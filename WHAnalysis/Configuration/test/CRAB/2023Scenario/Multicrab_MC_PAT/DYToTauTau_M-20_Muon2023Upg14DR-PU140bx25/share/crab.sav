@@ -1,0 +1,13 @@
+-USER.user_remote_dir=SamplePh2/DYToTauTau_M-20_Muon2023Upg14DR-PU140bx25
+-CMSSW.total_number_of_events=-1
+-USER.ui_working_dir=Multicrab_MC_PAT/DYToTauTau_M-20_Muon2023Upg14DR-PU140bx25
+-USER.storage_element=T2_IT_Bari
+-USER.storage_path=/lustre/cms/store/user/rosma/
+-CMSSW.datasetpath=/DYToTauTau_M-20_TuneZ2star_14TeV-pythia6-tauola/Muon2023Upg14DR-PU140bx25_PH2_1K_FB_V2-v1/AODSIM
+-cfg=crab_MC.cfg
+-jobtype=cmssw
+-CMSSW.events_per_job=5000
+-use_server=0
+-CMSSW.pycfg_params=isMC=True,channel=none,globaltag=PH2_1K_FB_V5::All,includeSim=True,includePatTrig=False
+-scheduler=remoteGlidein
+-CMSSW.pset=/cmshome/venditti/AnalisiGEMSample_SHLC12_2/CMSSW_6_2_0_SLHC12/src/WHAnalysis/Configuration/test/CRAB/patTuple_standard_allInOne_2013_rho_cfg.py

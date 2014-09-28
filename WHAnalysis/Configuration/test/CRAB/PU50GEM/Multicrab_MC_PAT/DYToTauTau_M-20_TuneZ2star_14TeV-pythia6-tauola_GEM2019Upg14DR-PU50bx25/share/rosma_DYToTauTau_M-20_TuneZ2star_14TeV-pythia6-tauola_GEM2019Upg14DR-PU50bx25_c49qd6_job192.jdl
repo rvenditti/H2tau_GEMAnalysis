@@ -1,0 +1,406 @@
+Universe  = vanilla
+Environment = CONDOR_ID=$(Cluster).$(Process);JobRunCount=$$([ ifThenElse(isUndefined(JobRunCount),0,JobRunCount) ]);GlideinMemory=$$([ ifThenElse(isUndefined(ImageSize_RAW),0,ImageSize_RAW) ]);Glidein_MonitorID=$$([ ifThenElse(isUndefined(Glidein_MonitorID),0,Glidein_MonitorID) ]) 
+since=(CurrentTime-EnteredCurrentStatus)
+Periodic_Remove = ((JobStatus == 2) && (((CurrentTime - JobCurrentStartDate) > (MaxWallTimeMins*60)) =?= True)) || (JobStatus==5 && $(since)>691200) || (JobStatus==1 && $(since)>691200)
+x509userproxy = x509up_u50797
+stream_output = false
+stream_error  = false
+notification  = never
+should_transfer_files   = YES
+when_to_transfer_output = ON_EXIT
+copy_to_spool           = false
++DESIRED_SEs = "srm.ihepa.ufl.edu,cmssrmdisk.fnal.gov"
++DESIRED_CMSDataset ="/DYToTauTau_M-20_TuneZ2star_14TeV-pythia6-tauola/GEM2019Upg14DR-PU50bx25_DES19_62_V8-v1/AODSIM"
++DESIRED_CMSVersion ="CMSSW_6_2_0_SLHC12"
++DESIRED_CMSVersionNr ="60200"
++DESIRED_CMSScramArch ="slc5_amd64_gcc472"
++DESIRED_OpSyses ="LINUX"
++DESIRED_OpSysMajorVers ="5,6"
++DESIRED_Archs ="X86_64"
++AccountingGroup ="rosma"
++Glidein_MonitorID = "https://hcc-crabserver.unl.edu//140604//$(Cluster).$(Process)"
++MaxWallTimeMins = 1315
+request_memory = 2000
+transfer_input_files = default.tgz,arguments.xml,CMSSW.sh
+Executable = CMSSW.sh
+log     = condor.log
+
++BLTaskID = "rosma_DYToTauTau_M-20_TuneZ2star_14TeV-pythia6-tauola_GEM2019Upg14DR-PU50bx25_c49qd6"
+Arguments  = 2 2
+output  = CMSSW_2.stdout
+error   = CMSSW_2.stderr
+transfer_output_remaps   = "CMSSW_2.stderr=/dev/null"
+transfer_output_files   = out_files_2.tgz,crab_fjr_2.xml
+Queue 1
+Arguments  = 9 2
+output  = CMSSW_9.stdout
+error   = CMSSW_9.stderr
+transfer_output_remaps   = "CMSSW_9.stderr=/dev/null"
+transfer_output_files   = out_files_9.tgz,crab_fjr_9.xml
+Queue 1
+Arguments  = 10 2
+output  = CMSSW_10.stdout
+error   = CMSSW_10.stderr
+transfer_output_remaps   = "CMSSW_10.stderr=/dev/null"
+transfer_output_files   = out_files_10.tgz,crab_fjr_10.xml
+Queue 1
+Arguments  = 11 2
+output  = CMSSW_11.stdout
+error   = CMSSW_11.stderr
+transfer_output_remaps   = "CMSSW_11.stderr=/dev/null"
+transfer_output_files   = out_files_11.tgz,crab_fjr_11.xml
+Queue 1
+Arguments  = 16 2
+output  = CMSSW_16.stdout
+error   = CMSSW_16.stderr
+transfer_output_remaps   = "CMSSW_16.stderr=/dev/null"
+transfer_output_files   = out_files_16.tgz,crab_fjr_16.xml
+Queue 1
+Arguments  = 25 2
+output  = CMSSW_25.stdout
+error   = CMSSW_25.stderr
+transfer_output_remaps   = "CMSSW_25.stderr=/dev/null"
+transfer_output_files   = out_files_25.tgz,crab_fjr_25.xml
+Queue 1
+Arguments  = 27 2
+output  = CMSSW_27.stdout
+error   = CMSSW_27.stderr
+transfer_output_remaps   = "CMSSW_27.stderr=/dev/null"
+transfer_output_files   = out_files_27.tgz,crab_fjr_27.xml
+Queue 1
+Arguments  = 29 2
+output  = CMSSW_29.stdout
+error   = CMSSW_29.stderr
+transfer_output_remaps   = "CMSSW_29.stderr=/dev/null"
+transfer_output_files   = out_files_29.tgz,crab_fjr_29.xml
+Queue 1
+Arguments  = 30 2
+output  = CMSSW_30.stdout
+error   = CMSSW_30.stderr
+transfer_output_remaps   = "CMSSW_30.stderr=/dev/null"
+transfer_output_files   = out_files_30.tgz,crab_fjr_30.xml
+Queue 1
+Arguments  = 33 2
+output  = CMSSW_33.stdout
+error   = CMSSW_33.stderr
+transfer_output_remaps   = "CMSSW_33.stderr=/dev/null"
+transfer_output_files   = out_files_33.tgz,crab_fjr_33.xml
+Queue 1
+Arguments  = 34 2
+output  = CMSSW_34.stdout
+error   = CMSSW_34.stderr
+transfer_output_remaps   = "CMSSW_34.stderr=/dev/null"
+transfer_output_files   = out_files_34.tgz,crab_fjr_34.xml
+Queue 1
+Arguments  = 38 2
+output  = CMSSW_38.stdout
+error   = CMSSW_38.stderr
+transfer_output_remaps   = "CMSSW_38.stderr=/dev/null"
+transfer_output_files   = out_files_38.tgz,crab_fjr_38.xml
+Queue 1
+Arguments  = 39 2
+output  = CMSSW_39.stdout
+error   = CMSSW_39.stderr
+transfer_output_remaps   = "CMSSW_39.stderr=/dev/null"
+transfer_output_files   = out_files_39.tgz,crab_fjr_39.xml
+Queue 1
+Arguments  = 46 2
+output  = CMSSW_46.stdout
+error   = CMSSW_46.stderr
+transfer_output_remaps   = "CMSSW_46.stderr=/dev/null"
+transfer_output_files   = out_files_46.tgz,crab_fjr_46.xml
+Queue 1
+Arguments  = 49 2
+output  = CMSSW_49.stdout
+error   = CMSSW_49.stderr
+transfer_output_remaps   = "CMSSW_49.stderr=/dev/null"
+transfer_output_files   = out_files_49.tgz,crab_fjr_49.xml
+Queue 1
+Arguments  = 55 2
+output  = CMSSW_55.stdout
+error   = CMSSW_55.stderr
+transfer_output_remaps   = "CMSSW_55.stderr=/dev/null"
+transfer_output_files   = out_files_55.tgz,crab_fjr_55.xml
+Queue 1
+Arguments  = 60 2
+output  = CMSSW_60.stdout
+error   = CMSSW_60.stderr
+transfer_output_remaps   = "CMSSW_60.stderr=/dev/null"
+transfer_output_files   = out_files_60.tgz,crab_fjr_60.xml
+Queue 1
+Arguments  = 69 2
+output  = CMSSW_69.stdout
+error   = CMSSW_69.stderr
+transfer_output_remaps   = "CMSSW_69.stderr=/dev/null"
+transfer_output_files   = out_files_69.tgz,crab_fjr_69.xml
+Queue 1
+Arguments  = 70 2
+output  = CMSSW_70.stdout
+error   = CMSSW_70.stderr
+transfer_output_remaps   = "CMSSW_70.stderr=/dev/null"
+transfer_output_files   = out_files_70.tgz,crab_fjr_70.xml
+Queue 1
+Arguments  = 74 2
+output  = CMSSW_74.stdout
+error   = CMSSW_74.stderr
+transfer_output_remaps   = "CMSSW_74.stderr=/dev/null"
+transfer_output_files   = out_files_74.tgz,crab_fjr_74.xml
+Queue 1
+Arguments  = 76 2
+output  = CMSSW_76.stdout
+error   = CMSSW_76.stderr
+transfer_output_remaps   = "CMSSW_76.stderr=/dev/null"
+transfer_output_files   = out_files_76.tgz,crab_fjr_76.xml
+Queue 1
+Arguments  = 81 2
+output  = CMSSW_81.stdout
+error   = CMSSW_81.stderr
+transfer_output_remaps   = "CMSSW_81.stderr=/dev/null"
+transfer_output_files   = out_files_81.tgz,crab_fjr_81.xml
+Queue 1
+Arguments  = 82 2
+output  = CMSSW_82.stdout
+error   = CMSSW_82.stderr
+transfer_output_remaps   = "CMSSW_82.stderr=/dev/null"
+transfer_output_files   = out_files_82.tgz,crab_fjr_82.xml
+Queue 1
+Arguments  = 83 2
+output  = CMSSW_83.stdout
+error   = CMSSW_83.stderr
+transfer_output_remaps   = "CMSSW_83.stderr=/dev/null"
+transfer_output_files   = out_files_83.tgz,crab_fjr_83.xml
+Queue 1
+Arguments  = 88 2
+output  = CMSSW_88.stdout
+error   = CMSSW_88.stderr
+transfer_output_remaps   = "CMSSW_88.stderr=/dev/null"
+transfer_output_files   = out_files_88.tgz,crab_fjr_88.xml
+Queue 1
+Arguments  = 89 2
+output  = CMSSW_89.stdout
+error   = CMSSW_89.stderr
+transfer_output_remaps   = "CMSSW_89.stderr=/dev/null"
+transfer_output_files   = out_files_89.tgz,crab_fjr_89.xml
+Queue 1
+Arguments  = 91 2
+output  = CMSSW_91.stdout
+error   = CMSSW_91.stderr
+transfer_output_remaps   = "CMSSW_91.stderr=/dev/null"
+transfer_output_files   = out_files_91.tgz,crab_fjr_91.xml
+Queue 1
+Arguments  = 93 2
+output  = CMSSW_93.stdout
+error   = CMSSW_93.stderr
+transfer_output_remaps   = "CMSSW_93.stderr=/dev/null"
+transfer_output_files   = out_files_93.tgz,crab_fjr_93.xml
+Queue 1
+Arguments  = 97 2
+output  = CMSSW_97.stdout
+error   = CMSSW_97.stderr
+transfer_output_remaps   = "CMSSW_97.stderr=/dev/null"
+transfer_output_files   = out_files_97.tgz,crab_fjr_97.xml
+Queue 1
+Arguments  = 98 2
+output  = CMSSW_98.stdout
+error   = CMSSW_98.stderr
+transfer_output_remaps   = "CMSSW_98.stderr=/dev/null"
+transfer_output_files   = out_files_98.tgz,crab_fjr_98.xml
+Queue 1
+Arguments  = 99 2
+output  = CMSSW_99.stdout
+error   = CMSSW_99.stderr
+transfer_output_remaps   = "CMSSW_99.stderr=/dev/null"
+transfer_output_files   = out_files_99.tgz,crab_fjr_99.xml
+Queue 1
+Arguments  = 104 2
+output  = CMSSW_104.stdout
+error   = CMSSW_104.stderr
+transfer_output_remaps   = "CMSSW_104.stderr=/dev/null"
+transfer_output_files   = out_files_104.tgz,crab_fjr_104.xml
+Queue 1
+Arguments  = 111 2
+output  = CMSSW_111.stdout
+error   = CMSSW_111.stderr
+transfer_output_remaps   = "CMSSW_111.stderr=/dev/null"
+transfer_output_files   = out_files_111.tgz,crab_fjr_111.xml
+Queue 1
+Arguments  = 116 2
+output  = CMSSW_116.stdout
+error   = CMSSW_116.stderr
+transfer_output_remaps   = "CMSSW_116.stderr=/dev/null"
+transfer_output_files   = out_files_116.tgz,crab_fjr_116.xml
+Queue 1
+Arguments  = 120 2
+output  = CMSSW_120.stdout
+error   = CMSSW_120.stderr
+transfer_output_remaps   = "CMSSW_120.stderr=/dev/null"
+transfer_output_files   = out_files_120.tgz,crab_fjr_120.xml
+Queue 1
+Arguments  = 122 2
+output  = CMSSW_122.stdout
+error   = CMSSW_122.stderr
+transfer_output_remaps   = "CMSSW_122.stderr=/dev/null"
+transfer_output_files   = out_files_122.tgz,crab_fjr_122.xml
+Queue 1
+Arguments  = 123 2
+output  = CMSSW_123.stdout
+error   = CMSSW_123.stderr
+transfer_output_remaps   = "CMSSW_123.stderr=/dev/null"
+transfer_output_files   = out_files_123.tgz,crab_fjr_123.xml
+Queue 1
+Arguments  = 124 2
+output  = CMSSW_124.stdout
+error   = CMSSW_124.stderr
+transfer_output_remaps   = "CMSSW_124.stderr=/dev/null"
+transfer_output_files   = out_files_124.tgz,crab_fjr_124.xml
+Queue 1
+Arguments  = 125 2
+output  = CMSSW_125.stdout
+error   = CMSSW_125.stderr
+transfer_output_remaps   = "CMSSW_125.stderr=/dev/null"
+transfer_output_files   = out_files_125.tgz,crab_fjr_125.xml
+Queue 1
+Arguments  = 126 2
+output  = CMSSW_126.stdout
+error   = CMSSW_126.stderr
+transfer_output_remaps   = "CMSSW_126.stderr=/dev/null"
+transfer_output_files   = out_files_126.tgz,crab_fjr_126.xml
+Queue 1
+Arguments  = 127 2
+output  = CMSSW_127.stdout
+error   = CMSSW_127.stderr
+transfer_output_remaps   = "CMSSW_127.stderr=/dev/null"
+transfer_output_files   = out_files_127.tgz,crab_fjr_127.xml
+Queue 1
+Arguments  = 128 2
+output  = CMSSW_128.stdout
+error   = CMSSW_128.stderr
+transfer_output_remaps   = "CMSSW_128.stderr=/dev/null"
+transfer_output_files   = out_files_128.tgz,crab_fjr_128.xml
+Queue 1
+Arguments  = 129 2
+output  = CMSSW_129.stdout
+error   = CMSSW_129.stderr
+transfer_output_remaps   = "CMSSW_129.stderr=/dev/null"
+transfer_output_files   = out_files_129.tgz,crab_fjr_129.xml
+Queue 1
+Arguments  = 133 2
+output  = CMSSW_133.stdout
+error   = CMSSW_133.stderr
+transfer_output_remaps   = "CMSSW_133.stderr=/dev/null"
+transfer_output_files   = out_files_133.tgz,crab_fjr_133.xml
+Queue 1
+Arguments  = 136 2
+output  = CMSSW_136.stdout
+error   = CMSSW_136.stderr
+transfer_output_remaps   = "CMSSW_136.stderr=/dev/null"
+transfer_output_files   = out_files_136.tgz,crab_fjr_136.xml
+Queue 1
+Arguments  = 142 2
+output  = CMSSW_142.stdout
+error   = CMSSW_142.stderr
+transfer_output_remaps   = "CMSSW_142.stderr=/dev/null"
+transfer_output_files   = out_files_142.tgz,crab_fjr_142.xml
+Queue 1
+Arguments  = 153 2
+output  = CMSSW_153.stdout
+error   = CMSSW_153.stderr
+transfer_output_remaps   = "CMSSW_153.stderr=/dev/null"
+transfer_output_files   = out_files_153.tgz,crab_fjr_153.xml
+Queue 1
+Arguments  = 154 2
+output  = CMSSW_154.stdout
+error   = CMSSW_154.stderr
+transfer_output_remaps   = "CMSSW_154.stderr=/dev/null"
+transfer_output_files   = out_files_154.tgz,crab_fjr_154.xml
+Queue 1
+Arguments  = 157 2
+output  = CMSSW_157.stdout
+error   = CMSSW_157.stderr
+transfer_output_remaps   = "CMSSW_157.stderr=/dev/null"
+transfer_output_files   = out_files_157.tgz,crab_fjr_157.xml
+Queue 1
+Arguments  = 159 2
+output  = CMSSW_159.stdout
+error   = CMSSW_159.stderr
+transfer_output_remaps   = "CMSSW_159.stderr=/dev/null"
+transfer_output_files   = out_files_159.tgz,crab_fjr_159.xml
+Queue 1
+Arguments  = 161 2
+output  = CMSSW_161.stdout
+error   = CMSSW_161.stderr
+transfer_output_remaps   = "CMSSW_161.stderr=/dev/null"
+transfer_output_files   = out_files_161.tgz,crab_fjr_161.xml
+Queue 1
+Arguments  = 163 2
+output  = CMSSW_163.stdout
+error   = CMSSW_163.stderr
+transfer_output_remaps   = "CMSSW_163.stderr=/dev/null"
+transfer_output_files   = out_files_163.tgz,crab_fjr_163.xml
+Queue 1
+Arguments  = 165 2
+output  = CMSSW_165.stdout
+error   = CMSSW_165.stderr
+transfer_output_remaps   = "CMSSW_165.stderr=/dev/null"
+transfer_output_files   = out_files_165.tgz,crab_fjr_165.xml
+Queue 1
+Arguments  = 168 2
+output  = CMSSW_168.stdout
+error   = CMSSW_168.stderr
+transfer_output_remaps   = "CMSSW_168.stderr=/dev/null"
+transfer_output_files   = out_files_168.tgz,crab_fjr_168.xml
+Queue 1
+Arguments  = 170 2
+output  = CMSSW_170.stdout
+error   = CMSSW_170.stderr
+transfer_output_remaps   = "CMSSW_170.stderr=/dev/null"
+transfer_output_files   = out_files_170.tgz,crab_fjr_170.xml
+Queue 1
+Arguments  = 172 2
+output  = CMSSW_172.stdout
+error   = CMSSW_172.stderr
+transfer_output_remaps   = "CMSSW_172.stderr=/dev/null"
+transfer_output_files   = out_files_172.tgz,crab_fjr_172.xml
+Queue 1
+Arguments  = 174 2
+output  = CMSSW_174.stdout
+error   = CMSSW_174.stderr
+transfer_output_remaps   = "CMSSW_174.stderr=/dev/null"
+transfer_output_files   = out_files_174.tgz,crab_fjr_174.xml
+Queue 1
+Arguments  = 176 2
+output  = CMSSW_176.stdout
+error   = CMSSW_176.stderr
+transfer_output_remaps   = "CMSSW_176.stderr=/dev/null"
+transfer_output_files   = out_files_176.tgz,crab_fjr_176.xml
+Queue 1
+Arguments  = 178 2
+output  = CMSSW_178.stdout
+error   = CMSSW_178.stderr
+transfer_output_remaps   = "CMSSW_178.stderr=/dev/null"
+transfer_output_files   = out_files_178.tgz,crab_fjr_178.xml
+Queue 1
+Arguments  = 180 2
+output  = CMSSW_180.stdout
+error   = CMSSW_180.stderr
+transfer_output_remaps   = "CMSSW_180.stderr=/dev/null"
+transfer_output_files   = out_files_180.tgz,crab_fjr_180.xml
+Queue 1
+Arguments  = 183 2
+output  = CMSSW_183.stdout
+error   = CMSSW_183.stderr
+transfer_output_remaps   = "CMSSW_183.stderr=/dev/null"
+transfer_output_files   = out_files_183.tgz,crab_fjr_183.xml
+Queue 1
+Arguments  = 188 2
+output  = CMSSW_188.stdout
+error   = CMSSW_188.stderr
+transfer_output_remaps   = "CMSSW_188.stderr=/dev/null"
+transfer_output_files   = out_files_188.tgz,crab_fjr_188.xml
+Queue 1
+Arguments  = 192 2
+output  = CMSSW_192.stdout
+error   = CMSSW_192.stderr
+transfer_output_remaps   = "CMSSW_192.stderr=/dev/null"
+transfer_output_files   = out_files_192.tgz,crab_fjr_192.xml
+Queue 1

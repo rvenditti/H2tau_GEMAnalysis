@@ -1,0 +1,571 @@
+2014-07-17 18:18:45,348 [DEBUG] 	/opt/exp_soft/crab/CRAB_2_10_5_patch1/python/crab.py -USER.user_remote_dir=SamplePh2/WHToTauTau_M-125_Muon2023Upg14DR-PU140bx25 -create -CMSSW.total_number_of_events=-1 -USER.ui_working_dir=Multicrab_MC_PAT/WHToTauTau_M-125_Muon2023Upg14DR-PU140bx25 -USER.storage_element=T2_IT_Bari -USER.storage_path=/lustre/cms/store/user/rosma/ -cfg=crab_MC.cfg -CMSSW.events_per_job=5000 -CMSSW.pycfg_params=isMC=True,channel=none,globaltag=PH2_1K_FB_V5::All,includeSim=True,includePatTrig=False -CMSSW.datasetpath=/WHToTauTau_M-125_TuneZ2star_14TeV-pythia6/Muon2023Upg14DR-PU140bx25_PH2_1K_FB_V2-v1/AODSIM -CMSSW.pset=/cmshome/venditti/AnalisiGEMSample_SHLC12_2/CMSSW_6_2_0_SLHC12/src/WHAnalysis/Configuration/test/CRAB/patTuple_standard_allInOne_2013_rho_cfg.py
+
+2014-07-17 18:18:45,348 [INFO] 	Version 2.10.5_patch1 running on Thu Jul 17 18:18:45 2014 CET (16:18:45 UTC)
+
+crab. Working options:
+	scheduler           remoteGlidein
+	job type            CMSSW
+	server              OFF
+	working directory   /cmshome/venditti/AnalisiGEMSample_SHLC12_2/CMSSW_6_2_0_SLHC12/src/WHAnalysis/Configuration/test/CRAB/2023Scenario/Multicrab_MC_PAT/WHToTauTau_M-125_Muon2023Upg14DR-PU140bx25/
+
+2014-07-17 18:18:45,349 [DEBUG] 	Downloading file [http://cmsdoc.cern.ch/cms/LCG/crab/config/] to [/cmshome/venditti/.cms_crab/allowed_releases.conf].
+2014-07-17 18:18:45,349 [DEBUG] 	Service initialised ({'endpoint': 'http://cmsdoc.cern.ch/cms/LCG/crab/config/', 'maxcachereuse': 24.0, 'cachepath': '/cmshome/venditti/.cms_crab', 'basepath': '/cms/LCG/crab/config/', 'method': None, 'timeout': 20, 'requests': {'endpoint': 'http://cmsdoc.cern.ch/cms/LCG/crab/config/', 'timeout': 20, 'cachepath': '/cmshome/venditti/.cms_crab', 'cacheduration': 0.5, 'host': 'cmsdoc.cern.ch', 'accept_type': 'text/html', 'content_type': 'application/x-www-form-urlencoded', 'logger': <logging.Logger object at 0x4ea8f10>, 'type': 'txt/csv', 'conn': <httplib.HTTPConnection instance at 0x4f31b00>}, 'logger': <logging.Logger object at 0x4ea8f10>, 'cacheduration': 0.5, 'type': 'txt/csv', 'inputdata': {}}):
+	 host: cmsdoc.cern.ch, basepath: /cms/LCG/crab/config/ (text/html)
+	 cache: /cmshome/venditti/.cms_crab (duration 0.5 hours, max reuse 24.0 hours)
+2014-07-17 18:18:45,484 [DEBUG] 	Service initialised ({'endpoint': 'https://cmsweb.cern.ch/sitedb/data/prod/', 'content_type': 'application/json', 'maxcachereuse': 24.0, 'cachepath': '/cmshome/venditti/.cms_sitedbcache', 'basepath': '/sitedb/data/prod/', 'method': None, 'accept_type': 'application/json', 'timeout': 30, 'requests': {'endpoint': 'https://cmsweb.cern.ch/sitedb/data/prod/', 'cachepath': '/cmshome/venditti/.cms_sitedbcache', 'host': 'cmsweb.cern.ch', 'accept_type': 'application/json', 'content_type': 'application/json', 'logger': <logging.Logger object at 0x4ea8f10>, 'conn': <httplib.HTTPSConnection instance at 0x4f61830>}, 'logger': <logging.Logger object at 0x4ea8f10>, 'cacheduration': 0.5, 'inputdata': {}}):
+	 host: cmsweb.cern.ch, basepath: /sitedb/data/prod/ (application/json)
+	 cache: /cmshome/venditti/.cms_sitedbcache (duration 0.5 hours, max reuse 24.0 hours)
+2014-07-17 18:18:45,485 [DEBUG] 	Service initialised ({'endpoint': 'https://cmsweb.cern.ch/sitedb/data/prod/', 'content_type': 'application/json', 'maxcachereuse': 24.0, 'cachepath': '/cmshome/venditti/.cms_sitedbcache', 'basepath': '/sitedb/data/prod/', 'method': None, 'accept_type': 'application/json', 'timeout': 30, 'requests': {'endpoint': 'https://cmsweb.cern.ch/sitedb/data/prod/', 'cachepath': '/cmshome/venditti/.cms_sitedbcache', 'host': 'cmsweb.cern.ch', 'accept_type': 'application/json', 'content_type': 'application/json', 'logger': <logging.Logger object at 0x4ea8f10>, 'conn': <httplib.HTTPSConnection instance at 0x504d098>}, 'logger': <logging.Logger object at 0x4ea8f10>, 'cacheduration': 0.5, 'inputdata': {}}):
+	 host: cmsweb.cern.ch, basepath: /sitedb/data/prod/ (application/json)
+	 cache: /cmshome/venditti/.cms_sitedbcache (duration 0.5 hours, max reuse 24.0 hours)
+2014-07-17 18:18:45,485 [DEBUG] 	Input whitelist: 
+2014-07-17 18:18:45,485 [DEBUG] 	Input blacklist: 
+2014-07-17 18:18:45,485 [DEBUG] 	Converted whitelist: 
+2014-07-17 18:18:45,485 [DEBUG] 	Converted blacklist: 
+2014-07-17 18:18:45,485 [DEBUG] 	Downloading file [http://cmsdoc.cern.ch/cms/LCG/crab/config/] to [/cmshome/venditti/.cms_crab/myproxy_server.conf].
+2014-07-17 18:18:45,485 [DEBUG] 	Service initialised ({'endpoint': 'http://cmsdoc.cern.ch/cms/LCG/crab/config/', 'maxcachereuse': 24.0, 'cachepath': '/cmshome/venditti/.cms_crab', 'basepath': '/cms/LCG/crab/config/', 'method': None, 'timeout': 20, 'requests': {'endpoint': 'http://cmsdoc.cern.ch/cms/LCG/crab/config/', 'timeout': 20, 'cachepath': '/cmshome/venditti/.cms_crab', 'cacheduration': 0.5, 'host': 'cmsdoc.cern.ch', 'accept_type': 'text/html', 'content_type': 'application/x-www-form-urlencoded', 'logger': <logging.Logger object at 0x4ea8f10>, 'type': 'txt/csv', 'conn': <httplib.HTTPConnection instance at 0x504d128>}, 'logger': <logging.Logger object at 0x4ea8f10>, 'cacheduration': 0.5, 'type': 'txt/csv', 'inputdata': {}}):
+	 host: cmsdoc.cern.ch, basepath: /cms/LCG/crab/config/ (text/html)
+	 cache: /cmshome/venditti/.cms_crab (duration 0.5 hours, max reuse 24.0 hours)
+2014-07-17 18:18:45,486 [DEBUG] 	Downloading file [http://cmsdoc.cern.ch/cms/LCG/crab/config/] to [/cmshome/venditti/.cms_crab/site_black_list.conf].
+2014-07-17 18:18:45,486 [DEBUG] 	Service initialised ({'endpoint': 'http://cmsdoc.cern.ch/cms/LCG/crab/config/', 'maxcachereuse': 24.0, 'cachepath': '/cmshome/venditti/.cms_crab', 'basepath': '/cms/LCG/crab/config/', 'method': None, 'timeout': 20, 'requests': {'endpoint': 'http://cmsdoc.cern.ch/cms/LCG/crab/config/', 'timeout': 20, 'cachepath': '/cmshome/venditti/.cms_crab', 'cacheduration': 0.5, 'host': 'cmsdoc.cern.ch', 'accept_type': 'text/html', 'content_type': 'application/x-www-form-urlencoded', 'logger': <logging.Logger object at 0x4ea8f10>, 'type': 'txt/csv', 'conn': <httplib.HTTPConnection instance at 0x504d128>}, 'logger': <logging.Logger object at 0x4ea8f10>, 'cacheduration': 0.5, 'type': 'txt/csv', 'inputdata': {}}):
+	 host: cmsdoc.cern.ch, basepath: /cms/LCG/crab/config/ (text/html)
+	 cache: /cmshome/venditti/.cms_crab (duration 0.5 hours, max reuse 24.0 hours)
+2014-07-17 18:18:45,486 [DEBUG] 	Enforced black list: TAPE,srm-cms.cern.ch,cmssrm.fnal.gov,T1_FR,T1_RU,T1_TW,cmseos.fnal.gov,cmsdca2.fnal.gov,T2_PK_NCP,T3_US_Vanderbilt_EC2
+ 
+2014-07-17 18:18:46,653 [DEBUG] 	Service initialised ({'endpoint': 'https://cmsweb.cern.ch/sitedb/data/prod/', 'content_type': 'application/json', 'maxcachereuse': 24.0, 'cachepath': '/cmshome/venditti/.cms_sitedbcache', 'basepath': '/sitedb/data/prod/', 'method': None, 'accept_type': 'application/json', 'timeout': 30, 'requests': {'endpoint': 'https://cmsweb.cern.ch/sitedb/data/prod/', 'cachepath': '/cmshome/venditti/.cms_sitedbcache', 'cacheduration': 24, 'host': 'cmsweb.cern.ch', 'accept_type': 'application/json', 'content_type': 'application/json', 'logger': <logging.Logger object at 0x4ea8f10>, 'conn': <httplib.HTTPSConnection instance at 0x504d170>}, 'logger': <logging.Logger object at 0x4ea8f10>, 'cacheduration': 24, 'inputdata': {}}):
+	 host: cmsweb.cern.ch, basepath: /sitedb/data/prod/ (application/json)
+	 cache: /cmshome/venditti/.cms_sitedbcache (duration 24 hours, max reuse 24.0 hours)
+2014-07-17 18:18:46,772 [DEBUG] 	Linux cmssusy.ba.infn.it 2.6.18-194.17.4.el5 #1 SMP Tue Oct 26 12:01:33 CEST 2010 x86_64 x86_64 x86_64 GNU/Linux
+ 
+Used properties:
+Linux cmssusy.ba.infn.it 2.6.18-194.17.4.el5 #1 SMP Tue Oct 26 12:01:33 CEST 2010 x86_64 x86_64 x86_64 GNU/Linux
+ 
+Used properties:
+   CMSSW.datasetpath : /WHToTauTau_M-125_TuneZ2star_14TeV-pythia6/Muon2023Upg14DR-PU140bx25_PH2_1K_FB_V2-v1/AODSIM
+   CMSSW.events_per_job : 5000
+   CMSSW.output_file : patTuple.root
+   CMSSW.pset : /cmshome/venditti/AnalisiGEMSample_SHLC12_2/CMSSW_6_2_0_SLHC12/src/WHAnalysis/Configuration/test/CRAB/patTuple_standard_allInOne_2013_rho_cfg.py
+   CMSSW.pycfg_params : isMC=True,channel=none,globaltag=PH2_1K_FB_V5::All,includeSim=True,includePatTrig=False
+   CMSSW.total_number_of_events : -1
+   CRAB.cfg : crab_MC.cfg
+   CRAB.create : 
+   CRAB.jobtype : cmssw
+   CRAB.scheduler : remoteGlidein
+   CRAB.use_server : 0
+   USER.copy_data : 1
+   USER.email : cesare.calabria@cern.ch
+   USER.return_data : 0
+   USER.storage_element : T2_IT_Bari
+   USER.storage_path : /lustre/cms/store/user/rosma/
+   USER.ui_working_dir : Multicrab_MC_PAT/WHToTauTau_M-125_Muon2023Upg14DR-PU140bx25
+   USER.user_remote_dir : SamplePh2/WHToTauTau_M-125_Muon2023Upg14DR-PU140bx25
+End of used properties.
+
+2014-07-17 18:18:46,833 [DEBUG] 	CMSSW::__init__
+2014-07-17 18:18:46,833 [DEBUG] 	Scram::Scram() version is 2
+2014-07-17 18:18:46,833 [DEBUG] 	Scram::Scram() arch is slc5_amd64_gcc472
+2014-07-17 18:18:46,834 [DEBUG] 	Downloading file [https://cmssdt.cern.ch/SDT/cgi-bin] to [/cmshome/venditti/.cms_crab/ReleasesXML?anytype=1].
+2014-07-17 18:18:46,834 [DEBUG] 	Service initialised ({'endpoint': 'https://cmssdt.cern.ch/SDT/cgi-bin', 'maxcachereuse': 24.0, 'cachepath': '/cmshome/venditti/.cms_crab', 'basepath': '/SDT/cgi-bin/', 'method': None, 'timeout': 20, 'requests': {'endpoint': 'https://cmssdt.cern.ch/SDT/cgi-bin', 'timeout': 20, 'cachepath': '/cmshome/venditti/.cms_crab', 'cacheduration': 0.5, 'host': 'cmssdt.cern.ch', 'accept_type': 'text/html', 'content_type': 'application/x-www-form-urlencoded', 'logger': <logging.Logger object at 0x4ea8f10>, 'type': 'txt/csv', 'conn': <httplib.HTTPSConnection instance at 0x5349dd0>}, 'logger': <logging.Logger object at 0x4ea8f10>, 'cacheduration': 0.5, 'type': 'txt/csv', 'inputdata': {}}):
+	 host: cmssdt.cern.ch, basepath: /SDT/cgi-bin/ (text/html)
+	 cache: /cmshome/venditti/.cms_crab (duration 0.5 hours, max reuse 24.0 hours)
+2014-07-17 18:18:46,875 [DEBUG] 	Service initialised ({'endpoint': 'https://cmsweb.cern.ch/sitedb/data/prod/', 'content_type': 'application/json', 'maxcachereuse': 24.0, 'cachepath': '/cmshome/venditti/.cms_sitedbcache', 'basepath': '/sitedb/data/prod/', 'method': None, 'accept_type': 'application/json', 'timeout': 30, 'requests': {'endpoint': 'https://cmsweb.cern.ch/sitedb/data/prod/', 'cachepath': '/cmshome/venditti/.cms_sitedbcache', 'host': 'cmsweb.cern.ch', 'accept_type': 'application/json', 'content_type': 'application/json', 'logger': <logging.Logger object at 0x4ea8f10>, 'conn': <httplib.HTTPSConnection instance at 0x51ea758>}, 'logger': <logging.Logger object at 0x4ea8f10>, 'cacheduration': 0.5, 'inputdata': {}}):
+	 host: cmsweb.cern.ch, basepath: /sitedb/data/prod/ (application/json)
+	 cache: /cmshome/venditti/.cms_sitedbcache (duration 0.5 hours, max reuse 24.0 hours)
+2014-07-17 18:18:46,875 [DEBUG] 	Service initialised ({'endpoint': 'https://cmsweb.cern.ch/sitedb/data/prod/', 'content_type': 'application/json', 'maxcachereuse': 24.0, 'cachepath': '/cmshome/venditti/.cms_sitedbcache', 'basepath': '/sitedb/data/prod/', 'method': None, 'accept_type': 'application/json', 'timeout': 30, 'requests': {'endpoint': 'https://cmsweb.cern.ch/sitedb/data/prod/', 'cachepath': '/cmshome/venditti/.cms_sitedbcache', 'host': 'cmsweb.cern.ch', 'accept_type': 'application/json', 'content_type': 'application/json', 'logger': <logging.Logger object at 0x4ea8f10>, 'conn': <httplib.HTTPSConnection instance at 0x51ea2d8>}, 'logger': <logging.Logger object at 0x4ea8f10>, 'cacheduration': 0.5, 'inputdata': {}}):
+	 host: cmsweb.cern.ch, basepath: /sitedb/data/prod/ (application/json)
+	 cache: /cmshome/venditti/.cms_sitedbcache (duration 0.5 hours, max reuse 24.0 hours)
+2014-07-17 18:18:46,875 [DEBUG] 	Input whitelist: 
+2014-07-17 18:18:46,876 [DEBUG] 	Input blacklist: 
+2014-07-17 18:18:46,876 [DEBUG] 	Converted whitelist: 
+2014-07-17 18:18:46,876 [DEBUG] 	Converted blacklist: 
+2014-07-17 18:18:46,901 [INFO] 	Contacting Data Discovery Services ...
+2014-07-17 18:18:46,901 [INFO] 	Accessing DBS at: https://cmsweb.cern.ch/dbs/prod/global/DBSReader
+2014-07-17 18:18:46,901 [INFO] 	Will do Data Discovery using  DBS3
+2014-07-17 18:18:48,536 [INFO] 	DBS3 lookup took  1.60 sec
+2014-07-17 18:18:48,622 [INFO] 	Datatype is mc
+2014-07-17 18:18:48,625 [DEBUG] 	DLS interface: DLS_TYPE_PHEDEX Server https://cmsweb.cern.ch/phedex/datasvc/xml/prod/
+2014-07-17 18:18:49,022 [INFO] 	Requested dataset: /WHToTauTau_M-125_TuneZ2star_14TeV-pythia6/Muon2023Upg14DR-PU140bx25_PH2_1K_FB_V2-v1/AODSIM has 100000 events in 7 blocks.
+
+2014-07-17 18:18:49,022 [DEBUG] 	Job splitting method: EventBased
+2014-07-17 18:18:49,022 [DEBUG] 	Downloading file [http://cmsdoc.cern.ch/cms/LCG/crab/config/] to [/cmshome/venditti/.cms_crab/site_black_list.conf].
+2014-07-17 18:18:49,023 [DEBUG] 	Service initialised ({'endpoint': 'http://cmsdoc.cern.ch/cms/LCG/crab/config/', 'maxcachereuse': 24.0, 'cachepath': '/cmshome/venditti/.cms_crab', 'basepath': '/cms/LCG/crab/config/', 'method': None, 'timeout': 20, 'requests': {'endpoint': 'http://cmsdoc.cern.ch/cms/LCG/crab/config/', 'timeout': 20, 'cachepath': '/cmshome/venditti/.cms_crab', 'cacheduration': 0.5, 'host': 'cmsdoc.cern.ch', 'accept_type': 'text/html', 'content_type': 'application/x-www-form-urlencoded', 'logger': <logging.Logger object at 0x4ea8f10>, 'type': 'txt/csv', 'conn': <httplib.HTTPConnection instance at 0x51c45a8>}, 'logger': <logging.Logger object at 0x4ea8f10>, 'cacheduration': 0.5, 'type': 'txt/csv', 'inputdata': {}}):
+	 host: cmsdoc.cern.ch, basepath: /cms/LCG/crab/config/ (text/html)
+	 cache: /cmshome/venditti/.cms_crab (duration 0.5 hours, max reuse 24.0 hours)
+2014-07-17 18:18:49,023 [DEBUG] 	Enforced black list: ['TAPE', 'srm-cms.cern.ch', 'cmssrm.fnal.gov', 'T1_FR', 'T1_RU', 'T1_TW', 'cmseos.fnal.gov', 'cmsdca2.fnal.gov', 'T2_PK_NCP', 'T3_US_Vanderbilt_EC2'] 
+2014-07-17 18:18:49,023 [DEBUG] 	Service initialised ({'endpoint': 'https://cmsweb.cern.ch/sitedb/data/prod/', 'content_type': 'application/json', 'maxcachereuse': 24.0, 'cachepath': '/cmshome/venditti/.cms_sitedbcache', 'basepath': '/sitedb/data/prod/', 'method': None, 'accept_type': 'application/json', 'timeout': 30, 'requests': {'endpoint': 'https://cmsweb.cern.ch/sitedb/data/prod/', 'cachepath': '/cmshome/venditti/.cms_sitedbcache', 'host': 'cmsweb.cern.ch', 'accept_type': 'application/json', 'content_type': 'application/json', 'logger': <logging.Logger object at 0x4ea8f10>, 'conn': <httplib.HTTPSConnection instance at 0x51c2f80>}, 'logger': <logging.Logger object at 0x4ea8f10>, 'cacheduration': 0.5, 'inputdata': {}}):
+	 host: cmsweb.cern.ch, basepath: /sitedb/data/prod/ (application/json)
+	 cache: /cmshome/venditti/.cms_sitedbcache (duration 0.5 hours, max reuse 24.0 hours)
+2014-07-17 18:18:49,024 [DEBUG] 	Service initialised ({'endpoint': 'https://cmsweb.cern.ch/sitedb/data/prod/', 'content_type': 'application/json', 'maxcachereuse': 24.0, 'cachepath': '/cmshome/venditti/.cms_sitedbcache', 'basepath': '/sitedb/data/prod/', 'method': None, 'accept_type': 'application/json', 'timeout': 30, 'requests': {'endpoint': 'https://cmsweb.cern.ch/sitedb/data/prod/', 'cachepath': '/cmshome/venditti/.cms_sitedbcache', 'host': 'cmsweb.cern.ch', 'accept_type': 'application/json', 'content_type': 'application/json', 'logger': <logging.Logger object at 0x4ea8f10>, 'conn': <httplib.HTTPSConnection instance at 0x51c5d40>}, 'logger': <logging.Logger object at 0x4ea8f10>, 'cacheduration': 0.5, 'inputdata': {}}):
+	 host: cmsweb.cern.ch, basepath: /sitedb/data/prod/ (application/json)
+	 cache: /cmshome/venditti/.cms_sitedbcache (duration 0.5 hours, max reuse 24.0 hours)
+2014-07-17 18:18:49,024 [DEBUG] 	Input whitelist: 
+2014-07-17 18:18:49,024 [DEBUG] 	Input blacklist: TAPE, srm-cms.cern.ch, cmssrm.fnal.gov, T1_FR, T1_RU, T1_TW, cmseos.fnal.gov, cmsdca2.fnal.gov, T2_PK_NCP, T3_US_Vanderbilt_EC2
+2014-07-17 18:18:49,071 [DEBUG] 	Converted whitelist: 
+2014-07-17 18:18:49,071 [DEBUG] 	Converted blacklist: pcncp22.ncp.edu.pk, brazil.accre.vanderbilt.edu, srm-cms-mss.jinr-t1.ru, srm-cms.cern.ch, cmssrm.fnal.gov, srm-cms.jinr-t1.ru, cmseos.fnal.gov, ccsrm.in2p3.fr, TAPE, cmsdca2.fnal.gov, srm2.grid.sinica.edu.tw
+2014-07-17 18:18:49,072 [INFO] 	SE black list applied to data location: ['TAPE', 'srm-cms.cern.ch', 'cmssrm.fnal.gov', 'T1_FR', 'T1_RU', 'T1_TW', 'cmseos.fnal.gov', 'cmsdca2.fnal.gov', 'T2_PK_NCP', 'T3_US_Vanderbilt_EC2']
+2014-07-17 18:18:49,072 [DEBUG] 	List of blocks and used locations (SE):
+2014-07-17 18:18:49,078 [DEBUG] 	/WHToTauTau_M-125_TuneZ2star_14TeV-pythia6/Muon2023Upg14DR-PU140bx25_PH2_1K_FB_V2-v1/AODSIM#482bd6fe-f135-11e3-9324-00221959e69e : ['srm.unl.edu', 'cmssrmdisk.fnal.gov']
+2014-07-17 18:18:49,078 [DEBUG] 	/WHToTauTau_M-125_TuneZ2star_14TeV-pythia6/Muon2023Upg14DR-PU140bx25_PH2_1K_FB_V2-v1/AODSIM#aead9eba-f1e6-11e3-9324-00221959e69e : ['srm.unl.edu', 'cmssrmdisk.fnal.gov']
+2014-07-17 18:18:49,079 [DEBUG] 	/WHToTauTau_M-125_TuneZ2star_14TeV-pythia6/Muon2023Upg14DR-PU140bx25_PH2_1K_FB_V2-v1/AODSIM#ed23a5f0-e80d-11e3-9a5c-00221959e69e : ['srm.unl.edu', 'cmssrmdisk.fnal.gov']
+2014-07-17 18:18:49,079 [DEBUG] 	/WHToTauTau_M-125_TuneZ2star_14TeV-pythia6/Muon2023Upg14DR-PU140bx25_PH2_1K_FB_V2-v1/AODSIM#89a8474c-e948-11e3-9a5c-00221959e69e : ['srm.unl.edu', 'cmssrmdisk.fnal.gov']
+2014-07-17 18:18:49,079 [DEBUG] 	/WHToTauTau_M-125_TuneZ2star_14TeV-pythia6/Muon2023Upg14DR-PU140bx25_PH2_1K_FB_V2-v1/AODSIM#6f5b627c-e8ab-11e3-9a5c-00221959e69e : ['srm.unl.edu', 'cmssrmdisk.fnal.gov']
+2014-07-17 18:18:49,080 [DEBUG] 	/WHToTauTau_M-125_TuneZ2star_14TeV-pythia6/Muon2023Upg14DR-PU140bx25_PH2_1K_FB_V2-v1/AODSIM#f1480b42-e83c-11e3-999d-00221959e72f : ['srm.unl.edu', 'cmssrmdisk.fnal.gov']
+2014-07-17 18:18:49,080 [DEBUG] 	/WHToTauTau_M-125_TuneZ2star_14TeV-pythia6/Muon2023Upg14DR-PU140bx25_PH2_1K_FB_V2-v1/AODSIM#75caf3aa-e948-11e3-999d-00221959e72f : ['srm.unl.edu', 'cmssrmdisk.fnal.gov']
+2014-07-17 18:18:49,080 [DEBUG] 	Events in Block File 6792
+2014-07-17 18:18:49,228 [DEBUG] 	Events in Block File 786
+2014-07-17 18:18:49,229 [DEBUG] 	Events in Block File 36256
+2014-07-17 18:18:49,232 [DEBUG] 	Events in Block File 400
+2014-07-17 18:18:49,232 [DEBUG] 	Events in Block File 12250
+2014-07-17 18:18:49,234 [DEBUG] 	Events in Block File 42344
+2014-07-17 18:18:49,237 [DEBUG] 	Events in Block File 1172
+2014-07-17 18:18:49,238 [DEBUG] 	
+Job 25 can run over 1172 events.
+Job 25 Destination: ['T2_US_Nebraska', 'T1_US_FNAL_Disk']
+
+2014-07-17 18:18:49,238 [INFO] 	25 job(s) can run on 100000 events.
+
+2014-07-17 18:18:49,238 [DEBUG] 	Selected sites for block /WHToTauTau_M-125_TuneZ2star_14TeV-pythia6/Muon2023Upg14DR-PU140bx25_PH2_1K_FB_V2-v1/AODSIM#482bd6fe-f135-11e3-9324-00221959e69e via blacklist are srm.unl.edu, cmssrmdisk.fnal.gov.
+
+2014-07-17 18:18:49,239 [DEBUG] 	Selected sites for block /WHToTauTau_M-125_TuneZ2star_14TeV-pythia6/Muon2023Upg14DR-PU140bx25_PH2_1K_FB_V2-v1/AODSIM#aead9eba-f1e6-11e3-9324-00221959e69e via blacklist are srm.unl.edu, cmssrmdisk.fnal.gov.
+
+2014-07-17 18:18:49,239 [DEBUG] 	Selected sites for block /WHToTauTau_M-125_TuneZ2star_14TeV-pythia6/Muon2023Upg14DR-PU140bx25_PH2_1K_FB_V2-v1/AODSIM#ed23a5f0-e80d-11e3-9a5c-00221959e69e via blacklist are srm.unl.edu, cmssrmdisk.fnal.gov.
+
+2014-07-17 18:18:49,240 [DEBUG] 	Selected sites for block /WHToTauTau_M-125_TuneZ2star_14TeV-pythia6/Muon2023Upg14DR-PU140bx25_PH2_1K_FB_V2-v1/AODSIM#89a8474c-e948-11e3-9a5c-00221959e69e via blacklist are srm.unl.edu, cmssrmdisk.fnal.gov.
+
+2014-07-17 18:18:49,240 [DEBUG] 	Selected sites for block /WHToTauTau_M-125_TuneZ2star_14TeV-pythia6/Muon2023Upg14DR-PU140bx25_PH2_1K_FB_V2-v1/AODSIM#6f5b627c-e8ab-11e3-9a5c-00221959e69e via blacklist are srm.unl.edu, cmssrmdisk.fnal.gov.
+
+2014-07-17 18:18:49,241 [DEBUG] 	Selected sites for block /WHToTauTau_M-125_TuneZ2star_14TeV-pythia6/Muon2023Upg14DR-PU140bx25_PH2_1K_FB_V2-v1/AODSIM#f1480b42-e83c-11e3-999d-00221959e72f via blacklist are srm.unl.edu, cmssrmdisk.fnal.gov.
+
+2014-07-17 18:18:49,241 [DEBUG] 	Selected sites for block /WHToTauTau_M-125_TuneZ2star_14TeV-pythia6/Muon2023Upg14DR-PU140bx25_PH2_1K_FB_V2-v1/AODSIM#75caf3aa-e948-11e3-999d-00221959e72f via blacklist are srm.unl.edu, cmssrmdisk.fnal.gov.
+
+2014-07-17 18:18:49,242 [INFO] 	List of jobs and available destination sites:
+
+Block     1: jobs                  1-2: sites: T2_US_Nebraska, T1_US_FNAL_Disk
+Block     2: jobs                    3: sites: T2_US_Nebraska, T1_US_FNAL_Disk
+Block     3: jobs                 4-11: sites: T2_US_Nebraska, T1_US_FNAL_Disk
+Block     4: jobs                   12: sites: T2_US_Nebraska, T1_US_FNAL_Disk
+Block     5: jobs                13-15: sites: T2_US_Nebraska, T1_US_FNAL_Disk
+Block     6: jobs                16-24: sites: T2_US_Nebraska, T1_US_FNAL_Disk
+Block     7: jobs                   25: sites: T2_US_Nebraska, T1_US_FNAL_Disk
+
+2014-07-17 18:18:49,274 [DEBUG] 	PsetManipulator::__init__: PSet file = /cmshome/venditti/AnalisiGEMSample_SHLC12_2/CMSSW_6_2_0_SLHC12/src/WHAnalysis/Configuration/test/CRAB/patTuple_standard_allInOne_2013_rho_cfg.py
+2014-07-17 18:18:53,098 [INFO] 	Adding tree.root (from TFileService) to list of output files
+2014-07-17 18:18:53,107 [DEBUG] 	lib /cmshome/venditti/AnalisiGEMSample_SHLC12_2/CMSSW_6_2_0_SLHC12/lib to be tarred
+2014-07-17 18:18:54,165 [DEBUG] 	Creator: JobType CMSSW created
+2014-07-17 18:18:54,165 [DEBUG] 	Creator: total # of jobs = 25
+2014-07-17 18:18:54,165 [DEBUG] 	Creator constructor finished
+2014-07-17 18:18:54,408 [DEBUG] 	Creator::run() called
+2014-07-17 18:18:54,409 [DEBUG] 	Scram::Scram() version is 2
+2014-07-17 18:18:54,409 [DEBUG] 	Scram::Scram() arch is slc5_amd64_gcc472
+2014-07-17 18:18:54,645 [DEBUG] 	Service initialised ({'endpoint': 'https://cmsweb.cern.ch/sitedb/data/prod/', 'content_type': 'application/json', 'maxcachereuse': 24.0, 'cachepath': '/cmshome/venditti/.cms_sitedbcache', 'basepath': '/sitedb/data/prod/', 'method': None, 'accept_type': 'application/json', 'timeout': 30, 'requests': {'endpoint': 'https://cmsweb.cern.ch/sitedb/data/prod/', 'cachepath': '/cmshome/venditti/.cms_sitedbcache', 'cacheduration': 24, 'host': 'cmsweb.cern.ch', 'accept_type': 'application/json', 'content_type': 'application/json', 'logger': <logging.Logger object at 0x4ea8f10>, 'conn': <httplib.HTTPSConnection instance at 0x51c4560>}, 'logger': <logging.Logger object at 0x4ea8f10>, 'cacheduration': 24, 'inputdata': {}}):
+	 host: cmsweb.cern.ch, basepath: /sitedb/data/prod/ (application/json)
+	 cache: /cmshome/venditti/.cms_sitedbcache (duration 24 hours, max reuse 24.0 hours)
+2014-07-17 18:18:55,054 [DEBUG] 	Service initialised ({'endpoint': 'https://cmsweb.cern.ch/sitedb/data/prod/', 'content_type': 'application/json', 'maxcachereuse': 24.0, 'cachepath': '/cmshome/venditti/.cms_sitedbcache', 'basepath': '/sitedb/data/prod/', 'method': None, 'accept_type': 'application/json', 'timeout': 30, 'requests': {'endpoint': 'https://cmsweb.cern.ch/sitedb/data/prod/', 'cachepath': '/cmshome/venditti/.cms_sitedbcache', 'cacheduration': 24, 'host': 'cmsweb.cern.ch', 'accept_type': 'application/json', 'content_type': 'application/json', 'logger': <logging.Logger object at 0x4ea8f10>, 'conn': <httplib.HTTPSConnection instance at 0x62ce248>}, 'logger': <logging.Logger object at 0x4ea8f10>, 'cacheduration': 24, 'inputdata': {}}):
+	 host: cmsweb.cern.ch, basepath: /sitedb/data/prod/ (application/json)
+	 cache: /cmshome/venditti/.cms_sitedbcache (duration 24 hours, max reuse 24.0 hours)
+2014-07-17 18:18:55,521 [INFO] 	Checking remote location
+2014-07-17 18:18:55,521 [DEBUG] 	protocol = srm-lcg
+endpoint = srm://storm-se-01.ba.infn.it:8444/srm/managerv2?SFN=//cms/store/user/rosma/SamplePh2/WHToTauTau_M-125_Muon2023Upg14DR-PU140bx25/
+
+2014-07-17 18:18:57,313 [DEBUG] 	Command:	unset LD_LIBRARY_PATH; unset GLITE_ENV_SET; export PATH=/usr/bin:/bin; source /etc/profile; source /afs/cern.ch/project/gd/LCG-share/3.2.8-0/external/etc/profile.d/grid-env.sh ; lcg-ls -d -b -D srmv2 srm://storm-se-01.ba.infn.it:8444/srm/managerv2?SFN=//cms/store/user/rosma/SamplePh2/WHToTauTau_M-125_Muon2023Upg14DR-PU140bx25/
+2014-07-17 18:18:57,313 [DEBUG] 	ExitCode:	1
+2014-07-17 18:18:57,313 [DEBUG] 	Output:	/cms/store/user/rosma/SamplePh2/WHToTauTau_M-125_Muon2023Upg14DR-PU140bx25: [SE][Ls][SRM_INVALID_PATH] No such file or directory
+
+2014-07-17 18:18:57,465 [INFO] 	Creating 25 jobs, please wait...
+2014-07-17 18:18:57,466 [DEBUG] 	Creation Time: 3.05708599091
+2014-07-17 18:18:57,466 [INFO] 	Total of 25 jobs created.
+
+2014-07-17 18:20:49,196 [DEBUG] 	/opt/exp_soft/crab/CRAB_2_10_5_patch1/python/crab.py -submit -c WHToTauTau_M-125_Muon2023Upg14DR-PU140bx25/
+
+2014-07-17 18:20:49,196 [INFO] 	Version 2.10.5_patch1 running on Thu Jul 17 18:20:49 2014 CET (16:20:49 UTC)
+
+crab. Working options:
+	scheduler           remoteGlidein
+	job type            CMSSW
+	server              OFF
+	working directory   /cmshome/venditti/AnalisiGEMSample_SHLC12_2/CMSSW_6_2_0_SLHC12/src/WHAnalysis/Configuration/test/CRAB/2023Scenario/Multicrab_MC_PAT/WHToTauTau_M-125_Muon2023Upg14DR-PU140bx25/
+
+2014-07-17 18:20:49,196 [DEBUG] 	Downloading file [http://cmsdoc.cern.ch/cms/LCG/crab/config/] to [/cmshome/venditti/.cms_crab/allowed_releases.conf].
+2014-07-17 18:20:49,196 [DEBUG] 	Service initialised ({'endpoint': 'http://cmsdoc.cern.ch/cms/LCG/crab/config/', 'maxcachereuse': 24.0, 'cachepath': '/cmshome/venditti/.cms_crab', 'basepath': '/cms/LCG/crab/config/', 'method': None, 'timeout': 20, 'requests': {'endpoint': 'http://cmsdoc.cern.ch/cms/LCG/crab/config/', 'timeout': 20, 'cachepath': '/cmshome/venditti/.cms_crab', 'cacheduration': 0.5, 'host': 'cmsdoc.cern.ch', 'accept_type': 'text/html', 'content_type': 'application/x-www-form-urlencoded', 'logger': <logging.Logger object at 0x1b3a0ed0>, 'type': 'txt/csv', 'conn': <httplib.HTTPConnection instance at 0x1b3aa998>}, 'logger': <logging.Logger object at 0x1b3a0ed0>, 'cacheduration': 0.5, 'type': 'txt/csv', 'inputdata': {}}):
+	 host: cmsdoc.cern.ch, basepath: /cms/LCG/crab/config/ (text/html)
+	 cache: /cmshome/venditti/.cms_crab (duration 0.5 hours, max reuse 24.0 hours)
+2014-07-17 18:20:49,352 [DEBUG] 	Service initialised ({'endpoint': 'https://cmsweb.cern.ch/sitedb/data/prod/', 'content_type': 'application/json', 'maxcachereuse': 24.0, 'cachepath': '/cmshome/venditti/.cms_sitedbcache', 'basepath': '/sitedb/data/prod/', 'method': None, 'accept_type': 'application/json', 'timeout': 30, 'requests': {'endpoint': 'https://cmsweb.cern.ch/sitedb/data/prod/', 'cachepath': '/cmshome/venditti/.cms_sitedbcache', 'host': 'cmsweb.cern.ch', 'accept_type': 'application/json', 'content_type': 'application/json', 'logger': <logging.Logger object at 0x1b3a0ed0>, 'conn': <httplib.HTTPSConnection instance at 0x1b221128>}, 'logger': <logging.Logger object at 0x1b3a0ed0>, 'cacheduration': 0.5, 'inputdata': {}}):
+	 host: cmsweb.cern.ch, basepath: /sitedb/data/prod/ (application/json)
+	 cache: /cmshome/venditti/.cms_sitedbcache (duration 0.5 hours, max reuse 24.0 hours)
+2014-07-17 18:20:49,352 [DEBUG] 	Service initialised ({'endpoint': 'https://cmsweb.cern.ch/sitedb/data/prod/', 'content_type': 'application/json', 'maxcachereuse': 24.0, 'cachepath': '/cmshome/venditti/.cms_sitedbcache', 'basepath': '/sitedb/data/prod/', 'method': None, 'accept_type': 'application/json', 'timeout': 30, 'requests': {'endpoint': 'https://cmsweb.cern.ch/sitedb/data/prod/', 'cachepath': '/cmshome/venditti/.cms_sitedbcache', 'host': 'cmsweb.cern.ch', 'accept_type': 'application/json', 'content_type': 'application/json', 'logger': <logging.Logger object at 0x1b3a0ed0>, 'conn': <httplib.HTTPSConnection instance at 0x1b312f38>}, 'logger': <logging.Logger object at 0x1b3a0ed0>, 'cacheduration': 0.5, 'inputdata': {}}):
+	 host: cmsweb.cern.ch, basepath: /sitedb/data/prod/ (application/json)
+	 cache: /cmshome/venditti/.cms_sitedbcache (duration 0.5 hours, max reuse 24.0 hours)
+2014-07-17 18:20:49,352 [DEBUG] 	Input whitelist: 
+2014-07-17 18:20:49,352 [DEBUG] 	Input blacklist: 
+2014-07-17 18:20:49,353 [DEBUG] 	Converted whitelist: 
+2014-07-17 18:20:49,353 [DEBUG] 	Converted blacklist: 
+2014-07-17 18:20:49,353 [DEBUG] 	Downloading file [http://cmsdoc.cern.ch/cms/LCG/crab/config/] to [/cmshome/venditti/.cms_crab/myproxy_server.conf].
+2014-07-17 18:20:49,353 [DEBUG] 	Service initialised ({'endpoint': 'http://cmsdoc.cern.ch/cms/LCG/crab/config/', 'maxcachereuse': 24.0, 'cachepath': '/cmshome/venditti/.cms_crab', 'basepath': '/cms/LCG/crab/config/', 'method': None, 'timeout': 20, 'requests': {'endpoint': 'http://cmsdoc.cern.ch/cms/LCG/crab/config/', 'timeout': 20, 'cachepath': '/cmshome/venditti/.cms_crab', 'cacheduration': 0.5, 'host': 'cmsdoc.cern.ch', 'accept_type': 'text/html', 'content_type': 'application/x-www-form-urlencoded', 'logger': <logging.Logger object at 0x1b3a0ed0>, 'type': 'txt/csv', 'conn': <httplib.HTTPConnection instance at 0x1b312fc8>}, 'logger': <logging.Logger object at 0x1b3a0ed0>, 'cacheduration': 0.5, 'type': 'txt/csv', 'inputdata': {}}):
+	 host: cmsdoc.cern.ch, basepath: /cms/LCG/crab/config/ (text/html)
+	 cache: /cmshome/venditti/.cms_crab (duration 0.5 hours, max reuse 24.0 hours)
+2014-07-17 18:20:49,353 [DEBUG] 	Downloading file [http://cmsdoc.cern.ch/cms/LCG/crab/config/] to [/cmshome/venditti/.cms_crab/site_black_list.conf].
+2014-07-17 18:20:49,354 [DEBUG] 	Service initialised ({'endpoint': 'http://cmsdoc.cern.ch/cms/LCG/crab/config/', 'maxcachereuse': 24.0, 'cachepath': '/cmshome/venditti/.cms_crab', 'basepath': '/cms/LCG/crab/config/', 'method': None, 'timeout': 20, 'requests': {'endpoint': 'http://cmsdoc.cern.ch/cms/LCG/crab/config/', 'timeout': 20, 'cachepath': '/cmshome/venditti/.cms_crab', 'cacheduration': 0.5, 'host': 'cmsdoc.cern.ch', 'accept_type': 'text/html', 'content_type': 'application/x-www-form-urlencoded', 'logger': <logging.Logger object at 0x1b3a0ed0>, 'type': 'txt/csv', 'conn': <httplib.HTTPConnection instance at 0x1b312fc8>}, 'logger': <logging.Logger object at 0x1b3a0ed0>, 'cacheduration': 0.5, 'type': 'txt/csv', 'inputdata': {}}):
+	 host: cmsdoc.cern.ch, basepath: /cms/LCG/crab/config/ (text/html)
+	 cache: /cmshome/venditti/.cms_crab (duration 0.5 hours, max reuse 24.0 hours)
+2014-07-17 18:20:49,354 [DEBUG] 	Enforced black list: TAPE,srm-cms.cern.ch,cmssrm.fnal.gov,T1_FR,T1_RU,T1_TW,cmseos.fnal.gov,cmsdca2.fnal.gov,T2_PK_NCP,T3_US_Vanderbilt_EC2
+ 
+2014-07-17 18:20:50,509 [DEBUG] 	parseRange_ None
+2014-07-17 18:20:50,525 [DEBUG] 	Scram::Scram() version is 2
+2014-07-17 18:20:50,525 [DEBUG] 	Scram::Scram() arch is slc5_amd64_gcc472
+2014-07-17 18:20:50,539 [DEBUG] 	Submitter::run() called
+2014-07-17 18:20:50,553 [DEBUG] 	Service initialised ({'endpoint': 'https://cmsweb.cern.ch/sitedb/data/prod/', 'content_type': 'application/json', 'maxcachereuse': 24.0, 'cachepath': '/cmshome/venditti/.cms_sitedbcache', 'basepath': '/sitedb/data/prod/', 'method': None, 'accept_type': 'application/json', 'timeout': 30, 'requests': {'endpoint': 'https://cmsweb.cern.ch/sitedb/data/prod/', 'cachepath': '/cmshome/venditti/.cms_sitedbcache', 'host': 'cmsweb.cern.ch', 'accept_type': 'application/json', 'content_type': 'application/json', 'logger': <logging.Logger object at 0x1b3a0ed0>, 'conn': <httplib.HTTPSConnection instance at 0x1b3403b0>}, 'logger': <logging.Logger object at 0x1b3a0ed0>, 'cacheduration': 0.5, 'inputdata': {}}):
+	 host: cmsweb.cern.ch, basepath: /sitedb/data/prod/ (application/json)
+	 cache: /cmshome/venditti/.cms_sitedbcache (duration 0.5 hours, max reuse 24.0 hours)
+2014-07-17 18:20:50,553 [DEBUG] 	Service initialised ({'endpoint': 'https://cmsweb.cern.ch/sitedb/data/prod/', 'content_type': 'application/json', 'maxcachereuse': 24.0, 'cachepath': '/cmshome/venditti/.cms_sitedbcache', 'basepath': '/sitedb/data/prod/', 'method': None, 'accept_type': 'application/json', 'timeout': 30, 'requests': {'endpoint': 'https://cmsweb.cern.ch/sitedb/data/prod/', 'cachepath': '/cmshome/venditti/.cms_sitedbcache', 'host': 'cmsweb.cern.ch', 'accept_type': 'application/json', 'content_type': 'application/json', 'logger': <logging.Logger object at 0x1b3a0ed0>, 'conn': <httplib.HTTPSConnection instance at 0x1b3409e0>}, 'logger': <logging.Logger object at 0x1b3a0ed0>, 'cacheduration': 0.5, 'inputdata': {}}):
+	 host: cmsweb.cern.ch, basepath: /sitedb/data/prod/ (application/json)
+	 cache: /cmshome/venditti/.cms_sitedbcache (duration 0.5 hours, max reuse 24.0 hours)
+2014-07-17 18:20:50,553 [DEBUG] 	Input whitelist: 
+2014-07-17 18:20:50,553 [DEBUG] 	Input blacklist: 
+2014-07-17 18:20:50,553 [DEBUG] 	Converted whitelist: 
+2014-07-17 18:20:50,554 [DEBUG] 	Converted blacklist: 
+2014-07-17 18:20:50,554 [DEBUG] 	nsjobs -1
+2014-07-17 18:20:50,554 [DEBUG] 	Total jobs 25
+2014-07-17 18:20:50,568 [DEBUG] 	nj_list [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25]
+2014-07-17 18:20:50,613 [DEBUG] 	GRIDNAME: /C=IT/O=INFN/OU=Personal Certificate/L=Bari/CN=Rosamaria Venditti 
+2014-07-17 18:20:50,631 [DEBUG] 	Service initialised ({'endpoint': 'https://cmsweb.cern.ch/sitedb/data/prod/', 'content_type': 'application/json', 'maxcachereuse': 24.0, 'cachepath': '/cmshome/venditti/.cms_sitedbcache', 'basepath': '/sitedb/data/prod/', 'method': None, 'accept_type': 'application/json', 'timeout': 30, 'requests': {'endpoint': 'https://cmsweb.cern.ch/sitedb/data/prod/', 'cachepath': '/cmshome/venditti/.cms_sitedbcache', 'cacheduration': 24, 'host': 'cmsweb.cern.ch', 'accept_type': 'application/json', 'content_type': 'application/json', 'logger': <logging.Logger object at 0x1b3a0ed0>, 'conn': <httplib.HTTPSConnection instance at 0x1b3da0e0>}, 'logger': <logging.Logger object at 0x1b3a0ed0>, 'cacheduration': 24, 'inputdata': {}}):
+	 host: cmsweb.cern.ch, basepath: /sitedb/data/prod/ (application/json)
+	 cache: /cmshome/venditti/.cms_sitedbcache (duration 24 hours, max reuse 24.0 hours)
+2014-07-17 18:20:50,710 [DEBUG] 	Service initialised ({'endpoint': 'https://cmsweb.cern.ch/sitedb/data/prod/', 'content_type': 'application/json', 'maxcachereuse': 24.0, 'cachepath': '/cmshome/venditti/.cms_sitedbcache', 'basepath': '/sitedb/data/prod/', 'method': None, 'accept_type': 'application/json', 'timeout': 30, 'requests': {'endpoint': 'https://cmsweb.cern.ch/sitedb/data/prod/', 'cachepath': '/cmshome/venditti/.cms_sitedbcache', 'cacheduration': 24, 'host': 'cmsweb.cern.ch', 'accept_type': 'application/json', 'content_type': 'application/json', 'logger': <logging.Logger object at 0x1b3a0ed0>, 'conn': <httplib.HTTPSConnection instance at 0x1b3da0e0>}, 'logger': <logging.Logger object at 0x1b3a0ed0>, 'cacheduration': 24, 'inputdata': {}}):
+	 host: cmsweb.cern.ch, basepath: /sitedb/data/prod/ (application/json)
+	 cache: /cmshome/venditti/.cms_sitedbcache (duration 24 hours, max reuse 24.0 hours)
+2014-07-17 18:20:50,780 [DEBUG] 	Submission DashBoard Pre-Submission report: {'ApplicationVersion': 'CMSSW_6_2_0_SLHC12', 'taskId': 'rosma_WHToTauTau_M-125_Muon2023Upg14DR-PU140bx25_79vzu6', 'resubmitter': 'user', 'tool': 'crab', 'vo': 'cms', 'tool_ui': 'cmssusy.ba.infn.it', 'JSToolVersion': '2.10.5_patch1', 'user': 'rosma', 'scheduler': 'GLIDEIN', 'taskType': 'analysis', 'CMSUser': 'rosma', 'jobId': 'TaskMeta', 'datasetFull': '/WHToTauTau_M-125_TuneZ2star_14TeV-pythia6/Muon2023Upg14DR-PU140bx25_PH2_1K_FB_V2-v1/AODSIM', 'exe': 'cmsRun', 'GridName': '/C=IT/O=INFN/OU=Personal Certificate/L=Bari/CN=Rosamaria Venditti', 'SubmissionType': 'direct'}
+2014-07-17 18:20:50,781 [INFO] 	Checking available resources...
+2014-07-17 18:20:50,799 [INFO] 	Found  compatible site(s) for job 1
+2014-07-17 18:20:50,800 [INFO] 	1 blocks of jobs will be submitted
+2014-07-17 18:20:50,800 [DEBUG] 	Delegating proxy 
+2014-07-17 18:20:50,800 [DEBUG] 	Submitting jobs [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25]
+2014-07-17 18:20:50,943 [DEBUG] 	Calling ServerConfig default
+2014-07-17 18:20:50,943 [DEBUG] 	getting serverlist from web
+2014-07-17 18:20:50,943 [DEBUG] 	Downloading file [http://cmsdoc.cern.ch/cms/LCG/crab/config/] to [/cmshome/venditti/.cms_crab/AvailableServerList].
+2014-07-17 18:20:50,943 [DEBUG] 	Service initialised ({'endpoint': 'http://cmsdoc.cern.ch/cms/LCG/crab/config/', 'maxcachereuse': 24.0, 'cachepath': '/cmshome/venditti/.cms_crab', 'basepath': '/cms/LCG/crab/config/', 'method': None, 'timeout': 20, 'requests': {'endpoint': 'http://cmsdoc.cern.ch/cms/LCG/crab/config/', 'timeout': 20, 'cachepath': '/cmshome/venditti/.cms_crab', 'cacheduration': 0.5, 'host': 'cmsdoc.cern.ch', 'accept_type': 'text/html', 'content_type': 'application/x-www-form-urlencoded', 'logger': <logging.Logger object at 0x1b3a0ed0>, 'type': 'txt/csv', 'conn': <httplib.HTTPConnection instance at 0x1b34a290>}, 'logger': <logging.Logger object at 0x1b3a0ed0>, 'cacheduration': 0.5, 'type': 'txt/csv', 'inputdata': {}}):
+	 host: cmsdoc.cern.ch, basepath: /cms/LCG/crab/config/ (text/html)
+	 cache: /cmshome/venditti/.cms_crab (duration 0.5 hours, max reuse 24.0 hours)
+2014-07-17 18:20:50,944 [DEBUG] 	All avaialble servers: [['cern_vocms20', '2.8.4-', 'remoteGlidein'], ['cern_vocms83', '2.8.4-', 'remoteGlidein'], ['unl_hcc-crabserver', '2.8.4-', 'remoteGlidein'], ['ucsd_submit-4', '2.8.4-', 'remoteGlidein'], ['ucsd_submit-4', '2.8.4-', 'remoteGlidein'], ['ucsd_submit-4', '2.8.4-', 'remoteGlidein'], ['ucsd_submit-6', '2.8.4-', 'remoteGlidein'], ['ucsd_submit-6', '2.8.4-', 'remoteGlidein'], ['ucsd_submit-6', '2.8.4-', 'remoteGlidein']]
+2014-07-17 18:20:50,944 [DEBUG] 	All avaialble servers compatible with 2.10.5_patch1: ['cern_vocms20', 'cern_vocms83', 'unl_hcc-crabserver', 'ucsd_submit-4', 'ucsd_submit-4', 'ucsd_submit-4', 'ucsd_submit-6', 'ucsd_submit-6', 'ucsd_submit-6']
+2014-07-17 18:20:50,944 [DEBUG] 	Avaialble servers: ['cern_vocms20', 'cern_vocms83', 'unl_hcc-crabserver', 'ucsd_submit-4', 'ucsd_submit-4', 'ucsd_submit-4', 'ucsd_submit-6', 'ucsd_submit-6', 'ucsd_submit-6'] choosen: cern_vocms20
+2014-07-17 18:20:50,944 [DEBUG] 	Downloading file [http://cmsdoc.cern.ch/cms/LCG/crab/config/] to [/cmshome/venditti/.cms_crab/server_cern_vocms20.conf].
+2014-07-17 18:20:50,945 [DEBUG] 	Service initialised ({'endpoint': 'http://cmsdoc.cern.ch/cms/LCG/crab/config/', 'maxcachereuse': 24.0, 'cachepath': '/cmshome/venditti/.cms_crab', 'basepath': '/cms/LCG/crab/config/', 'method': None, 'timeout': 20, 'requests': {'endpoint': 'http://cmsdoc.cern.ch/cms/LCG/crab/config/', 'timeout': 20, 'cachepath': '/cmshome/venditti/.cms_crab', 'cacheduration': 0.5, 'host': 'cmsdoc.cern.ch', 'accept_type': 'text/html', 'content_type': 'application/x-www-form-urlencoded', 'logger': <logging.Logger object at 0x1b3a0ed0>, 'type': 'txt/csv', 'conn': <httplib.HTTPConnection instance at 0x1b34a290>}, 'logger': <logging.Logger object at 0x1b3a0ed0>, 'cacheduration': 0.5, 'type': 'txt/csv', 'inputdata': {}}):
+	 host: cmsdoc.cern.ch, basepath: /cms/LCG/crab/config/ (text/html)
+	 cache: /cmshome/venditti/.cms_crab (duration 0.5 hours, max reuse 24.0 hours)
+2014-07-17 18:20:50,945 [INFO] 	remotehost from Avail.List = vocms20.cern.ch
+2014-07-17 18:20:51,001 [DEBUG] 	Scram::Scram() version is 2
+2014-07-17 18:20:51,001 [DEBUG] 	Scram::Scram() arch is slc5_amd64_gcc472
+2014-07-17 18:20:51,020 [DEBUG] 	Service initialised ({'endpoint': 'https://cmsweb.cern.ch/sitedb/data/prod/', 'content_type': 'application/json', 'maxcachereuse': 24.0, 'cachepath': '/cmshome/venditti/.cms_sitedbcache', 'basepath': '/sitedb/data/prod/', 'method': None, 'accept_type': 'application/json', 'timeout': 30, 'requests': {'endpoint': 'https://cmsweb.cern.ch/sitedb/data/prod/', 'cachepath': '/cmshome/venditti/.cms_sitedbcache', 'cacheduration': 24, 'host': 'cmsweb.cern.ch', 'accept_type': 'application/json', 'content_type': 'application/json', 'logger': <logging.Logger object at 0x1b3a0ed0>, 'conn': <httplib.HTTPSConnection instance at 0x1b8a35f0>}, 'logger': <logging.Logger object at 0x1b3a0ed0>, 'cacheduration': 24, 'inputdata': {}}):
+	 host: cmsweb.cern.ch, basepath: /sitedb/data/prod/ (application/json)
+	 cache: /cmshome/venditti/.cms_sitedbcache (duration 24 hours, max reuse 24.0 hours)
+2014-07-17 18:20:51,174 [INFO] 	contacting remote host vocms20.cern.ch
+2014-07-17 18:20:51,213 [INFO] 	COPY FILES TO REMOTE HOST
+2014-07-17 18:20:51,213 [DEBUG] 	Execute command :
+gsissh -o ControlMaster=auto -o ControlPath=/tmp/venditti/.ssh/ssh-link--279240553-vocms20.cern.ch -o BatchMode=yes -o StrictHostKeyChecking=no -o ForwardX11=no vocms20.cern.ch  mkdir -p rosma_WHToTauTau_M-125_Muon2023Upg14DR-PU140bx25_79vzu6
+2014-07-17 18:20:51,417 [DEBUG] 	Status,output= 0,
+2014-07-17 18:20:51,418 [DEBUG] 	Execute command :
+gsiscp -o ControlMaster=auto -o ControlPath=/tmp/venditti/.ssh/ssh-link--279240553-vocms20.cern.ch -o BatchMode=yes -o StrictHostKeyChecking=no -o ForwardX11=no /cmshome/venditti/AnalisiGEMSample_SHLC12_2/CMSSW_6_2_0_SLHC12/src/WHAnalysis/Configuration/test/CRAB/2023Scenario/Multicrab_MC_PAT/WHToTauTau_M-125_Muon2023Upg14DR-PU140bx25/share/default.tgz /cmshome/venditti/AnalisiGEMSample_SHLC12_2/CMSSW_6_2_0_SLHC12/src/WHAnalysis/Configuration/test/CRAB/2023Scenario/Multicrab_MC_PAT/WHToTauTau_M-125_Muon2023Upg14DR-PU140bx25/share/arguments.xml /cmshome/venditti/AnalisiGEMSample_SHLC12_2/CMSSW_6_2_0_SLHC12/src/WHAnalysis/Configuration/test/CRAB/2023Scenario/Multicrab_MC_PAT/WHToTauTau_M-125_Muon2023Upg14DR-PU140bx25/job/CMSSW.sh /cmshome/venditti/AnalisiGEMSample_SHLC12_2/CMSSW_6_2_0_SLHC12/src/WHAnalysis/Configuration/test/CRAB/2023Scenario/Multicrab_MC_PAT/WHToTauTau_M-125_Muon2023Upg14DR-PU140bx25//share//rosma_WHToTauTau_M-125_Muon2023Upg14DR-PU140bx25_79vzu6_job25.jdl /tmp/x509up_u50797 vocms20.cern.ch:rosma_WHToTauTau_M-125_Muon2023Upg14DR-PU140bx25_79vzu6
+2014-07-17 18:20:52,355 [DEBUG] 	Status,output= 0,
+2014-07-17 18:20:52,355 [INFO] 	SUBMIT TO REMOTE GLIDEIN FRONTEND
+2014-07-17 18:20:52,355 [DEBUG] 	Execute command :
+gsissh -o ControlMaster=auto -o ControlPath=/tmp/venditti/.ssh/ssh-link--279240553-vocms20.cern.ch -o BatchMode=yes -o StrictHostKeyChecking=no -o ForwardX11=no vocms20.cern.ch "cd rosma_WHToTauTau_M-125_Muon2023Upg14DR-PU140bx25_79vzu6;  condor_submit  rosma_WHToTauTau_M-125_Muon2023Upg14DR-PU140bx25_79vzu6_job25.jdl; echo 'CONDOR_SUBMIT-EXIT-STATUS IS' \$?"
+2014-07-17 18:20:53,097 [DEBUG] 	Status,output= 0,Submitting job(s).........................
+25 job(s) submitted to cluster 1863587.
+CONDOR_SUBMIT-EXIT-STATUS IS 0
+2014-07-17 18:20:53,099 [DEBUG] 	Returning {u'rosma_WHToTauTau_M-125_Muon2023Upg14DR-PU140bx25_79vzu6_job25': 'vocms20.cern.ch//140717//1863587.24', u'rosma_WHToTauTau_M-125_Muon2023Upg14DR-PU140bx25_79vzu6_job24': 'vocms20.cern.ch//140717//1863587.23', u'rosma_WHToTauTau_M-125_Muon2023Upg14DR-PU140bx25_79vzu6_job23': 'vocms20.cern.ch//140717//1863587.22', u'rosma_WHToTauTau_M-125_Muon2023Upg14DR-PU140bx25_79vzu6_job22': 'vocms20.cern.ch//140717//1863587.21', u'rosma_WHToTauTau_M-125_Muon2023Upg14DR-PU140bx25_79vzu6_job21': 'vocms20.cern.ch//140717//1863587.20', u'rosma_WHToTauTau_M-125_Muon2023Upg14DR-PU140bx25_79vzu6_job20': 'vocms20.cern.ch//140717//1863587.19', u'rosma_WHToTauTau_M-125_Muon2023Upg14DR-PU140bx25_79vzu6_job18': 'vocms20.cern.ch//140717//1863587.17', u'rosma_WHToTauTau_M-125_Muon2023Upg14DR-PU140bx25_79vzu6_job19': 'vocms20.cern.ch//140717//1863587.18', u'rosma_WHToTauTau_M-125_Muon2023Upg14DR-PU140bx25_79vzu6_job12': 'vocms20.cern.ch//140717//1863587.11', u'rosma_WHToTauTau_M-125_Muon2023Upg14DR-PU140bx25_79vzu6_job13': 'vocms20.cern.ch//140717//1863587.12', u'rosma_WHToTauTau_M-125_Muon2023Upg14DR-PU140bx25_79vzu6_job10': 'vocms20.cern.ch//140717//1863587.9', u'rosma_WHToTauTau_M-125_Muon2023Upg14DR-PU140bx25_79vzu6_job11': 'vocms20.cern.ch//140717//1863587.10', u'rosma_WHToTauTau_M-125_Muon2023Upg14DR-PU140bx25_79vzu6_job16': 'vocms20.cern.ch//140717//1863587.15', u'rosma_WHToTauTau_M-125_Muon2023Upg14DR-PU140bx25_79vzu6_job17': 'vocms20.cern.ch//140717//1863587.16', u'rosma_WHToTauTau_M-125_Muon2023Upg14DR-PU140bx25_79vzu6_job14': 'vocms20.cern.ch//140717//1863587.13', u'rosma_WHToTauTau_M-125_Muon2023Upg14DR-PU140bx25_79vzu6_job15': 'vocms20.cern.ch//140717//1863587.14', u'rosma_WHToTauTau_M-125_Muon2023Upg14DR-PU140bx25_79vzu6_job1': 'vocms20.cern.ch//140717//1863587.0', u'rosma_WHToTauTau_M-125_Muon2023Upg14DR-PU140bx25_79vzu6_job2': 'vocms20.cern.ch//140717//1863587.1', u'rosma_WHToTauTau_M-125_Muon2023Upg14DR-PU140bx25_79vzu6_job3': 'vocms20.cern.ch//140717//1863587.2', u'rosma_WHToTauTau_M-125_Muon2023Upg14DR-PU140bx25_79vzu6_job4': 'vocms20.cern.ch//140717//1863587.3', u'rosma_WHToTauTau_M-125_Muon2023Upg14DR-PU140bx25_79vzu6_job5': 'vocms20.cern.ch//140717//1863587.4', u'rosma_WHToTauTau_M-125_Muon2023Upg14DR-PU140bx25_79vzu6_job6': 'vocms20.cern.ch//140717//1863587.5', u'rosma_WHToTauTau_M-125_Muon2023Upg14DR-PU140bx25_79vzu6_job7': 'vocms20.cern.ch//140717//1863587.6', u'rosma_WHToTauTau_M-125_Muon2023Upg14DR-PU140bx25_79vzu6_job8': 'vocms20.cern.ch//140717//1863587.7', u'rosma_WHToTauTau_M-125_Muon2023Upg14DR-PU140bx25_79vzu6_job9': 'vocms20.cern.ch//140717//1863587.8'}
+rosma_WHToTauTau_M-125_Muon2023Upg14DR-PU140bx25_79vzu6
+cmssusy.ba.infn.it
+2014-07-17 18:20:53,197 [DEBUG] 	WMS : cmssusy.ba.infn.it
+Collection ID : rosma_WHToTauTau_M-125_Muon2023Upg14DR-PU140bx25_79vzu6
+2014-07-17 18:20:53,211 [DEBUG] 	Submitted job # 1
+2014-07-17 18:20:53,211 [DEBUG] 	Submitted job # 2
+2014-07-17 18:20:53,211 [DEBUG] 	Submitted job # 3
+2014-07-17 18:20:53,211 [DEBUG] 	Submitted job # 4
+2014-07-17 18:20:53,211 [DEBUG] 	Submitted job # 5
+2014-07-17 18:20:53,211 [DEBUG] 	Submitted job # 6
+2014-07-17 18:20:53,211 [DEBUG] 	Submitted job # 7
+2014-07-17 18:20:53,211 [DEBUG] 	Submitted job # 8
+2014-07-17 18:20:53,212 [DEBUG] 	Submitted job # 9
+2014-07-17 18:20:53,212 [DEBUG] 	Submitted job # 10
+2014-07-17 18:20:53,212 [DEBUG] 	Submitted job # 11
+2014-07-17 18:20:53,212 [DEBUG] 	Submitted job # 12
+2014-07-17 18:20:53,212 [DEBUG] 	Submitted job # 13
+2014-07-17 18:20:53,212 [DEBUG] 	Submitted job # 14
+2014-07-17 18:20:53,212 [DEBUG] 	Submitted job # 15
+2014-07-17 18:20:53,212 [DEBUG] 	Submitted job # 16
+2014-07-17 18:20:53,212 [DEBUG] 	Submitted job # 17
+2014-07-17 18:20:53,212 [DEBUG] 	Submitted job # 18
+2014-07-17 18:20:53,213 [DEBUG] 	Submitted job # 19
+2014-07-17 18:20:53,213 [DEBUG] 	Submitted job # 20
+2014-07-17 18:20:53,213 [DEBUG] 	Submitted job # 21
+2014-07-17 18:20:53,213 [DEBUG] 	Submitted job # 22
+2014-07-17 18:20:53,213 [DEBUG] 	Submitted job # 23
+2014-07-17 18:20:53,213 [DEBUG] 	Submitted job # 24
+2014-07-17 18:20:53,213 [DEBUG] 	Submitted job # 25
+2014-07-17 18:20:53,338 [DEBUG] 	Updating [[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25]] state SubSuccess
+2014-07-17 18:20:53,450 [DEBUG] 	GRIDNAME: /C=IT/O=INFN/OU=Personal Certificate/L=Bari/CN=Rosamaria Venditti 
+2014-07-17 18:20:53,469 [DEBUG] 	Service initialised ({'endpoint': 'https://cmsweb.cern.ch/sitedb/data/prod/', 'content_type': 'application/json', 'maxcachereuse': 24.0, 'cachepath': '/cmshome/venditti/.cms_sitedbcache', 'basepath': '/sitedb/data/prod/', 'method': None, 'accept_type': 'application/json', 'timeout': 30, 'requests': {'endpoint': 'https://cmsweb.cern.ch/sitedb/data/prod/', 'cachepath': '/cmshome/venditti/.cms_sitedbcache', 'cacheduration': 24, 'host': 'cmsweb.cern.ch', 'accept_type': 'application/json', 'content_type': 'application/json', 'logger': <logging.Logger object at 0x1b3a0ed0>, 'conn': <httplib.HTTPSConnection instance at 0x1b9242d8>}, 'logger': <logging.Logger object at 0x1b3a0ed0>, 'cacheduration': 24, 'inputdata': {}}):
+	 host: cmsweb.cern.ch, basepath: /sitedb/data/prod/ (application/json)
+	 cache: /cmshome/venditti/.cms_sitedbcache (duration 24 hours, max reuse 24.0 hours)
+2014-07-17 18:20:53,548 [DEBUG] 	Service initialised ({'endpoint': 'https://cmsweb.cern.ch/sitedb/data/prod/', 'content_type': 'application/json', 'maxcachereuse': 24.0, 'cachepath': '/cmshome/venditti/.cms_sitedbcache', 'basepath': '/sitedb/data/prod/', 'method': None, 'accept_type': 'application/json', 'timeout': 30, 'requests': {'endpoint': 'https://cmsweb.cern.ch/sitedb/data/prod/', 'cachepath': '/cmshome/venditti/.cms_sitedbcache', 'cacheduration': 24, 'host': 'cmsweb.cern.ch', 'accept_type': 'application/json', 'content_type': 'application/json', 'logger': <logging.Logger object at 0x1b3a0ed0>, 'conn': <httplib.HTTPSConnection instance at 0x1b3444d0>}, 'logger': <logging.Logger object at 0x1b3a0ed0>, 'cacheduration': 24, 'inputdata': {}}):
+	 host: cmsweb.cern.ch, basepath: /sitedb/data/prod/ (application/json)
+	 cache: /cmshome/venditti/.cms_sitedbcache (duration 24 hours, max reuse 24.0 hours)
+2014-07-17 18:20:53,619 [DEBUG] 	Submission Time: 3.08000802994
+2014-07-17 18:20:53,619 [INFO] 	Total of 25 jobs submitted.
+2014-07-21 14:48:34,849 [DEBUG] 	/opt/exp_soft/crab/CRAB_2_10_5_patch1/python/crab.py -status -c WHToTauTau_M-125_Muon2023Upg14DR-PU140bx25/
+
+2014-07-21 14:48:34,862 [INFO] 	Version 2.10.5_patch1 running on Mon Jul 21 14:48:34 2014 CET (12:48:34 UTC)
+
+crab. Working options:
+	scheduler           remoteGlidein
+	job type            CMSSW
+	server              OFF
+	working directory   /cmshome/venditti/AnalisiGEMSample_SHLC12_2/CMSSW_6_2_0_SLHC12/src/WHAnalysis/Configuration/test/CRAB/2023Scenario/Multicrab_MC_PAT/WHToTauTau_M-125_Muon2023Upg14DR-PU140bx25/
+
+2014-07-21 14:48:34,863 [DEBUG] 	Downloading file [http://cmsdoc.cern.ch/cms/LCG/crab/config/] to [/cmshome/venditti/.cms_crab/allowed_releases.conf].
+2014-07-21 14:48:34,863 [DEBUG] 	Service initialised ({'endpoint': 'http://cmsdoc.cern.ch/cms/LCG/crab/config/', 'maxcachereuse': 24.0, 'cachepath': '/cmshome/venditti/.cms_crab', 'basepath': '/cms/LCG/crab/config/', 'method': None, 'timeout': 20, 'requests': {'endpoint': 'http://cmsdoc.cern.ch/cms/LCG/crab/config/', 'timeout': 20, 'cachepath': '/cmshome/venditti/.cms_crab', 'cacheduration': 0.5, 'host': 'cmsdoc.cern.ch', 'accept_type': 'text/html', 'content_type': 'application/x-www-form-urlencoded', 'logger': <logging.Logger object at 0x79fef10>, 'type': 'txt/csv', 'conn': <httplib.HTTPConnection instance at 0x7a83998>}, 'logger': <logging.Logger object at 0x79fef10>, 'cacheduration': 0.5, 'type': 'txt/csv', 'inputdata': {}}):
+	 host: cmsdoc.cern.ch, basepath: /cms/LCG/crab/config/ (text/html)
+	 cache: /cmshome/venditti/.cms_crab (duration 0.5 hours, max reuse 24.0 hours)
+2014-07-21 14:48:35,022 [DEBUG] 	Service initialised ({'endpoint': 'https://cmsweb.cern.ch/sitedb/data/prod/', 'content_type': 'application/json', 'maxcachereuse': 24.0, 'cachepath': '/cmshome/venditti/.cms_sitedbcache', 'basepath': '/sitedb/data/prod/', 'method': None, 'accept_type': 'application/json', 'timeout': 30, 'requests': {'endpoint': 'https://cmsweb.cern.ch/sitedb/data/prod/', 'cachepath': '/cmshome/venditti/.cms_sitedbcache', 'host': 'cmsweb.cern.ch', 'accept_type': 'application/json', 'content_type': 'application/json', 'logger': <logging.Logger object at 0x79fef10>, 'conn': <httplib.HTTPSConnection instance at 0x7ab7368>}, 'logger': <logging.Logger object at 0x79fef10>, 'cacheduration': 0.5, 'inputdata': {}}):
+	 host: cmsweb.cern.ch, basepath: /sitedb/data/prod/ (application/json)
+	 cache: /cmshome/venditti/.cms_sitedbcache (duration 0.5 hours, max reuse 24.0 hours)
+2014-07-21 14:48:35,023 [DEBUG] 	Service initialised ({'endpoint': 'https://cmsweb.cern.ch/sitedb/data/prod/', 'content_type': 'application/json', 'maxcachereuse': 24.0, 'cachepath': '/cmshome/venditti/.cms_sitedbcache', 'basepath': '/sitedb/data/prod/', 'method': None, 'accept_type': 'application/json', 'timeout': 30, 'requests': {'endpoint': 'https://cmsweb.cern.ch/sitedb/data/prod/', 'cachepath': '/cmshome/venditti/.cms_sitedbcache', 'host': 'cmsweb.cern.ch', 'accept_type': 'application/json', 'content_type': 'application/json', 'logger': <logging.Logger object at 0x79fef10>, 'conn': <httplib.HTTPSConnection instance at 0x7a65f38>}, 'logger': <logging.Logger object at 0x79fef10>, 'cacheduration': 0.5, 'inputdata': {}}):
+	 host: cmsweb.cern.ch, basepath: /sitedb/data/prod/ (application/json)
+	 cache: /cmshome/venditti/.cms_sitedbcache (duration 0.5 hours, max reuse 24.0 hours)
+2014-07-21 14:48:35,023 [DEBUG] 	Input whitelist: 
+2014-07-21 14:48:35,023 [DEBUG] 	Input blacklist: 
+2014-07-21 14:48:35,023 [DEBUG] 	Converted whitelist: 
+2014-07-21 14:48:35,023 [DEBUG] 	Converted blacklist: 
+2014-07-21 14:48:35,023 [DEBUG] 	Downloading file [http://cmsdoc.cern.ch/cms/LCG/crab/config/] to [/cmshome/venditti/.cms_crab/myproxy_server.conf].
+2014-07-21 14:48:35,023 [DEBUG] 	Service initialised ({'endpoint': 'http://cmsdoc.cern.ch/cms/LCG/crab/config/', 'maxcachereuse': 24.0, 'cachepath': '/cmshome/venditti/.cms_crab', 'basepath': '/cms/LCG/crab/config/', 'method': None, 'timeout': 20, 'requests': {'endpoint': 'http://cmsdoc.cern.ch/cms/LCG/crab/config/', 'timeout': 20, 'cachepath': '/cmshome/venditti/.cms_crab', 'cacheduration': 0.5, 'host': 'cmsdoc.cern.ch', 'accept_type': 'text/html', 'content_type': 'application/x-www-form-urlencoded', 'logger': <logging.Logger object at 0x79fef10>, 'type': 'txt/csv', 'conn': <httplib.HTTPConnection instance at 0x7a65fc8>}, 'logger': <logging.Logger object at 0x79fef10>, 'cacheduration': 0.5, 'type': 'txt/csv', 'inputdata': {}}):
+	 host: cmsdoc.cern.ch, basepath: /cms/LCG/crab/config/ (text/html)
+	 cache: /cmshome/venditti/.cms_crab (duration 0.5 hours, max reuse 24.0 hours)
+2014-07-21 14:48:35,024 [DEBUG] 	Downloading file [http://cmsdoc.cern.ch/cms/LCG/crab/config/] to [/cmshome/venditti/.cms_crab/site_black_list.conf].
+2014-07-21 14:48:35,024 [DEBUG] 	Service initialised ({'endpoint': 'http://cmsdoc.cern.ch/cms/LCG/crab/config/', 'maxcachereuse': 24.0, 'cachepath': '/cmshome/venditti/.cms_crab', 'basepath': '/cms/LCG/crab/config/', 'method': None, 'timeout': 20, 'requests': {'endpoint': 'http://cmsdoc.cern.ch/cms/LCG/crab/config/', 'timeout': 20, 'cachepath': '/cmshome/venditti/.cms_crab', 'cacheduration': 0.5, 'host': 'cmsdoc.cern.ch', 'accept_type': 'text/html', 'content_type': 'application/x-www-form-urlencoded', 'logger': <logging.Logger object at 0x79fef10>, 'type': 'txt/csv', 'conn': <httplib.HTTPConnection instance at 0x7a65fc8>}, 'logger': <logging.Logger object at 0x79fef10>, 'cacheduration': 0.5, 'type': 'txt/csv', 'inputdata': {}}):
+	 host: cmsdoc.cern.ch, basepath: /cms/LCG/crab/config/ (text/html)
+	 cache: /cmshome/venditti/.cms_crab (duration 0.5 hours, max reuse 24.0 hours)
+2014-07-21 14:48:35,024 [DEBUG] 	Enforced black list: TAPE,srm-cms.cern.ch,cmssrm.fnal.gov,T1_FR,T1_RU,T1_TW,cmseos.fnal.gov,cmsdca2.fnal.gov,T2_PK_NCP,T3_US_Vanderbilt_EC2
+ 
+2014-07-21 14:48:36,214 [DEBUG] 	Status::run() called
+2014-07-21 14:48:36,214 [INFO] 	Checking the status of all jobs: please wait
+2014-07-21 14:48:36,297 [INFO] 	contacting remote host vocms20.cern.ch
+2014-07-21 14:48:36,346 [DEBUG] 	Execute command :
+gsissh  -o ControlMaster=auto -o ControlPath=/tmp/venditti/.ssh/ssh-link--279240553-vocms20.cern.ch -o BatchMode=yes -o StrictHostKeyChecking=no -o ForwardX11=no vocms20.cern.ch  "sleep 3600"
+2014-07-21 14:48:36,350 [INFO] 	Establishing gsissh ControlPath. Wait 2 sec ...
+2014-07-21 14:48:38,350 [INFO] 	Establishing gsissh ControlPath. Wait 2 sec ...
+2014-07-21 14:48:40,351 [INFO] 	Establishing gsissh ControlPath. Wait 2 sec ...
+2014-07-21 14:48:42,351 [DEBUG] 	Execute command :
+gsiscp -o ControlMaster=auto -o ControlPath=/tmp/venditti/.ssh/ssh-link--279240553-vocms20.cern.ch -o BatchMode=yes -o StrictHostKeyChecking=no -o ForwardX11=no /tmp/x509up_u50797 vocms20.cern.ch:rosma_WHToTauTau_M-125_Muon2023Upg14DR-PU140bx25_79vzu6
+2014-07-21 14:48:42,668 [DEBUG] 	Status,output= 0,
+2014-07-21 14:48:42,668 [DEBUG] 	Execute command :
+gsissh -o ControlMaster=auto -o ControlPath=/tmp/venditti/.ssh/ssh-link--279240553-vocms20.cern.ch -o BatchMode=yes -o StrictHostKeyChecking=no -o ForwardX11=no vocms20.cern.ch  "condor_history -userlog rosma_WHToTauTau_M-125_Muon2023Upg14DR-PU140bx25_79vzu6/condor.log -xml"
+2014-07-21 14:48:43,250 [DEBUG] 	Execute command :
+gsissh -o ControlMaster=auto -o ControlPath=/tmp/venditti/.ssh/ssh-link--279240553-vocms20.cern.ch -o BatchMode=yes -o StrictHostKeyChecking=no -o ForwardX11=no vocms20.cern.ch "cd rosma_WHToTauTau_M-125_Muon2023Upg14DR-PU140bx25_79vzu6; egrep -H WrapperExitCode\|ExeExitCode crab_fjr_*xml|tr '_.\t\"' ' '|awk '{print \$3\" \"\$7\" \"\$9}'"
+2014-07-21 14:48:43,766 [DEBUG] 	Status,output= 0
+10 0 WrapperExitCode
+10 0 ExeExitCode
+11 0 WrapperExitCode
+11 0 ExeExitCode
+12 0 WrapperExitCode
+12 0 ExeExitCode
+13 50664 WrapperExitCode
+13 143 ExeExitCode
+14 50664 WrapperExitCode
+14 143 ExeExitCode
+15 0 WrapperExitCode
+15 0 ExeExitCode
+16 50664 WrapperExitCode
+16 143 ExeExitCode
+17 0 WrapperExitCode
+17 0 ExeExitCode
+18 50664 WrapperExitCode
+18 143 ExeExitCode
+19 0 WrapperExitCode
+19 0 ExeExitCode
+1 50664 WrapperExitCode
+1 143 ExeExitCode
+20 0 WrapperExitCode
+20 0 ExeExitCode
+21 0 WrapperExitCode
+21 0 ExeExitCode
+22 0 WrapperExitCode
+22 0 ExeExitCode
+23 50664 WrapperExitCode
+23 143 ExeExitCode
+24 0 WrapperExitCode
+24 0 ExeExitCode
+25 0 WrapperExitCode
+25 0 ExeExitCode
+2 0 WrapperExitCode
+2 0 ExeExitCode
+3 0 WrapperExitCode
+3 0 ExeExitCode
+4 0 WrapperExitCode
+4 0 ExeExitCode
+5 50664 WrapperExitCode
+5 143 ExeExitCode
+6 50664 WrapperExitCode
+6 143 ExeExitCode
+7 50664 WrapperExitCode
+7 143 ExeExitCode
+8 0 WrapperExitCode
+8 0 ExeExitCode
+9 0 WrapperExitCode
+9 0 ExeExitCode
+2014-07-21 14:48:44,053 [INFO] 	
+ID    END STATUS            ACTION       ExeExitCode JobExitCode E_HOST
+----- --- ----------------- ------------  ---------- ----------- ---------
+1     N   Done              Terminated    143        50664       red-gw2.unl.edu red-gw2.unl.edu
+2     N   Done              Terminated    0          0           red-gw1.unl.edu red-gw1.unl.edu
+3     N   Done              Terminated    0          0           red.unl.edu red.unl.edu
+4     N   Done              Terminated    0          0           red-gw1.unl.edu red-gw1.unl.edu
+5     N   Done              Terminated    143        50664       red.unl.edu red.unl.edu
+6     N   Done              Terminated    143        50664       red.unl.edu red.unl.edu
+7     N   Done              Terminated    143        50664       red-gw1.unl.edu red-gw1.unl.edu
+8     N   Done              Terminated    0          0           red.unl.edu red.unl.edu
+9     N   Done              Terminated    0          0           red.unl.edu red.unl.edu
+10    N   Done              Terminated    0          0           red-gw1.unl.edu red-gw1.unl.edu
+--------------------------------------------------------------------------------
+11    N   Done              Terminated    0          0           red.unl.edu red.unl.edu
+12    N   Done              Terminated    0          0           red.unl.edu red.unl.edu
+13    N   Done              Terminated    143        50664       red-gw1.unl.edu red-gw1.unl.edu
+14    N   Done              Terminated    143        50664       red.unl.edu red.unl.edu
+15    N   Done              Terminated    0          0           red.unl.edu red.unl.edu
+16    N   Done              Terminated    143        50664       red.unl.edu red.unl.edu
+17    N   Done              Terminated    0          0           red-gw1.unl.edu red-gw1.unl.edu
+18    N   Done              Terminated    143        50664       red.unl.edu red.unl.edu
+19    N   Done              Terminated    0          0           red.unl.edu red.unl.edu
+20    N   Done              Terminated    0          0           red.unl.edu red.unl.edu
+--------------------------------------------------------------------------------
+21    N   Done              Terminated    0          0           red-gw1.unl.edu red-gw1.unl.edu
+22    N   Done              Terminated    0          0           red.unl.edu red.unl.edu
+23    N   Done              Terminated    143        50664       red-gw1.unl.edu red-gw1.unl.edu
+24    N   Done              Terminated    0          0           red-gw1.unl.edu red-gw1.unl.edu
+25    N   Done              Terminated    0          0           red-gw1.unl.edu red-gw1.unl.edu
+
+2014-07-21 14:48:44,071 [INFO] 	ExitCodes Summary
+ >>>>>>>>> 16 Jobs with Wrapper Exit Code : 0 
+	 List of jobs: 2-4,8-12,15,17,19-22,24-25 
+	See https://twiki.cern.ch/twiki/bin/view/CMS/JobExitCodes for Exit Code meaning
+
+2014-07-21 14:48:44,073 [INFO] 	ExitCodes Summary
+ >>>>>>>>> 9 Jobs with Wrapper Exit Code : 50664 
+	 List of jobs: 1,5-7,13-14,16,18,23 
+	See https://twiki.cern.ch/twiki/bin/view/CMS/JobExitCodes for Exit Code meaning
+
+2014-07-21 14:48:44,073 [INFO] 	 25 Total Jobs 
+
+2014-07-21 14:48:44,080 [INFO] 	You can also follow the status of this task on :
+	CMS Dashboard: http://dashb-cms-job-task.cern.ch/taskmon.html#task=rosma_WHToTauTau_M-125_Muon2023Upg14DR-PU140bx25_79vzu6
+	Your task name is: rosma_WHToTauTau_M-125_Muon2023Upg14DR-PU140bx25_79vzu6 
+
+2014-07-21 14:48:44,080 [DEBUG] 	Status Time: 7.86543011665
+2014-07-21 14:50:15,391 [DEBUG] 	/opt/exp_soft/crab/CRAB_2_10_5_patch1/python/crab.py -forceResubmit 1,5-7,13-14,16,18,23 -c WHToTauTau_M-125_Muon2023Upg14DR-PU140bx25/
+
+2014-07-21 14:50:15,391 [INFO] 	Version 2.10.5_patch1 running on Mon Jul 21 14:50:15 2014 CET (12:50:15 UTC)
+
+crab. Working options:
+	scheduler           remoteGlidein
+	job type            CMSSW
+	server              OFF
+	working directory   /cmshome/venditti/AnalisiGEMSample_SHLC12_2/CMSSW_6_2_0_SLHC12/src/WHAnalysis/Configuration/test/CRAB/2023Scenario/Multicrab_MC_PAT/WHToTauTau_M-125_Muon2023Upg14DR-PU140bx25/
+
+2014-07-21 14:50:15,392 [DEBUG] 	Downloading file [http://cmsdoc.cern.ch/cms/LCG/crab/config/] to [/cmshome/venditti/.cms_crab/allowed_releases.conf].
+2014-07-21 14:50:15,392 [DEBUG] 	Service initialised ({'endpoint': 'http://cmsdoc.cern.ch/cms/LCG/crab/config/', 'maxcachereuse': 24.0, 'cachepath': '/cmshome/venditti/.cms_crab', 'basepath': '/cms/LCG/crab/config/', 'method': None, 'timeout': 20, 'requests': {'endpoint': 'http://cmsdoc.cern.ch/cms/LCG/crab/config/', 'timeout': 20, 'cachepath': '/cmshome/venditti/.cms_crab', 'cacheduration': 0.5, 'host': 'cmsdoc.cern.ch', 'accept_type': 'text/html', 'content_type': 'application/x-www-form-urlencoded', 'logger': <logging.Logger object at 0x1c973f50>, 'type': 'txt/csv', 'conn': <httplib.HTTPConnection instance at 0x1c9fd998>}, 'logger': <logging.Logger object at 0x1c973f50>, 'cacheduration': 0.5, 'type': 'txt/csv', 'inputdata': {}}):
+	 host: cmsdoc.cern.ch, basepath: /cms/LCG/crab/config/ (text/html)
+	 cache: /cmshome/venditti/.cms_crab (duration 0.5 hours, max reuse 24.0 hours)
+2014-07-21 14:50:15,553 [DEBUG] 	Service initialised ({'endpoint': 'https://cmsweb.cern.ch/sitedb/data/prod/', 'content_type': 'application/json', 'maxcachereuse': 24.0, 'cachepath': '/cmshome/venditti/.cms_sitedbcache', 'basepath': '/sitedb/data/prod/', 'method': None, 'accept_type': 'application/json', 'timeout': 30, 'requests': {'endpoint': 'https://cmsweb.cern.ch/sitedb/data/prod/', 'cachepath': '/cmshome/venditti/.cms_sitedbcache', 'host': 'cmsweb.cern.ch', 'accept_type': 'application/json', 'content_type': 'application/json', 'logger': <logging.Logger object at 0x1c973f50>, 'conn': <httplib.HTTPSConnection instance at 0x1ca05050>}, 'logger': <logging.Logger object at 0x1c973f50>, 'cacheduration': 0.5, 'inputdata': {}}):
+	 host: cmsweb.cern.ch, basepath: /sitedb/data/prod/ (application/json)
+	 cache: /cmshome/venditti/.cms_sitedbcache (duration 0.5 hours, max reuse 24.0 hours)
+2014-07-21 14:50:15,554 [DEBUG] 	Service initialised ({'endpoint': 'https://cmsweb.cern.ch/sitedb/data/prod/', 'content_type': 'application/json', 'maxcachereuse': 24.0, 'cachepath': '/cmshome/venditti/.cms_sitedbcache', 'basepath': '/sitedb/data/prod/', 'method': None, 'accept_type': 'application/json', 'timeout': 30, 'requests': {'endpoint': 'https://cmsweb.cern.ch/sitedb/data/prod/', 'cachepath': '/cmshome/venditti/.cms_sitedbcache', 'host': 'cmsweb.cern.ch', 'accept_type': 'application/json', 'content_type': 'application/json', 'logger': <logging.Logger object at 0x1c973f50>, 'conn': <httplib.HTTPSConnection instance at 0x1c9ddf38>}, 'logger': <logging.Logger object at 0x1c973f50>, 'cacheduration': 0.5, 'inputdata': {}}):
+	 host: cmsweb.cern.ch, basepath: /sitedb/data/prod/ (application/json)
+	 cache: /cmshome/venditti/.cms_sitedbcache (duration 0.5 hours, max reuse 24.0 hours)
+2014-07-21 14:50:15,554 [DEBUG] 	Input whitelist: 
+2014-07-21 14:50:15,554 [DEBUG] 	Input blacklist: 
+2014-07-21 14:50:15,554 [DEBUG] 	Converted whitelist: 
+2014-07-21 14:50:15,554 [DEBUG] 	Converted blacklist: 
+2014-07-21 14:50:15,554 [DEBUG] 	Downloading file [http://cmsdoc.cern.ch/cms/LCG/crab/config/] to [/cmshome/venditti/.cms_crab/myproxy_server.conf].
+2014-07-21 14:50:15,554 [DEBUG] 	Service initialised ({'endpoint': 'http://cmsdoc.cern.ch/cms/LCG/crab/config/', 'maxcachereuse': 24.0, 'cachepath': '/cmshome/venditti/.cms_crab', 'basepath': '/cms/LCG/crab/config/', 'method': None, 'timeout': 20, 'requests': {'endpoint': 'http://cmsdoc.cern.ch/cms/LCG/crab/config/', 'timeout': 20, 'cachepath': '/cmshome/venditti/.cms_crab', 'cacheduration': 0.5, 'host': 'cmsdoc.cern.ch', 'accept_type': 'text/html', 'content_type': 'application/x-www-form-urlencoded', 'logger': <logging.Logger object at 0x1c973f50>, 'type': 'txt/csv', 'conn': <httplib.HTTPConnection instance at 0x1c9ddfc8>}, 'logger': <logging.Logger object at 0x1c973f50>, 'cacheduration': 0.5, 'type': 'txt/csv', 'inputdata': {}}):
+	 host: cmsdoc.cern.ch, basepath: /cms/LCG/crab/config/ (text/html)
+	 cache: /cmshome/venditti/.cms_crab (duration 0.5 hours, max reuse 24.0 hours)
+2014-07-21 14:50:15,555 [DEBUG] 	Downloading file [http://cmsdoc.cern.ch/cms/LCG/crab/config/] to [/cmshome/venditti/.cms_crab/site_black_list.conf].
+2014-07-21 14:50:15,555 [DEBUG] 	Service initialised ({'endpoint': 'http://cmsdoc.cern.ch/cms/LCG/crab/config/', 'maxcachereuse': 24.0, 'cachepath': '/cmshome/venditti/.cms_crab', 'basepath': '/cms/LCG/crab/config/', 'method': None, 'timeout': 20, 'requests': {'endpoint': 'http://cmsdoc.cern.ch/cms/LCG/crab/config/', 'timeout': 20, 'cachepath': '/cmshome/venditti/.cms_crab', 'cacheduration': 0.5, 'host': 'cmsdoc.cern.ch', 'accept_type': 'text/html', 'content_type': 'application/x-www-form-urlencoded', 'logger': <logging.Logger object at 0x1c973f50>, 'type': 'txt/csv', 'conn': <httplib.HTTPConnection instance at 0x1c9ddfc8>}, 'logger': <logging.Logger object at 0x1c973f50>, 'cacheduration': 0.5, 'type': 'txt/csv', 'inputdata': {}}):
+	 host: cmsdoc.cern.ch, basepath: /cms/LCG/crab/config/ (text/html)
+	 cache: /cmshome/venditti/.cms_crab (duration 0.5 hours, max reuse 24.0 hours)
+2014-07-21 14:50:15,555 [DEBUG] 	Enforced black list: TAPE,srm-cms.cern.ch,cmssrm.fnal.gov,T1_FR,T1_RU,T1_TW,cmseos.fnal.gov,cmsdca2.fnal.gov,T2_PK_NCP,T3_US_Vanderbilt_EC2
+ 
+2014-07-21 14:50:16,773 [DEBUG] 	parseRange_ 1,5-7,13-14,16,18,23
+2014-07-21 14:50:16,935 [INFO] 	Jobs [1, 5, 6, 7, 13, 14, 16, 18, 23] will be resubmitted
+2014-07-21 14:50:16,936 [DEBUG] 	Scram::Scram() version is 2
+2014-07-21 14:50:16,937 [DEBUG] 	Scram::Scram() arch is slc5_amd64_gcc472
+2014-07-21 14:50:16,937 [DEBUG] 	Submitter::run() called
+2014-07-21 14:50:16,951 [DEBUG] 	Service initialised ({'endpoint': 'https://cmsweb.cern.ch/sitedb/data/prod/', 'content_type': 'application/json', 'maxcachereuse': 24.0, 'cachepath': '/cmshome/venditti/.cms_sitedbcache', 'basepath': '/sitedb/data/prod/', 'method': None, 'accept_type': 'application/json', 'timeout': 30, 'requests': {'endpoint': 'https://cmsweb.cern.ch/sitedb/data/prod/', 'cachepath': '/cmshome/venditti/.cms_sitedbcache', 'host': 'cmsweb.cern.ch', 'accept_type': 'application/json', 'content_type': 'application/json', 'logger': <logging.Logger object at 0x1c973f50>, 'conn': <httplib.HTTPSConnection instance at 0x1c961a70>}, 'logger': <logging.Logger object at 0x1c973f50>, 'cacheduration': 0.5, 'inputdata': {}}):
+	 host: cmsweb.cern.ch, basepath: /sitedb/data/prod/ (application/json)
+	 cache: /cmshome/venditti/.cms_sitedbcache (duration 0.5 hours, max reuse 24.0 hours)
+2014-07-21 14:50:16,951 [DEBUG] 	Service initialised ({'endpoint': 'https://cmsweb.cern.ch/sitedb/data/prod/', 'content_type': 'application/json', 'maxcachereuse': 24.0, 'cachepath': '/cmshome/venditti/.cms_sitedbcache', 'basepath': '/sitedb/data/prod/', 'method': None, 'accept_type': 'application/json', 'timeout': 30, 'requests': {'endpoint': 'https://cmsweb.cern.ch/sitedb/data/prod/', 'cachepath': '/cmshome/venditti/.cms_sitedbcache', 'host': 'cmsweb.cern.ch', 'accept_type': 'application/json', 'content_type': 'application/json', 'logger': <logging.Logger object at 0x1c973f50>, 'conn': <httplib.HTTPSConnection instance at 0x1cb22488>}, 'logger': <logging.Logger object at 0x1c973f50>, 'cacheduration': 0.5, 'inputdata': {}}):
+	 host: cmsweb.cern.ch, basepath: /sitedb/data/prod/ (application/json)
+	 cache: /cmshome/venditti/.cms_sitedbcache (duration 0.5 hours, max reuse 24.0 hours)
+2014-07-21 14:50:16,951 [DEBUG] 	Input whitelist: 
+2014-07-21 14:50:16,952 [DEBUG] 	Input blacklist: 
+2014-07-21 14:50:16,952 [DEBUG] 	Converted whitelist: 
+2014-07-21 14:50:16,952 [DEBUG] 	Converted blacklist: 
+2014-07-21 14:50:16,952 [DEBUG] 	nsjobs -1
+2014-07-21 14:50:16,952 [DEBUG] 	Total jobs 25
+2014-07-21 14:50:16,958 [DEBUG] 	nj_list [1, 5, 6, 7, 13, 14, 16, 18, 23]
+2014-07-21 14:50:17,012 [DEBUG] 	GRIDNAME: /C=IT/O=INFN/OU=Personal Certificate/L=Bari/CN=Rosamaria Venditti 
+2014-07-21 14:50:17,042 [DEBUG] 	Service initialised ({'endpoint': 'https://cmsweb.cern.ch/sitedb/data/prod/', 'content_type': 'application/json', 'maxcachereuse': 24.0, 'cachepath': '/cmshome/venditti/.cms_sitedbcache', 'basepath': '/sitedb/data/prod/', 'method': None, 'accept_type': 'application/json', 'timeout': 30, 'requests': {'endpoint': 'https://cmsweb.cern.ch/sitedb/data/prod/', 'cachepath': '/cmshome/venditti/.cms_sitedbcache', 'cacheduration': 24, 'host': 'cmsweb.cern.ch', 'accept_type': 'application/json', 'content_type': 'application/json', 'logger': <logging.Logger object at 0x1c973f50>, 'conn': <httplib.HTTPSConnection instance at 0x1c9d0cf8>}, 'logger': <logging.Logger object at 0x1c973f50>, 'cacheduration': 24, 'inputdata': {}}):
+	 host: cmsweb.cern.ch, basepath: /sitedb/data/prod/ (application/json)
+	 cache: /cmshome/venditti/.cms_sitedbcache (duration 24 hours, max reuse 24.0 hours)
+2014-07-21 14:50:17,129 [DEBUG] 	Service initialised ({'endpoint': 'https://cmsweb.cern.ch/sitedb/data/prod/', 'content_type': 'application/json', 'maxcachereuse': 24.0, 'cachepath': '/cmshome/venditti/.cms_sitedbcache', 'basepath': '/sitedb/data/prod/', 'method': None, 'accept_type': 'application/json', 'timeout': 30, 'requests': {'endpoint': 'https://cmsweb.cern.ch/sitedb/data/prod/', 'cachepath': '/cmshome/venditti/.cms_sitedbcache', 'cacheduration': 24, 'host': 'cmsweb.cern.ch', 'accept_type': 'application/json', 'content_type': 'application/json', 'logger': <logging.Logger object at 0x1c973f50>, 'conn': <httplib.HTTPSConnection instance at 0x1ce9b4d0>}, 'logger': <logging.Logger object at 0x1c973f50>, 'cacheduration': 24, 'inputdata': {}}):
+	 host: cmsweb.cern.ch, basepath: /sitedb/data/prod/ (application/json)
+	 cache: /cmshome/venditti/.cms_sitedbcache (duration 24 hours, max reuse 24.0 hours)
+2014-07-21 14:50:17,205 [DEBUG] 	Submission DashBoard Pre-Submission report: {'ApplicationVersion': 'CMSSW_6_2_0_SLHC12', 'taskId': 'rosma_WHToTauTau_M-125_Muon2023Upg14DR-PU140bx25_79vzu6', 'resubmitter': 'user', 'tool': 'crab', 'vo': 'cms', 'tool_ui': 'cmssusy.ba.infn.it', 'JSToolVersion': '2.10.5_patch1', 'user': 'rosma', 'scheduler': 'GLIDEIN', 'taskType': 'analysis', 'CMSUser': 'rosma', 'jobId': 'TaskMeta', 'datasetFull': '/WHToTauTau_M-125_TuneZ2star_14TeV-pythia6/Muon2023Upg14DR-PU140bx25_PH2_1K_FB_V2-v1/AODSIM', 'exe': 'cmsRun', 'GridName': '/C=IT/O=INFN/OU=Personal Certificate/L=Bari/CN=Rosamaria Venditti', 'SubmissionType': 'direct'}
+2014-07-21 14:50:17,206 [INFO] 	Checking available resources...
+2014-07-21 14:50:17,223 [INFO] 	Found  compatible site(s) for job 1
+2014-07-21 14:50:17,224 [INFO] 	1 blocks of jobs will be submitted
+2014-07-21 14:50:17,224 [DEBUG] 	Delegating proxy 
+2014-07-21 14:50:17,224 [DEBUG] 	Submitting jobs [1, 5, 6, 7, 13, 14, 16, 18, 23]
+2014-07-21 14:50:17,285 [INFO] 	serverName from Task DB is vocms20.cern.ch
+2014-07-21 14:50:17,344 [DEBUG] 	Scram::Scram() version is 2
+2014-07-21 14:50:17,344 [DEBUG] 	Scram::Scram() arch is slc5_amd64_gcc472
+2014-07-21 14:50:17,367 [DEBUG] 	Service initialised ({'endpoint': 'https://cmsweb.cern.ch/sitedb/data/prod/', 'content_type': 'application/json', 'maxcachereuse': 24.0, 'cachepath': '/cmshome/venditti/.cms_sitedbcache', 'basepath': '/sitedb/data/prod/', 'method': None, 'accept_type': 'application/json', 'timeout': 30, 'requests': {'endpoint': 'https://cmsweb.cern.ch/sitedb/data/prod/', 'cachepath': '/cmshome/venditti/.cms_sitedbcache', 'cacheduration': 24, 'host': 'cmsweb.cern.ch', 'accept_type': 'application/json', 'content_type': 'application/json', 'logger': <logging.Logger object at 0x1c973f50>, 'conn': <httplib.HTTPSConnection instance at 0x1cf5b170>}, 'logger': <logging.Logger object at 0x1c973f50>, 'cacheduration': 24, 'inputdata': {}}):
+	 host: cmsweb.cern.ch, basepath: /sitedb/data/prod/ (application/json)
+	 cache: /cmshome/venditti/.cms_sitedbcache (duration 24 hours, max reuse 24.0 hours)
+2014-07-21 14:50:17,518 [INFO] 	contacting remote host vocms20.cern.ch
+2014-07-21 14:50:17,591 [INFO] 	COPY FILES TO REMOTE HOST
+2014-07-21 14:50:17,591 [DEBUG] 	Execute command :
+gsissh -o ControlMaster=auto -o ControlPath=/tmp/venditti/.ssh/ssh-link--279240553-vocms20.cern.ch -o BatchMode=yes -o StrictHostKeyChecking=no -o ForwardX11=no vocms20.cern.ch  mkdir -p rosma_WHToTauTau_M-125_Muon2023Upg14DR-PU140bx25_79vzu6
+2014-07-21 14:50:17,814 [DEBUG] 	Status,output= 0,
+2014-07-21 14:50:17,814 [DEBUG] 	Execute command :
+gsiscp -o ControlMaster=auto -o ControlPath=/tmp/venditti/.ssh/ssh-link--279240553-vocms20.cern.ch -o BatchMode=yes -o StrictHostKeyChecking=no -o ForwardX11=no /cmshome/venditti/AnalisiGEMSample_SHLC12_2/CMSSW_6_2_0_SLHC12/src/WHAnalysis/Configuration/test/CRAB/2023Scenario/Multicrab_MC_PAT/WHToTauTau_M-125_Muon2023Upg14DR-PU140bx25/share/default.tgz /cmshome/venditti/AnalisiGEMSample_SHLC12_2/CMSSW_6_2_0_SLHC12/src/WHAnalysis/Configuration/test/CRAB/2023Scenario/Multicrab_MC_PAT/WHToTauTau_M-125_Muon2023Upg14DR-PU140bx25/share/arguments.xml /cmshome/venditti/AnalisiGEMSample_SHLC12_2/CMSSW_6_2_0_SLHC12/src/WHAnalysis/Configuration/test/CRAB/2023Scenario/Multicrab_MC_PAT/WHToTauTau_M-125_Muon2023Upg14DR-PU140bx25/job/CMSSW.sh /cmshome/venditti/AnalisiGEMSample_SHLC12_2/CMSSW_6_2_0_SLHC12/src/WHAnalysis/Configuration/test/CRAB/2023Scenario/Multicrab_MC_PAT/WHToTauTau_M-125_Muon2023Upg14DR-PU140bx25//share//rosma_WHToTauTau_M-125_Muon2023Upg14DR-PU140bx25_79vzu6_job23.jdl /tmp/x509up_u50797 vocms20.cern.ch:rosma_WHToTauTau_M-125_Muon2023Upg14DR-PU140bx25_79vzu6
+2014-07-21 14:50:18,900 [DEBUG] 	Status,output= 0,
+2014-07-21 14:50:18,901 [INFO] 	SUBMIT TO REMOTE GLIDEIN FRONTEND
+2014-07-21 14:50:18,901 [DEBUG] 	Execute command :
+gsissh -o ControlMaster=auto -o ControlPath=/tmp/venditti/.ssh/ssh-link--279240553-vocms20.cern.ch -o BatchMode=yes -o StrictHostKeyChecking=no -o ForwardX11=no vocms20.cern.ch "cd rosma_WHToTauTau_M-125_Muon2023Upg14DR-PU140bx25_79vzu6;  condor_submit  rosma_WHToTauTau_M-125_Muon2023Upg14DR-PU140bx25_79vzu6_job23.jdl; echo 'CONDOR_SUBMIT-EXIT-STATUS IS' \$?"
+2014-07-21 14:50:19,672 [DEBUG] 	Status,output= 0,Submitting job(s).........
+9 job(s) submitted to cluster 1863914.
+CONDOR_SUBMIT-EXIT-STATUS IS 0
+2014-07-21 14:50:19,674 [DEBUG] 	Returning {u'rosma_WHToTauTau_M-125_Muon2023Upg14DR-PU140bx25_79vzu6_job1': 'vocms20.cern.ch//140721//1863914.0', u'rosma_WHToTauTau_M-125_Muon2023Upg14DR-PU140bx25_79vzu6_job5': 'vocms20.cern.ch//140721//1863914.1', u'rosma_WHToTauTau_M-125_Muon2023Upg14DR-PU140bx25_79vzu6_job6': 'vocms20.cern.ch//140721//1863914.2', u'rosma_WHToTauTau_M-125_Muon2023Upg14DR-PU140bx25_79vzu6_job7': 'vocms20.cern.ch//140721//1863914.3', u'rosma_WHToTauTau_M-125_Muon2023Upg14DR-PU140bx25_79vzu6_job18': 'vocms20.cern.ch//140721//1863914.7', u'rosma_WHToTauTau_M-125_Muon2023Upg14DR-PU140bx25_79vzu6_job23': 'vocms20.cern.ch//140721//1863914.8', u'rosma_WHToTauTau_M-125_Muon2023Upg14DR-PU140bx25_79vzu6_job13': 'vocms20.cern.ch//140721//1863914.4', u'rosma_WHToTauTau_M-125_Muon2023Upg14DR-PU140bx25_79vzu6_job16': 'vocms20.cern.ch//140721//1863914.6', u'rosma_WHToTauTau_M-125_Muon2023Upg14DR-PU140bx25_79vzu6_job14': 'vocms20.cern.ch//140721//1863914.5'}
+rosma_WHToTauTau_M-125_Muon2023Upg14DR-PU140bx25_79vzu6
+cmssusy.ba.infn.it
+2014-07-21 14:50:19,715 [DEBUG] 	WMS : cmssusy.ba.infn.it
+Collection ID : rosma_WHToTauTau_M-125_Muon2023Upg14DR-PU140bx25_79vzu6
+2014-07-21 14:50:19,721 [DEBUG] 	Submitted job # 1
+2014-07-21 14:50:19,721 [DEBUG] 	Submitted job # 5
+2014-07-21 14:50:19,721 [DEBUG] 	Submitted job # 6
+2014-07-21 14:50:19,722 [DEBUG] 	Submitted job # 7
+2014-07-21 14:50:19,722 [DEBUG] 	Submitted job # 13
+2014-07-21 14:50:19,722 [DEBUG] 	Submitted job # 14
+2014-07-21 14:50:19,722 [DEBUG] 	Submitted job # 16
+2014-07-21 14:50:19,722 [DEBUG] 	Submitted job # 18
+2014-07-21 14:50:19,722 [DEBUG] 	Submitted job # 23
+2014-07-21 14:50:19,774 [DEBUG] 	Updating [[1, 5, 6, 7, 13, 14, 16, 18, 23]] state SubSuccess
+2014-07-21 14:50:19,855 [DEBUG] 	GRIDNAME: /C=IT/O=INFN/OU=Personal Certificate/L=Bari/CN=Rosamaria Venditti 
+2014-07-21 14:50:19,874 [DEBUG] 	Service initialised ({'endpoint': 'https://cmsweb.cern.ch/sitedb/data/prod/', 'content_type': 'application/json', 'maxcachereuse': 24.0, 'cachepath': '/cmshome/venditti/.cms_sitedbcache', 'basepath': '/sitedb/data/prod/', 'method': None, 'accept_type': 'application/json', 'timeout': 30, 'requests': {'endpoint': 'https://cmsweb.cern.ch/sitedb/data/prod/', 'cachepath': '/cmshome/venditti/.cms_sitedbcache', 'cacheduration': 24, 'host': 'cmsweb.cern.ch', 'accept_type': 'application/json', 'content_type': 'application/json', 'logger': <logging.Logger object at 0x1c973f50>, 'conn': <httplib.HTTPSConnection instance at 0x1c981c20>}, 'logger': <logging.Logger object at 0x1c973f50>, 'cacheduration': 24, 'inputdata': {}}):
+	 host: cmsweb.cern.ch, basepath: /sitedb/data/prod/ (application/json)
+	 cache: /cmshome/venditti/.cms_sitedbcache (duration 24 hours, max reuse 24.0 hours)
+2014-07-21 14:50:19,952 [DEBUG] 	Service initialised ({'endpoint': 'https://cmsweb.cern.ch/sitedb/data/prod/', 'content_type': 'application/json', 'maxcachereuse': 24.0, 'cachepath': '/cmshome/venditti/.cms_sitedbcache', 'basepath': '/sitedb/data/prod/', 'method': None, 'accept_type': 'application/json', 'timeout': 30, 'requests': {'endpoint': 'https://cmsweb.cern.ch/sitedb/data/prod/', 'cachepath': '/cmshome/venditti/.cms_sitedbcache', 'cacheduration': 24, 'host': 'cmsweb.cern.ch', 'accept_type': 'application/json', 'content_type': 'application/json', 'logger': <logging.Logger object at 0x1c973f50>, 'conn': <httplib.HTTPSConnection instance at 0x1c981c20>}, 'logger': <logging.Logger object at 0x1c973f50>, 'cacheduration': 24, 'inputdata': {}}):
+	 host: cmsweb.cern.ch, basepath: /sitedb/data/prod/ (application/json)
+	 cache: /cmshome/venditti/.cms_sitedbcache (duration 24 hours, max reuse 24.0 hours)
+2014-07-21 14:50:20,017 [DEBUG] 	Submission Time: 3.07965993881
+2014-07-21 14:50:20,017 [INFO] 	Total of 9 jobs submitted.

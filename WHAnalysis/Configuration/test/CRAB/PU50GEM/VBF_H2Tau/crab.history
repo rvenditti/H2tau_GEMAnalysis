@@ -1,0 +1,8 @@
+140609_194024: /opt/exp_soft/crab/CRAB_2_10_4/python/crab.py -create -cfg crab_VBF.cfg
+140609_194219: /opt/exp_soft/crab/CRAB_2_10_5_patch1/python/crab.py -create -cfg crab_VBF.cfg
+140609_211602: /opt/exp_soft/crab/CRAB_2_10_5_patch1/python/crab.py -create -cfg crab_VBF.cfg
+140609_211656: /opt/exp_soft/crab/CRAB_2_10_5_patch1/python/crab.py -submit -c VBF_HToTauTau_M-125_14TeV_GEM2019Upg14DR-PU50/
+140611_115834: /opt/exp_soft/crab/CRAB_2_10_5_patch1/python/crab.py -status -c VBF_HToTauTau_M-125_14TeV_GEM2019Upg14DR-PU50/
+140611_120856: /opt/exp_soft/crab/CRAB_2_10_5_patch1/python/crab.py -forceResubmit 1,3-10,12-20,2,11 -GRID.CE.black_list=T1_US_FNAL -c VBF_HToTauTau_M-125_14TeV_GEM2019Upg14DR-PU50/
+140616_181651: /opt/exp_soft/crab/CRAB_2_10_5_patch1/python/crab.py -status -c VBF_HToTauTau_M-125_14TeV_GEM2019Upg14DR-PU50/
+140616_182025: /opt/exp_soft/crab/CRAB_2_10_5_patch1/python/crab.py -status -c VBF_HToTauTau_M-125_14TeV_GEM2019Upg14DR-PU50/

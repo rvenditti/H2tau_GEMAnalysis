@@ -1,0 +1,7 @@
+/lustre/home/donvito
+/lustrehome/donvito/
+/opt/exp_soft/cms
+Your shell is not able to find where cmsset_default.csh is located.
+Either you have not set VO_CMS_SW_DIR or OSG_APP correctly
+or SCRAM_ARCH is not set to a valid architecture.
+/cmshome/venditti/AnalisiGEMSample_SHLC12_2/CMSSW_6_2_0_SLHC12/src/GEMSampleAnalysis/WH_PU40CMS2012_ProvaAnalisi

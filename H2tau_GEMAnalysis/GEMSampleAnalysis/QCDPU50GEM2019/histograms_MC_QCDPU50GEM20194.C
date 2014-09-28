@@ -1,0 +1,47 @@
+#if !defined(__CINT__) || defined(__MAKECINT__)
+#include <TROOT.h>
+#include <TSystem.h>
+#include <TFile.h>
+#include <TH1.h>
+#include <TH2.h>
+#include <TObject.h>
+#include <TCanvas.h>
+#include <TKey.h>
+#include <TStyle.h>
+#include <TTree.h>
+#include <TLegend.h>
+#include "VHAnalyser_Jan13.h"
+#include <TString.h>
+#include <string>
+#include <vector>
+#include <iostream>
+#include <fstream>
+#include <sstream>
+#include "TChain.h"
+#include <stdlib.h>
+#endif
+using namespace std;
+int main() {
+   TChain* chain = new TChain("treeCreator/vhtree");
+   //WH
+chain->AddFile("/lustre/cms/store/user/rosma/SamplePh2/QCD_Pt-15to3000_Tune4C_Flat_14TeV_GEM2019Upg14DR-PU50bx25/tree_1054_2_9rg.root");
+chain->AddFile("/lustre/cms/store/user/rosma/SamplePh2/QCD_Pt-15to3000_Tune4C_Flat_14TeV_GEM2019Upg14DR-PU50bx25/tree_1057_1_Gow.root");
+chain->AddFile("/lustre/cms/store/user/rosma/SamplePh2/QCD_Pt-15to3000_Tune4C_Flat_14TeV_GEM2019Upg14DR-PU50bx25/tree_1058_1_oSP.root");
+chain->AddFile("/lustre/cms/store/user/rosma/SamplePh2/QCD_Pt-15to3000_Tune4C_Flat_14TeV_GEM2019Upg14DR-PU50bx25/tree_1059_2_EH6.root");
+chain->AddFile("/lustre/cms/store/user/rosma/SamplePh2/QCD_Pt-15to3000_Tune4C_Flat_14TeV_GEM2019Upg14DR-PU50bx25/tree_1061_1_TEA.root");
+chain->AddFile("/lustre/cms/store/user/rosma/SamplePh2/QCD_Pt-15to3000_Tune4C_Flat_14TeV_GEM2019Upg14DR-PU50bx25/tree_1062_2_9eH.root");
+chain->AddFile("/lustre/cms/store/user/rosma/SamplePh2/QCD_Pt-15to3000_Tune4C_Flat_14TeV_GEM2019Upg14DR-PU50bx25/tree_1065_2_qNG.root");
+chain->AddFile("/lustre/cms/store/user/rosma/SamplePh2/QCD_Pt-15to3000_Tune4C_Flat_14TeV_GEM2019Upg14DR-PU50bx25/tree_1067_2_4wo.root");
+chain->AddFile("/lustre/cms/store/user/rosma/SamplePh2/QCD_Pt-15to3000_Tune4C_Flat_14TeV_GEM2019Upg14DR-PU50bx25/tree_1068_1_IQZ.root");
+chain->AddFile("/lustre/cms/store/user/rosma/SamplePh2/QCD_Pt-15to3000_Tune4C_Flat_14TeV_GEM2019Upg14DR-PU50bx25/tree_107_2_ODP.root");
+std::string histo_fname ="/lustre/cms/store/user/rvenditti/PostLS2/FullSim/AnalisiGEM/QCDPU50GEM2019/histo_file_QCDPU50GEM20194.root";
+  VHAnalyser_Jan13* myanal = new VHAnalyser_Jan13(chain, histo_fname);
+  myanal->bookHistograms();
+  myanal->Loop();
+  myanal->saveHistograms();
+  //file->Close();
+//  delete chain;
+//  delete myanal;
+gSystem->Exit(0);
+return 0;
+}

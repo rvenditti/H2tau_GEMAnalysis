@@ -1,29 +1,3 @@
-#if !defined(__CINT__) || defined(__MAKECINT__)
-#include <TROOT.h>
-#include <TSystem.h>
-#include <TFile.h>
-#include <TH1.h>
-#include <TH2.h>
-#include <TObject.h>
-#include <TCanvas.h>
-#include <TKey.h>
-#include <TStyle.h>
-#include <TTree.h>
-#include <TLegend.h>
-#include "VHAnalyzer_WH_New.h"
-#include <TString.h>
-#include <string>
-#include <vector>
-#include <iostream>
-#include <fstream>
-#include <sstream>
-#include "TChain.h"
-#include <stdlib.h>
-#endif
-using namespace std;
-int main() {
-   TChain* chain = new TChain("treeCreator/vhtree");
-   //WH
 chain->AddFile("/lustre/cms/store/user/rosma/SamplePh2/VBF_HToTauTau_M-125_14TeV_GEM2019Upg14DR-PU50/tree_10_1_rul.root");
 chain->AddFile("/lustre/cms/store/user/rosma/SamplePh2/VBF_HToTauTau_M-125_14TeV_GEM2019Upg14DR-PU50/tree_10_2_3kU.root");
 chain->AddFile("/lustre/cms/store/user/rosma/SamplePh2/VBF_HToTauTau_M-125_14TeV_GEM2019Upg14DR-PU50/tree_11_2_7l7.root");
@@ -62,14 +36,3 @@ chain->AddFile("/lustre/cms/store/user/rosma/SamplePh2/VBF_HToTauTau_M-125_14TeV
 chain->AddFile("/lustre/cms/store/user/rosma/SamplePh2/VBF_HToTauTau_M-125_14TeV_GEM2019Upg14DR-PU50/tree_8_2_w9R.root");
 chain->AddFile("/lustre/cms/store/user/rosma/SamplePh2/VBF_HToTauTau_M-125_14TeV_GEM2019Upg14DR-PU50/tree_9_1_eZZ.root");
 chain->AddFile("/lustre/cms/store/user/rosma/SamplePh2/VBF_HToTauTau_M-125_14TeV_GEM2019Upg14DR-PU50/tree_9_2_wRT.root");
-std::string histo_fname ="/lustre/cms/store/user/rvenditti/PostLS2/FullSim/AnalisiGEM/H2tau_VBF/VBFH2Tau_PU50woGEM_2015/histo_file_VBFH2Tau_PU50woGEM_2015XX.root";
-  VHAnalyzer_WH_New* myanal = new VHAnalyzer_WH_New(chain, histo_fname);
-  myanal->bookHistograms();
-  myanal->Loop();
-  myanal->saveHistograms();
-  //file->Close();
-//  delete chain;
-//  delete myanal;
-gSystem->Exit(0);
-return 0;
-}

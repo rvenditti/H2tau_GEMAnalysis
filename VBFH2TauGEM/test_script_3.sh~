@@ -12,7 +12,7 @@ rm -f histograms_MC_WH_PU50GEM2019$filenum.C
 rm -f jobs_submit
 
 set count = 0
-foreach line ("`cat list.txt `")
+foreach line ("`cat file.txt `")
  @ count = $count + 1
  
 	echo "$line" >> fileinp_$filenum

@@ -1,0 +1,52 @@
+#if !defined(__CINT__) || defined(__MAKECINT__)
+
+#include <TROOT.h>
+#include <TSystem.h>
+#include <TFile.h>
+#include <TH1.h>
+#include <TH2.h>
+#include <TObject.h>
+#include <TCanvas.h>
+#include <TKey.h>
+#include <TStyle.h>
+#include <TTree.h>
+#include <TLegend.h>
+#include "VHAnalyzer.h"
+#include <TString.h>
+#include <string>
+#include <vector>
+#include <iostream>
+#include <fstream>
+#include <sstream>
+#include "TChain.h"
+#include <stdlib.h>
+#endif
+
+using namespace std;
+
+int main() {
+
+
+   TChain* chain = new TChain("treeCreator/vhtree");
+
+
+FILES_TO_INSERT_HERE
+
+
+
+std::string histo_fname = "/lustre/cms/store/user/rvenditti/PostLS2/FullSim/AnalisiGEM/H2tau_VBF/VBFHTT_GEM_GenOnly/histo_file_VBFHTT_GEM_GenOnlyXX.root"; 
+  VHAnalyzer* myanal = new VHAnalyzer(chain, histo_fname);
+
+  myanal->bookHistograms();
+  myanal->Loop();
+  myanal->saveHistograms();
+  //file->Close();
+//  delete chain;
+//  delete myanal;
+gSystem->Exit(0);
+
+return 0;
+
+}
+
+

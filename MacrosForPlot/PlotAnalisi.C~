@@ -1,0 +1,83 @@
+#include <TH1>
+#include <string>
+#include <vector>
+#include <TString.h>
+
+void PlotAnalisi(){
+	
+  gROOT->ProcessLine(".L ./tdrstyle.C");
+  setTDRStyle();
+  //gStyle->SetOptStat(00000001111);	
+	gStyle->SetOptStat("nemr");
+	
+//   TFile *f = TFile::Open("histo_file_WH1250.root");  
+	TFile *f = TFile::Open("histo_file_WH_PU50GEM2019.root");
+	
+	std::vector<TString> histoName;
+	
+	histoName.push_back("hTauPtAfterTau");
+	histoName.push_back("hTauEtaAfterTau");
+	histoName.push_back("hTauOSPt_AfterIso");
+	histoName.push_back("hTauSSPt_AfterIso");
+	histoName.push_back("hMET_AfterFullLepSel");
+	histoName.push_back("hMuonPtReco");
+	histoName.push_back("hMuonEtaReco");
+	histoName.push_back("hTau1Pt_taglio7");
+	histoName.push_back("hTau2Pt_taglio7");
+	histoName.push_back("massainv_TauTau_taglio7");
+	
+	
+	histoName.push_back("hRecoMuonPt");
+	histoName.push_back("hRecoMuonEta"); 
+	histoName.push_back("hRecoMuonPhi");
+	histoName.push_back("hRecoMuonChi2");
+	histoName.push_back("hMuonTrkLayer");
+	histoName.push_back("hMuonDB"); 
+	histoName.push_back("hMuonDZ"); 
+	histoName.push_back("hNMuonBefSel");
+	histoName.push_back("hNMuonAfterSel");
+	
+	histoName.push_back("hMuonEtaFinal_HE"); 
+	histoName.push_back("hMuonPtFinal_HE"); 
+	histoName.push_back("hMuonEtaFinal_Barrel");
+	histoName.push_back("hMuonPtFinal_Barrel"); 
+	histoName.push_back("hMuonEtaFinal_Full");  
+	histoName.push_back("hMuonPtFinal_Full");  
+	
+	
+	std::string strPt ("Pt");
+	std::string strEta ("Eta");
+	cout<<"Size histoName="<<histoName.size()<<endl;
+
+	int numHisto = histoName.size();
+	TH1F *histo; 
+	histo = (TH1F) malloc(numHisto * sizeof(TH1F));
+	
+	//TCanvas* CanvVector; 
+	//CanvVector= (TCanvas) malloc(numHisto * sizeof(CanvVector));
+	TCanvas* CanvVector[25];
+	
+	for(int i=0;i<numHisto; i++){
+		
+	histo[i] = (TH1F*)f->Get(histoName[i]);
+	cout<<i<<" bin size num "<<histo[i].GetNbinsX()<<endl;
+		
+	
+	if(histoName[i].Contains(strPt)) {histo[i].GetXaxis()->SetTitle("P_{T} [GeV/c]");  histo[i].Rebin(4);}
+	if(histoName[i].Contains(strEta)) histo[i].GetXaxis()->SetTitle("#eta");
+	if(histoName[i].Contains("MET")){ histo[i].GetXaxis()->SetTitle("MET [GeV]"); histo[i].Rebin(4);}
+	if(histoName[i].Contains("massa")){ histo[i].GetXaxis()->SetTitle("m^{vis}_{#tau #tau} [GeV/c^{2}]"); histo[i].Rebin(10);}
+		
+	histo[i].SetLineColor(kBlue);	
+	histo[i].SetLineWidth(2);	
+		
+	TString titleCanv ("CanvVector"); titleCanv+=(i+1);	
+	CanvVector[i] = new TCanvas("titleCanv", "titleCanv", 500, 500);
+		
+	CanvVector[i]->cd();
+	histo[i]->Draw("histe");
+	CanvVector[i]->SaveAs("./PlotWH/"+histoName[i]+".pdf");
+		
+	}
+	
+}

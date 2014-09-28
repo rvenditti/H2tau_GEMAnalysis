@@ -1,0 +1,2 @@
+scp venditti@cmssusy.ba.infn.it:/lustre/cms/store/user/rvenditti/PostLS2/FullSim/AnalisiGEM/H2tau_VBF/VBFH2Tau_PU50GEM2019/histo_file_VBFH2Tau_PU50GEM2019XX.root .
+scp venditti@cmssusy.ba.infn.it:/lustre/cms/store/user/rvenditti/PostLS2/FullSim/AnalisiGEM/H2tau_VBF/QCDPU50GEM2019/histo_file_QCDPU50GEM2019.root .

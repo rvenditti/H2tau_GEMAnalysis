@@ -1,0 +1,1312 @@
+#define VHAnalyser_Jan13_cxx
+#include "VHAnalyser_Jan13.h"
+#include <TH2.h>
+#include <TStyle.h>
+#include <TCanvas.h>
+#include <vector>
+#include <string>
+#include <algorithm>
+#include <iostream>
+#include <TLorentzVector.h>
+#include <TMath.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <fstream>
+#include <sstream>
+using namespace std;
+
+TFile* f_puweights;
+TH1D* puweights;
+
+static float puweight(float npu) {
+    if (npu<0) return 1.0;
+    return puweights->GetBinContent(puweights->FindBin(npu));
+}
+
+
+void VHAnalyser_Jan13::Loop()
+{
+
+   if (fChain == 0) return;
+   
+    //reweighting pileup
+    //f_puweights = TFile::Open("/lustre/cms/store/user/rvenditti/reweightFunctionFall11.root", "read");
+    f_puweights = TFile::Open("/lustre/cms/store/user/rvenditti/reweightFunctionFall12.root", "read");
+    puweights = (TH1D*)f_puweights->Get("plot_data_div_MC");
+    
+   Long64_t nentries = fChain->GetEntriesFast();
+   
+    Int_t loose=0;
+    /////////////////CICLO SU TUTTI GLI EVENTI
+   Long64_t nbytes = 0, nb = 0;
+   //  for (Long64_t jentry=0; jentry<nentries;jentry++) {
+   for (Long64_t jentry=0; jentry<100000;jentry++) {
+      Long64_t ientry = LoadTree(jentry);
+      if (ientry < 0) break;
+      nb = fChain->GetEntry(jentry);   nbytes += nb;
+      // if (Cut(ientry) < 0) continue;
+       Int_t event_type = 0;
+       Int_t muon_type = 0;
+       Int_t tau_type = 0;
+       Int_t rigaMotherW=-2;
+       Int_t rigaMotherH=-2;
+       bool WplusGOODmuon=false;
+       tagli[0]->Fill(1);
+       
+       /////////////////////////////////////////////////////////////
+  
+       float puWeight =1;
+       //       cout<<jentry<<" sto all'inizio  "<<endl;
+       /////////////////////////////////////////////facciamo il filtro////////////////////////////////////////
+              
+       // NO GEN PARTICLE!!
+       
+        for(Int_t r=0; r<nGenParticle; r++){
+           if(GenParticle_pdgId[r] == 25 && GenParticle_status[r] == 3 ){
+               H_tot->Fill(1);
+               rigaMotherH=r;}  // fine if GenParticle = H
+           if(TMath::Abs(GenParticle_pdgId[r]) == 13 && GenParticle_status[r] == 1){
+               muon_type=1;}
+           if(TMath::Abs(GenParticle_pdgId[r]) == 15 && GenParticle_status[r] == 3 && GenParticle_motherIndex[r] == rigaMotherH){
+               if(TMath::Abs(GenParticle_pdgId[r+1]) == 15 && GenParticle_status[r+1] == 3 && GenParticle_motherIndex[r+1] == rigaMotherH){
+                   tau_type=1;}}
+       }  // fine for GenParticle
+       
+       ////////////////////////////SELEZIONE DI W Z o tt
+       for(Int_t r=0; r<nGenParticle; r++){
+           if(TMath::Abs(GenParticle_pdgId[r]) == 24 && GenParticle_status[r] == 3 ){
+               event_type = 1;
+               rigaMotherW=r;
+               break;}  // fine if GenParticle = W
+           if(GenParticle_pdgId[r] == 23 && GenParticle_status[r] == 3 ){
+               event_type = 2;
+               break;}  // fine if GenParticle = Z
+           if(TMath::Abs(GenParticle_pdgId[r]) == 6 && GenParticle_status[r] == 3 ){
+               event_type = 3;
+               break;}  // fine if GenParticle = t
+       }  //fine for GenParticle
+       
+       if (event_type == 1) {W_tot->Fill(1);}
+       if (event_type == 2) {Z_tot->Fill(1);}
+       if (event_type == 3) {t_tot->Fill(1);}
+       if (muon_type == 1) {muonStatus1->Fill(1);}
+       if (tau_type == 1) {tautauEvent->Fill(1);}
+       if (event_type == 1 && muon_type == 1){
+           WplusGOODmuon=true;
+           WplusMuon->Fill(1);}
+       
+       
+       // DA ATTIVARE SOLO QUANDO GIRO SU WH!!
+       if (event_type != 1) continue;
+       // DA ATTIVARE SOLO QUANDO GIRO SU ZH!!
+       // if (event_type != 2) continue;
+       // DA ATTIVARE SOLO QUANDO GIRO SU ttH!!
+       //if (event_type != 3) continue;
+       
+       ////////////////////////////////SE HO UN W ED UN MU STATUS1 VEDO SE QUESTO VIENE DAL W...ASSEGNO goodTrigger V SE ACCADE
+       bool goodTrigger=false;
+       Int_t rigaMu=-2;
+       TLorentzVector muGen;
+       muGen.SetPtEtaPhiM(1,0,0,0);
+       
+       if(WplusGOODmuon){
+           for(Int_t r=0; r<nGenParticle; r++){
+               if (TMath::Abs(GenParticle_pdgId[r]) == 13 && GenParticle_status[r] == 3 && GenParticle_motherIndex[r] == rigaMotherW){
+                   rigaMotherW=r;
+                   muonWstatus3->Fill(1);
+               }
+               
+               if(TMath::Abs(GenParticle_pdgId[r]) == 13 && GenParticle_status[r] == 2 && GenParticle_motherIndex[r] == rigaMotherW){rigaMotherW=r;}
+               if(TMath::Abs(GenParticle_pdgId[r]) == 13 && GenParticle_status[r] == 1 && GenParticle_motherIndex[r] == rigaMotherW){
+                   //    std::cout<<"++++++++++++++++++++++++++++++++++evento W->mu: "<< jentry<<std::endl;
+                   //TLorentzVector muGen;
+                   muonW->Fill(1);
+                   rigaMu=r;
+                   goodTrigger=true;  //DA ATTIVARE!!!
+                   muGen.SetPtEtaPhiE(GenParticle_pt[rigaMu], GenParticle_eta[rigaMu], GenParticle_phi[rigaMu], GenParticle_energy[rigaMu]);
+                   //  std::cout<<" evento "<<jentry<<" muon gen pt "<<muGen.Pt()<<" muon gen eta  "<<muGen.Eta()<<" muon gen phi  "<<muGen.Phi()<<" muon gen en  "<<muGen.E()<<std::endl;
+               }
+           }//end for gen part
+       }// end if mu status 1 plus W nell'evento
+       
+       ////////////////////////////////VEDO IL CANALE DI DECADIMANTO DEI TAU DA H
+       bool Tau1jet=false;
+       bool Tau2jet=false;
+       bool Tau1electron=false;
+       bool Tau2electron=false;
+       bool Tau1muon=false;
+       bool Tau2muon=false;
+       bool FHevent=false;
+       bool elejet=false;
+       bool mujet=false;
+       bool FLevent=false;
+       bool GTFHevent=false;
+       bool GTelejet=false;
+       bool GTmujet=false;
+       bool GTFLevent=false;
+       TLorentzVector tau1Gen;
+       TLorentzVector tau2Gen;
+       tau1Gen.SetPtEtaPhiM(1,0,0,0);
+       tau2Gen.SetPtEtaPhiM(1,0,0,0);
+       TLorentzVector MHGen = tau1Gen + tau2Gen;
+       std::vector<int> indexGenTau, indexTauID, indexTauLep,indexTauHad,indexTau1HadrGen,indexTau2HadrGen , indexTauHadrGen, indexNuTau1HadrGen, indexNuTau2HadrGen, indexMotherNuTau1Had,  indexMotherNuTau2Had;     
+       Int_t rigaMu_tau=-2;
+       TLorentzVector muGen_tau, Tau1HadGen,Tau2HadGen, RecoTau ;
+       
+       if(tau_type==1){
+           Int_t rigaTau1=-2, tau1_rigaprova=-2, tau1_rigaCorretta=-2;
+           Int_t rigaTau2=-2, tau2_rigaprova=-2, tau2_rigaCorretta=-2;
+
+
+	   for(Int_t r=0; r<nGenParticle; r++){
+	   
+	     if(TMath::Abs(GenParticle_pdgId[r]) == 15 && GenParticle_status[r] == 3 && GenParticle_motherIndex[r] == rigaMotherH){
+	       if(TMath::Abs(GenParticle_pdgId[r+1]) == 15 && GenParticle_status[r+1] == 3 && GenParticle_motherIndex[r+1] == rigaMotherH){
+		 controlloTauTau->Fill(1);
+		 rigaTau1=r;
+		 rigaTau2=r+1;}}
+	   
+	   
+	     if(TMath::Abs(GenParticle_pdgId[r]) == 15  &&  GenParticle_status[r] == 2 &&  GenParticle_motherIndex[r] == rigaTau1){ rigaTau1=r; }
+	     if(TMath::Abs(GenParticle_pdgId[r]) == 15  && GenParticle_status[r] == 2 && GenParticle_motherIndex[r] == rigaTau2){rigaTau2=r;}
+
+	     if (TMath::Abs(GenParticle_pdgId[r]) >22 && GenParticle_motherIndex[r] == rigaTau1){
+	       Tau1jet=true;
+	       //htau1jet->Fill(1);
+	       indexTau1HadrGen.push_back(rigaTau1); 
+	       indexTauHadrGen.push_back(rigaTau1);
+	       Tau1HadGen.SetPtEtaPhiM(GenParticle_pt[rigaTau1],GenParticle_eta[rigaTau1],GenParticle_phi[rigaTau1],1.7 );
+	       
+	   }
+	     if (TMath::Abs(GenParticle_pdgId[r]) == 11 && GenParticle_motherIndex[r] == rigaTau1){Tau1electron=true;
+	       //  htau1ele->Fill(1);
+	     }
+	     if (TMath::Abs(GenParticle_pdgId[r]) ==13 && GenParticle_motherIndex[r] == rigaTau1){Tau1muon=true; rigaMu_tau=r;
+	       //muGen_tau.SetPtEtaPhiE(GenParticle_pt[r], GenParticle_eta[r], GenParticle_phi[r], GenParticle_energy[r]);
+	       // htau1mu->Fill(1);
+	     }
+	     if (TMath::Abs(GenParticle_pdgId[r]) >22 && GenParticle_motherIndex[r] == rigaTau2){Tau2jet=true;
+	       //htau2jet->Fill(1);
+	       indexTau2HadrGen.push_back(rigaTau2); 
+	       indexTauHadrGen.push_back(rigaTau2);
+	       Tau2HadGen.SetPtEtaPhiM(GenParticle_pt[rigaTau2],GenParticle_eta[rigaTau2],GenParticle_phi[rigaTau2],1.7 );
+	     }	   
+	     
+	     if (TMath::Abs(GenParticle_pdgId[r]) == 11 && GenParticle_motherIndex[r] == rigaTau2){Tau2electron=true;
+	       //  htau2ele->Fill(1);
+	     }
+	     if (TMath::Abs(GenParticle_pdgId[r]) ==13 && GenParticle_motherIndex[r] == rigaTau2){Tau2muon=true;
+	       //htau2mu->Fill(1);
+	       rigaMu_tau=r;
+	       muGen_tau.SetPtEtaPhiE(GenParticle_pt[r], GenParticle_eta[r], GenParticle_phi[r], GenParticle_energy[r]);
+	     }
+	     
+	   }//end for gen part
+	   
+ 
+
+       }// end if tau tau da H in evento
+ 
+       
+       //////////////////////////////////GUARDO IN FACCIA I CANALI DI DEC DEI TAU TAU E CONTO
+       if(Tau1jet && Tau2jet){
+           FHevent=true;
+           FHEvent->Fill(1);
+       }
+       if((Tau1jet || Tau2jet) && (Tau1electron || Tau2electron)){
+           elejet=true;
+           elejetEvent->Fill(1);
+       }
+       if((Tau1jet || Tau2jet) && (Tau1muon || Tau2muon)){
+           mujet=true;
+           mujetEvent->Fill(1);
+       }
+       if((Tau1electron || Tau1muon) && (Tau2electron || Tau2muon)){
+           FLevent=true;
+           FLEvent->Fill(1);
+       }
+       ////////////////////////////////////COMBINO QUESTE INFORMAZIONI CON IL TRIGGER.... VEDO I DECADIMENTI DI H->tau tau PRODUZIONE ASSOCIATA DI W->mu
+       if(FHevent && goodTrigger){
+           GTFHevent=true;
+           GTFHEvent->Fill(1);
+       }
+       if(elejet && goodTrigger){
+           GTelejet=true;
+           GTelejetEvent->Fill(1);
+       }
+       if(mujet && goodTrigger){
+           GTmujet=true;
+           GTmujetEvent->Fill(1);
+       }
+       if(FLevent && goodTrigger){
+           GTFLevent=true;
+           GTFLEvent->Fill(1);
+       }
+       
+       if(goodTrigger){
+           for(Int_t r=0; r<nGenParticle; r++){
+	     if (TMath::Abs(GenParticle_pdgId[r]) == 13) mupt_gen->Fill(GenParticle_pt[r]); }
+       }
+       
+       /////////////////////////////////////////////////////////////////////////////////////////////////////
+       /////////////FILTRO A MONTE PER WH... SOLO EVENTI DEL MIO CANALE!
+       if(GTFHevent==false)continue;
+       //if(GTmujet){
+       
+       ///////////////////////// SELEZIONATE LE PARTICELLE ED OSSERVATA LA FISICA DEL CANALE IN ANALISI FACCIO HISTO PRELIMINARI
+       
+       hnMuon->Fill(nMuon);
+       hnTau->Fill(nTau);
+       hnElectron->Fill(nElectron);
+       hnMET->Fill(nMET);
+       hnMET_PU->Fill(nMET,puWeight);
+       hMET->Fill(MET_met[0]);
+       hMET_PU->Fill(MET_met[0],puWeight);
+       
+       ///////////////////////////////////////////////  ANALISI  ////////////////////////////////////////////////////////////////////////
+       
+       
+     
+      
+      
+       double VertexCuts=false; int nGoodVertices=0;
+       std::vector<int> IndexPV;
+       for(Int_t l=0; l<nVertex; l++){
+	 VertexX->Fill(Vertex_x[l]);
+	 VertexY->Fill(Vertex_y[l]);
+	 VertexZ->Fill(Vertex_z[l]);
+	 VertexXY->Fill(Vertex_x[l],Vertex_y[l]);
+	 double z = Vertex_z[l];
+	 double rho = TMath::Sqrt(TMath::Power(Vertex_x[l],2)+TMath::Power(Vertex_y[l],2));
+	 if(Vertex_ndf[l] > 4 && fabs(z) < 24 && fabs(rho)<2)
+           {
+	     IndexPV.push_back(l);
+	     ++nGoodVertices;
+	     
+                  
+           }
+       }
+       
+ if (nGoodVertices!=0){VertexCuts =true;}
+ if (VertexCuts==false) continue;
+ 
+ 
+ 
+ hNMuonBefSel->Fill(nMuon);
+ entries_after_vertex_PU->Fill(1,puWeight);
+ hnVertex->Fill(nVertex);
+ hnVertex_PU->Fill(nVertex, puWeight);
+       
+ 
+ TLorentzVector MET;
+ MET.SetPtEtaPhiM(mvaMET_met[0], 0., mvaMET_metphi[0], 0.);
+ 
+       
+       
+       //////////////////////////// MUON CUT /////////////////////////////////////////
+       std::vector<int> indexMuon;
+       std::vector<int> indexMuonPt;
+       std::vector<int> indexMuonAccept;
+       std::vector<int> indexMuonID;
+       std::vector<int> indexMuonISO;
+       TLorentzVector mu; mu.SetPtEtaPhiE(1,0,0,0);
+       Int_t muon_index=-1;
+       TLorentzVector mu_tmp; mu_tmp.SetPtEtaPhiE(1,0,0,0);
+       bool MuonCuts=false;
+       bool MuonPt=false;
+       Double_t muPt_max = 0;
+       Int_t imax = -1;
+       
+       Double_t massa_trasversa=0;
+       bool MtCut = true;
+       Float_t dB_err = -10;
+       Float_t dB = 10;
+       std::vector<int>        indexMuonTrackGlob;
+       std::vector<int>        indexMuonPixHits;
+       std::vector<int>        indexMuonTrackHits;
+       std::vector<int>        indexTrackD0;
+       std::vector<int>        indexDistZ;
+       std::vector<int>        indexNMatch;
+       std::vector<int>        indexMuonChi2;
+       std::vector<int>        indexMuonTrackdB;
+       std::vector<int>        indexNChambers;
+       std::vector<int>        indexNMatchStat;
+       //std::cout<<" nMuon "<<nMuon<<std::endl;
+       for (Int_t i=0 ; i<nMuon ; i++){
+	 
+	 hRecoMuonPt->Fill(Muon_pt[i]);
+	 hRecoMuonEta->Fill(Muon_eta[i]);
+	 hRecoMuonPhi->Fill(Muon_phi[i]);
+	 hRecoMuonChi2->Fill(Muon_globalChi2[i]);
+	 hMuonTrkLayer->Fill(Muon_trackerLayersWithMeasurement[i]);
+	 hMuonDB->Fill(Muon_dB[i]);
+	 hMuonDZ->Fill(Muon_vz[i]-Vertex_z[IndexPV[0]]);
+	 
+	 mu_tmp.SetPtEtaPhiE(Muon_pt[i], Muon_eta[i], Muon_phi[i], Muon_energy[i]);
+	 indexMuonID.push_back(i);
+	 if (!(TMath::Abs(Muon_eta[i]) < 2.1)) continue;
+	 indexMuonAccept.push_back(i);
+	 
+	 //	 if(!(Muon_pt[i]>24))continue;
+	 indexMuonPt.push_back(i);
+
+	 if (!((Muon_isTrackerMuon[i]==1) && (Muon_isPFMuon[i]==1)))continue;
+	 //if (!((Muon_isTrackerMuon[i]==1)&&(Muon_isGlobalMuonPromptTight[i]==1)))continue;
+	 indexMuonTrackGlob.push_back(i);
+	 if(!(Muon_nChambers[i]>=2))continue;
+	 indexNChambers.push_back(i);
+	 if(!(Muon_nMatches[i]>=2))continue;
+	 if(!(Muon_nMatchedStations[i]>=2))continue;
+	 indexNMatchStat.push_back(i);
+	 if(!(Muon_trackerLayersWithMeasurement[i]>5))continue;//5
+	 indexMuonTrackHits.push_back(i);
+	 if (!(Muon_pixHits[i]>=1)) continue;
+	 indexMuonPixHits.push_back(i);
+	 if(!(Muon_globalChi2[i]<10.0))continue;
+	 indexMuonChi2.push_back(i);
+	 if(!(TMath::Abs(Muon_dB[i])<0.045))continue;
+	 indexMuonTrackdB.push_back(i);
+	 if(!(TMath::Abs(Muon_vz[i]-Vertex_z[IndexPV[0]])<0.2))continue;
+	 indexDistZ.push_back(i);
+	 if(! ( (Muon_sumChPartR04[i] /Muon_pt[i]) <0.1 ) ) continue;
+	 
+	 indexMuonISO.push_back(i);
+	 indexMuon.push_back(i);
+       }
+       
+       // end for sui mu
+       if (indexMuonAccept.size()!=0){
+	 sizeMuonAccept->Fill(1,puWeight);}
+       if(indexMuonPt.size()!=0){
+	 sizeMuonPt->Fill(1,puWeight);}
+       if (indexMuonISO.size()!=0){
+	 sizeMuonISO->Fill(1,puWeight);}
+       
+       if(indexMuonTrackGlob.size()>0){
+	 sizeMuonTrackGlob->Fill(1,puWeight);
+       }
+       if(indexMuonPixHits.size()>0){
+	 sizeMuonPixHits->Fill(1,puWeight);
+       }
+       if(indexMuonTrackHits.size()>0){
+	 sizeMuonTrackHits->Fill(1,puWeight);
+       }
+       if(indexMuonChi2.size()>0){
+	 sizeMuonChi2->Fill(1,puWeight);
+       }
+       
+       if (indexMuonTrackdB.size()>0){
+	 sizeMuondB->Fill(1,puWeight);
+       }
+       if(indexDistZ.size()>0){
+	 sizeMuonDistZ->Fill(1,puWeight);
+       }
+       
+       if(indexNChambers.size()>0){
+	 sizeMuonChambers->Fill(1,puWeight);
+       }
+       
+       if (indexMuonID.size()!=0){
+	 sizeMuonID->Fill(1,puWeight);}
+
+
+       if(indexNMatchStat.size()!=0){
+	 sizeMuonMatchStat->Fill(1,puWeight);}
+       if(indexMuon.size()!=0){
+	 sizeMuon->Fill(1,puWeight);
+	 hMuonMult->Fill(indexMuon.size());}
+       if (indexMuon.size()>0){MuonCuts=true;}
+       
+       if(MuonCuts==false)continue;
+       hNMuonAfterSel->Fill(indexMuon.size());
+
+       muon_index=indexMuon[0];
+       mu.SetPtEtaPhiE(Muon_pt[muon_index], Muon_eta[muon_index], Muon_phi[muon_index],Muon_energy[muon_index] );  
+  
+       if(  ( TMath::Abs(Muon_eta[indexMuon[0]]) <2.2) && ( TMath::Abs(Muon_eta[indexMuon[0]]) >=1.5) ){
+	 hMuonEtaFinal_HE->Fill(mu.Eta());
+	 hMuonPtFinal_HE->Fill(mu.Pt());
+       }
+       
+       if(  ( TMath::Abs(Muon_eta[indexMuon[0]]) <1.5) ){
+	 hMuonEtaFinal_Barrel->Fill(mu.Eta());
+	 hMuonPtFinal_Barrel->Fill(mu.Pt());
+       }
+       
+       if(  TMath::Abs(Muon_eta[indexMuon[0]]) <2.2){
+	 hMuonEtaFinal_Full->Fill(mu.Eta());
+	 hMuonPtFinal_Full->Fill(mu.Pt());}
+
+       if( ( TMath::Abs(Muon_eta[indexMuon[0]]) <2.1) && Muon_pt[indexMuon[0]]>24){
+	 hMuonPtWP2012->Fill(mu.Pt());}
+   
+
+       
+      
+       //	  mu.SetPtEtaPhiM(Muon_pt[imax], Muon_eta[imax], Muon_phi[imax], 0.105);
+       dB_err = Muon_dB[imax]/Muon_edB[imax];
+       dB = Muon_dB[imax];
+       hMuonPtReco->Fill(mu.Pt(),puWeight);
+       hMuonEtaReco->Fill(mu.Eta(),puWeight);
+       
+       TLorentzVector mu1;
+       mu1=mu;
+       
+       hnVertex2->Fill(nVertex);
+       hnVertex_PU2->Fill(nVertex, puWeight);
+       tagli[1]->Fill(1,puWeight);
+       
+       
+       
+       //////////////////////////////////////// TAU CUT
+       
+       std::vector<int>  indexTau, indexTauDR, indexTauPt, indexTauAccept, indexTauDMF, indexTauMuRej, indexTauEleRej, indexTauFinal;
+       TLorentzVector tau_tmp, tau1, tau2;
+       bool TauCuts =false;
+       
+       for(Int_t j=0; j<nTau; j++){
+           tau_tmp.SetPtEtaPhiM(Tau_pt[j], Tau_eta[j], Tau_phi[j], Tau_mass[j]);
+           indexTau.push_back(j);
+	   if (tau_tmp.DeltaR(mu)<=  0.5) continue;
+           indexTauDR.push_back(j);
+           if(!(Tau_pt[j]>20)) continue;
+           indexTauPt.push_back(j);
+           if (!(TMath::Abs(Tau_eta[j]) < 2.3)) continue;
+           indexTauAccept.push_back(j);
+           if (!(Tau_decayModeFinding[j] == 1)) continue;
+           indexTauDMF.push_back(j);
+           if(! (Tau_againstMuonTight[j] == 1)) continue;
+           indexTauMuRej.push_back(j);
+           if (!(Tau_againstElectronLoose[j] == 1))continue;
+           indexTauEleRej.push_back(j);
+           if(!(TMath::Abs(Tau_zvertex[j]-Vertex_z[IndexPV[0]])<0.2)) continue;
+	   // if(!( TMath::Abs(Tau_charge[j]) == 1) ) continue;
+           indexTauFinal.push_back(j);
+
+
+       }           
+
+       
+
+       if (indexTauAccept.size()>0){
+	 sizeTauAccept1->Fill(1,puWeight);
+       }
+       if(indexTauDR.size()>0){
+	 sizeTau1DR->Fill(1,puWeight);
+         
+       }
+       
+       if (indexTauPt.size()>0){
+	 sizeTauPt1->Fill(1,puWeight);
+       }
+       
+    
+       if (indexTauFinal.size()>0){
+           sizeTauDeltaZ1->Fill(1,puWeight);
+       }
+       if (indexTauDMF.size()>0){
+	 sizeTauID1->Fill(1,puWeight);}
+      
+       if (indexTauMuRej.size()>0){
+           sizeTau1AgMu->Fill(1,puWeight);}
+       
+       if (indexTauEleRej.size()>0){
+	 sizeTauAgainstLepton1->Fill(1,puWeight);}
+       
+       if (indexTauFinal.size()!=0){
+           nTau_baseSelection1->Fill(1,puWeight);}
+       
+       if (indexTauFinal.size()>0){TauCuts = true;}
+       
+       if(TauCuts ==false)continue;
+       tagli[2]->Fill(1,puWeight);
+
+    
+ 
+       std::vector<int> indexZMu;
+       //  if(!(TMath::Abs(Muon_vz[indexMuon[0]]-Tau_zvertex[indexTau1[0]])<0.14))continue;
+       indexZMu.push_back(1);
+       if(indexZMu.size()>0){sizeMuTau1Z->Fill(1,puWeight);}
+       
+       
+       hnVertex_PU3->Fill(nVertex, puWeight);
+       
+       
+       TLorentzVector  Z;
+       Z.SetPtEtaPhiM(1.,0.,0.,0.);
+       
+       Double_t m_MuMet=TMath::Sqrt(2*(mu1.Pt())*(MET.Pt())*(1-TMath::Cos(mu1.DeltaPhi(MET))));
+       MuTau1_AfterTau1->Fill(Z.M(),puWeight);
+       MuMET_AfterTau1->Fill(m_MuMet,puWeight);
+       //Tau1Pt_AfterTau1->Fill(tau1.Pt(),puWeight);
+       MuPt_AfterTau1->Fill(mu1.Pt(),puWeight);
+       
+       Double_t Mu_z=Vertex_z[0]+Muon_vz[imax];
+       
+       ///////////// SEGNALE almeno 1Tau1 + 1Tau2 buoni
+       bool segnale=false;
+       
+       std::vector<int> indexTau1coppiaSegnale;
+       std::vector<int> indexTau2coppiaSegnale;
+       std::vector<float> pesoSegnale;
+       std::vector<int> indexCoppiaSegnale;
+       std::vector<int> indexDR;
+       std::vector<int> indexCharge;
+       std::vector<int> indexZCut;
+       std::vector<int> indexMET;
+       std::vector<int>	  extramuon;
+       std::vector<int> extraele;
+       std::vector<int>  extrab;
+       std::vector<int> indexZtau;
+       std::vector<int> indexMtmumet;
+       std::vector<int> indexTauLead;
+       std::vector<int> indexTauSubLead;
+       std::vector<int>  indexTauLeadPt;
+       //  std::cout<<jentry<<" caso tau1+tau2 "<<std::endl;
+       Double_t coppie=0;
+
+       std::vector<int>  IndexTauOS, IndexTauSS, indexTau2DRTau1;
+       bool ChargeCut = false;
+       cout<<jentry<<"  dopo tau cut   "<<indexTauFinal.size()<<endl;
+      
+       double MuTauCharge =0;
+
+       for(int k=0;k<indexTauFinal.size();k++){
+
+	 hTauPtAfterTau->Fill(Tau_pt[indexTauFinal[k]]);
+	 hTauEtaAfterTau->Fill(Tau_eta[indexTauFinal[k]]);
+	 
+	 MuTauCharge=Tau_charge[indexTauFinal[k]] + Muon_charge[indexMuon[0]];
+
+	 cout<<jentry<<" mu ch="<< Muon_charge[indexMuon[0]]<<" tau ch="<<Tau_charge[indexTauFinal[k]]<<endl;
+
+	 cout<<jentry<<"  mu tau charge   "<<MuTauCharge<<" indexTau="<<indexTauFinal[k]<<endl;
+
+	 if(  MuTauCharge == 0 )   IndexTauOS.push_back(indexTauFinal[k]);
+	 
+	 if( ( TMath::Abs(MuTauCharge)) == 2 ) IndexTauSS.push_back(indexTauFinal[k]);
+       }
+	
+        cout<<jentry<<" sizeTauSS "<<IndexTauSS.size()<<" size Tau OS  "<<IndexTauOS.size()<<endl;
+     
+	   
+       if( (IndexTauOS.size()!=0) &&  (IndexTauSS.size()!=0)  ){
+	
+	 ChargeCut=true;}
+       
+       if(ChargeCut==false)continue;
+
+       tagli[6]->Fill(1); 
+
+
+       cout<<jentry<<"  dopo controllo in carica   "<<endl;
+
+       std::vector<int>  indexTauOS_ISO,indexTauSS_ISO;
+
+       for(int t=0;t<IndexTauSS.size();t++){
+	 tau1.SetPtEtaPhiM(Tau_pt[IndexTauSS[t]], Tau_eta[IndexTauSS[t]], Tau_phi[IndexTauSS[t]], Tau_mass[IndexTauSS[t]]);
+	
+	 for(int k=0;k<IndexTauOS.size();k++){
+
+	     tau2.SetPtEtaPhiM(Tau_pt[IndexTauOS[k]], Tau_eta[IndexTauOS[k]], Tau_phi[IndexTauOS[k]], Tau_mass[IndexTauOS[k]]);
+
+
+
+	     if(tau1.DeltaR(tau2)<=0.5) continue;
+	     indexTau2DRTau1.push_back(1);
+
+	     // if(!(Tau_byLooseCombinedIsolationDeltaBetaCorr3Hits[IndexTauOS[k]] ==1) ) continue;
+	     if(!(Tau_chargedIsoPtSum[IndexTauOS[k]]<2.0)) continue;
+	     indexTauOS_ISO.push_back(IndexTauOS[k]);
+
+	     // if(!(Tau_byMediumCombinedIsolationDeltaBetaCorr3Hits[IndexTauSS[t]]==1) ) continue;
+	     if(!(Tau_chargedIsoPtSum[IndexTauSS[t]]<1.0)) continue;
+	     indexTauSS_ISO.push_back(IndexTauSS[t]);
+
+	     hTauOSPt_AfterIso->Fill(Tau_pt[indexTauOS_ISO[k]]);
+	     hTauSSPt_AfterIso->Fill(Tau_pt[indexTauSS_ISO[t]]);
+
+	     if(tau1.Pt()>=tau2.Pt()){
+	       indexTauLead.push_back(indexTauSS_ISO[t]);
+	       indexTauSubLead.push_back(indexTauOS_ISO[k]);}
+	     else{
+	       indexTauLead.push_back(indexTauOS_ISO[k]);
+	       indexTauSubLead.push_back(indexTauSS_ISO[t]);}
+	   }}
+
+
+
+       bool isOSTauIso =false;        
+       bool isSSTauIso =false;
+       if (indexTauOS_ISO.size() != 0 ){ isOSTauIso = true;}
+       if (indexTauSS_ISO.size() != 0 ){ isSSTauIso = true;}
+
+
+       std::cout<<jentry<<" lead size  "<<indexTauLead.size()<<std::endl;
+       std::cout<<jentry<<" sublead size  "<<indexTauSubLead.size()<<std::endl;
+       std::cout<<jentry<<" TAU1 SIZE  "<<indexTauOS_ISO.size()<<std::endl;
+       std::cout<<jentry<<" TAU2 size  "<<indexTauSS_ISO.size()<<std::endl;
+       
+       if (indexTau2DRTau1.size()==0) continue;
+       sizeTau2DRTau1->Fill(1,puWeight);
+
+       if(isOSTauIso == false) continue;
+       sizeTauOSIso->Fill(1);
+
+       if(isSSTauIso == false) continue;
+       sizeTauSSIso->Fill(1);
+
+
+
+	        for(int t=0;t<indexTauLead.size();t++){
+		  tau1.SetPtEtaPhiM(Tau_pt[indexTauLead[t]], Tau_eta[indexTauLead[t]], Tau_phi[indexTauLead[t]], Tau_mass[indexTauLead[t]]);
+		  
+		  for(int k=0;k<indexTauSubLead.size();k++){
+		    tau2.SetPtEtaPhiM(Tau_pt[indexTauSubLead[k]], Tau_eta[indexTauSubLead[k]], Tau_phi[indexTauSubLead[k]], Tau_mass[indexTauSubLead[k]]);
+		    
+		    
+		    if(!(Tau_pt[indexTauLead[t]]>25)) continue;
+		    indexTauLeadPt.push_back(1);
+		    
+		    indexTau1coppiaSegnale.push_back(indexTauLead[t]);
+		    indexTau2coppiaSegnale.push_back(indexTauSubLead[k]);
+		    indexCoppiaSegnale.push_back(1);
+		    
+		  }}//FINE SELEZIONI SUL TAU
+		    //////////////////////////////////////////////// Stampa Eventi ///////////////////////////////////////////////////////////
+		/*   
+		     cout<<"Run: "<<Event_run[0]<<" Event: "<<Event_run[1]<<" LS: "<<Event_run[2]<<endl;
+		     
+		     std::ofstream selEvents;
+		     std::stringstream txtName;
+		     
+		     txtName<<"/lustre/cms/store/user/rvenditti/Output_PatUniversal/Run_"<<Event_run[0]<<"_LS_"<<Event_run[2]<<"_Event_"<<Event_run[1]<<".txt";
+		     std::string txt = txtName.str();
+		     selEvents.open(txt.c_str());
+		     selEvents<<txt.c_str()<<std::endl;
+		     selEvents.close();
+		*/
+		////////////////////////////////////////////////// Stampa Eventi //////////////////////////////////////////////////////////
+	
+		 
+		if(indexTauLeadPt.size()>0){MaxPtGreat25->Fill(1,puWeight);}
+
+		
+		if( (indexCoppiaSegnale.size()==0)) continue;
+		hTauPairCuts->Fill(1,puWeight);
+		hMET_AfterFullLepSel->Fill(MET_met[0]);
+		//////////////////////////MT MUMET CUT///////////////////////////////////
+		double Mtmumet=TMath::Sqrt(2*(mu.Pt())*(MET.Pt())*(1-TMath::Cos(mu.DeltaPhi(MET))));
+		MtMuMetVsMet_afterCharge->Fill(Mtmumet,(MET_met[0]));
+		//  cout<<jentry<<" mt mumet  "<<Mtmumet<<endl;
+		if(!(Mtmumet>30))continue;
+		indexMtmumet.push_back(1);
+		sizeMtmumet->Fill(1,puWeight);
+
+		/////////////////////////zero goodMu/////////////////////////////////////////////////
+		std::vector<int> indexExtraMuon;
+		TLorentzVector muschifo;
+		muschifo.SetPtEtaPhiM(1.,0.,0.,0.);
+		for (Int_t i=0 ; i<nMuon ; i++){
+		  muschifo.SetPtEtaPhiM(Muon_pt[i], Muon_eta[i], Muon_phi[i], 0.105);
+		  if (!(muschifo.DeltaR(mu)>0.5) ) continue;
+		  //if (!(TMath::Abs(Muon_eta[i]) < 2.4)) continue;
+		  if (!(TMath::Abs(Muon_eta[i]) < 2.1)) continue;
+		  //  if(!(TMath::Abs(Muon_vz[i]-Tau_zvertex[indexTauLead[t]])<0.14))continue;
+		  if(!(TMath::Abs(Muon_vz[i]-Vertex_z[IndexPV[0]])<0.2))continue;
+		  if (!(Muon_pt[i] > 15)) continue;
+		  if (!((Muon_isTrackerMuon[i]==1)&& (Muon_isPFMuon[i]==1)))continue;
+		  indexExtraMuon.push_back(i);
+               }
+		if(!(indexExtraMuon.size()==0))continue;
+		extramuon.push_back(1);
+		NoExtraMuon->Fill(1,puWeight);
+              
+               //////////////////////////////////jetCuts/////////////////////////////
+               std::vector<int> indexJet;
+               std::vector<int> indexJetMatch;
+               bool JetCuts=false;
+               bool JetCutsMatch=false;
+               TLorentzVector jet; jet.SetPtEtaPhiE(1,0,0,0);
+               
+               for (Int_t p=0; p<nJet; p++ ){
+                   if (!( Jet_pt[p] > 20.0 )) continue;
+                   if (!( TMath::Abs(Jet_eta[p]) < 2.4 )) continue;
+                   if(!(Jet_combinedSecondaryVertexBTag[p]>0.679))continue;
+		   bdiscrAleternative->Fill(Jet_simpleSecondaryVertexHighEffBTag[p],puWeight);
+                   hPtJet_baseSelection->Fill(Jet_pt[p],puWeight);
+                   indexJet.push_back(p);
+                   
+               } //fine loop jet
+               nJet_baseSelection->Fill(indexJet.size(),puWeight);
+               if(indexJet.size()==0){JetCuts=true;}
+               
+	       if(JetCuts==false)continue;
+	       extrab.push_back(1);
+	       sizeJetMatch->Fill(1,puWeight);
+	       //////////////////////////////////fine selezioni topologiche/////////////////////////////
+
+	  
+	       Double_t doppioniSegnale=0;
+	       Double_t coppieSegnale=0;
+	       
+	       for(int n=0;n<indexCoppiaSegnale.size();n++){
+		 bool cacca=false;
+		 for(int m=0;m<indexCoppiaSegnale.size();m++){
+		   if(n==m)continue;
+		   
+		   if((indexTau1coppiaSegnale[n]==indexTau2coppiaSegnale[m])&&(indexTau2coppiaSegnale[n]==indexTau1coppiaSegnale[m])){
+		     if(Tau_pt[indexTau1coppiaSegnale[n]]>Tau_pt[indexTau2coppiaSegnale[n]]){
+                       pesoSegnale.push_back(1);}
+		     if(Tau_pt[indexTau1coppiaSegnale[n]]<Tau_pt[indexTau2coppiaSegnale[n]]){
+                       pesoSegnale.push_back(0);}
+		     
+		     doppioniSegnale++;
+		     cacca=true;
+		     //		cout<<jentry<<" pt   "<<Tau_pt[indexTau1coppiaSegnale[n]]<<"  index1    "<<indexTau1coppiaSegnale[n]<<endl;
+		     //cout<<jentry<<" pt   "<<Tau_pt[indexTau2coppiaSegnale[n]]<<"  index2    "<<indexTau2coppiaSegnale[n]<<endl;
+		     
+		   }
+		 }
+		 if(cacca==false){pesoSegnale.push_back(1);}
+       }
+	       
+	       //coppieSegnale=indexCoppiaSegnale.size()-doppioniSegnale/2;
+	       
+	       
+	       Double_t peso=1;
+	       TLorentzVector MH; MH.SetPtEtaPhiE(1,0,0,0);
+	       
+	       for(Int_t c=0; c<indexCoppiaSegnale.size(); c++){
+		 
+		 tau1.SetPtEtaPhiM(Tau_pt[indexTau1coppiaSegnale[c]], Tau_eta[indexTau1coppiaSegnale[c]], Tau_phi[indexTau1coppiaSegnale[c]], Tau_mass[indexTau1coppiaSegnale[c]]);//LEAD
+		 tau2.SetPtEtaPhiM(Tau_pt[indexTau2coppiaSegnale[c]], Tau_eta[indexTau2coppiaSegnale[c]], Tau_phi[indexTau2coppiaSegnale[c]], Tau_mass[indexTau2coppiaSegnale[c]]);//SUBL
+               
+		 
+		 MH = tau1 + tau2;
+		 Z=mu1+tau1;
+		 // std::cout<<jentry<<" peso segnale  "<<pesoSegnale.at(c)<<" peso  "<<peso<<" puWeight  "<<puWeight<<endl;;
+		 hTau1Pt[7]->Fill(tau1.Pt(), pesoSegnale.at(c)*peso*puWeight);
+		 hTau1Eta[7]->Fill(tau1.Eta(),peso*pesoSegnale.at(c)*puWeight);
+		 hTau2Pt[7]->Fill(tau2.Pt(),peso*pesoSegnale.at(c)*puWeight);
+		 hTau2Eta[7]->Fill(tau2.Eta(),peso*pesoSegnale.at(c)*puWeight);
+		 hMuon1Pt[7]->Fill(mu1.Pt(),peso*pesoSegnale.at(c)*puWeight);
+		 hMuon1Eta[7]->Fill(mu1.Eta(),peso*pesoSegnale.at(c)*puWeight);
+		 massainv_TauTau[7]->Fill(MH.M(),peso*pesoSegnale.at(c)*puWeight);
+		 tagli[7]->Fill(1,peso*pesoSegnale.at(c)*puWeight);
+		 
+		 /*	 if(  ( TMath::Abs(Muon_eta[indexMuon[0]]) <2.2) && ( TMath::Abs(Muon_eta[indexMuon[0]]) >=1.5) ){
+			hMuonEtaFinal_HE->Fill(mu1.Eta());
+			hMuonPtFinal_HE->Fill(mu1.Pt());
+		      }
+		      
+		      if(  ( TMath::Abs(Muon_eta[indexMuon[0]]) <1.5) ){
+			hMuonEtaFinal_Barrel->Fill(mu1.Eta());
+			hMuonPtFinal_Barrel->Fill(mu1.Pt());
+		      }
+		      
+		      if(  TMath::Abs(Muon_eta[indexMuon[0]]) <2.2){
+			hMuonEtaFinal_Full->Fill(mu1.Eta());
+			hMuonPtFinal_Full->Fill(mu1.Pt());}
+		 */
+		 
+	       }//FINE LOOP SULLE COPPIE E VAFFANCULO A VOI
+	       
+	       
+	       if (jentry % 10000 == 0 ){
+		 std::cout << "jentry = " << jentry << std::endl;}
+   } //parentesi del ciclo su tutti gli eventi
+   
+   std::cout<<"before filter;"<<tagli[0]->Integral(0,3)<<std::endl;
+   std::cout<<" WH filter;"<<hnMET_PU->Integral(0,32)<<std::endl;
+   std::cout<<" Trigger;"<<sizeAfterTrigger->Integral(0,32)<<std::endl;
+   std::cout<<"vertex cut;"<<entries_after_vertex_PU->Integral(0,3)<<std::endl;
+   std::cout<<" Muon Pt;"<<sizeMuonPt->Integral(0,32)<<std::endl;
+    
+    std::cout<<" Muon Eta;"<<sizeMuonAccept->Integral(0,3)<<std::endl;
+    std::cout<<" Muon Tracker && Global;"<< sizeMuonTrackGlob->Integral(0,32)<<std::endl;
+    std::cout<<" Muon chambers=>2;"<<sizeMuonChambers->Integral(0,32)<<std::endl;
+    std::cout<<" Muon Match =>2;"<<sizeMuonMatchStat->Integral(0,32)<<std::endl;
+    
+    std::cout<<" muon Tracker Hits;"<< sizeMuonTrackHits->Integral(0,32)<<std::endl;
+    std::cout<<" muon Pixel Hits;"<< sizeMuonPixHits->Integral(0,32)<<std::endl;
+    
+    std::cout<<" muon Chi2;"<< sizeMuonChi2->Integral(0,32)<<std::endl;
+    std::cout<<" muon dB;"<< sizeMuondB->Integral(0,32)<<std::endl;
+    std::cout<<" muon Dist Z;"<< sizeMuonDistZ->Integral(0,32)<<std::endl;
+    std::cout<<" muon PFRel Iso;"<<sizeMuonISO->Integral(0,3)<<std::endl;
+    
+    //std::cout<<" muon ID;"<<sizeMuonID->Integral(0,3)<<std::endl;
+    //std::cout<<"Muon id;"<<tagli_7->Integral(0,3)<<std::endl;
+    std::cout<<" DR(Mu,tau1);"<<sizeTau1DR->Integral(0,31)<<std::endl;
+    std::cout<<" Tau1 pt;"<<sizeTauPt1->Integral(0,31)<<std::endl;
+    std::cout<<" tau1 Eta;"<<sizeTauAccept1->Integral(0,11)<<std::endl;
+    std::cout<<" tau os;"<<sizeTauOS->Integral(0,30)<<std::endl;
+    
+    std::cout<<" tau1 ID;"<<sizeTauID1->Integral(0,11)<<std::endl;
+    std::cout<<" tau1 LC Isolation DB;"<<sizeTauISO1->Integral(0,11)<<std::endl;
+    std::cout<<" Muon Tight;"<<sizeTau1AgMu->Integral(0,31)<<std::endl;
+    std::cout<<" Electron Loose;"<<sizeTauAgainstLepton1->Integral(0,11)<<std::endl;
+    // std::cout<<" tau1 Delta Z;"<<sizeTauDeltaZ1->Integral(0,11)<<std::endl;
+    
+    std::cout<<" DR(Mu,tau2);"<<sizeTau2DRMu->Integral(0,31)<<std::endl;
+    
+    std::cout<<" tau2 Pt;"<<sizeTauPt2->Integral(0,11)<<std::endl;
+    std::cout<<" tau2 Eta;"<<sizeTauAccept2->Integral(0,11)<<std::endl;
+    std::cout<<" tau2 ID;"<<sizeTauID2->Integral(0,11)<<std::endl;
+    std::cout<<" tau SS;"<<sizeTauSS->Integral(0,30)<<std::endl;
+    std::cout<<" tau2 Cm Isoltion DB;"<<sizeTauISO2->Integral(0,11)<<std::endl;
+    std::cout<<" Muon Tight ;"<<sizeTau2AgMu->Integral(0,10)<<std::endl;
+    std::cout<<" Electron lOOSE ;"<<sizeTauAgainstLepton2->Integral(0,11)<<std::endl;
+    std::cout<<" charge cut;"<<tagli[6]->Integral(0,3)<<std::endl;
+    // std::cout<<" tau2 Delta Z;"<<sizeTauDeltaZ2->Integral(0,11)<<std::endl;
+    std::cout<<" DR(tau1,tau2);"<<sizeTau2DRTau1->Integral(0,31)<<std::endl;
+    std::cout<<"  Tau OS Iso; "<<sizeTauOSIso->Integral(0,10)<<std::endl;
+    std::cout<<"  Tau SS Iso; "<<sizeTauSSIso->Integral(0,10)<<std::endl;
+    std::cout<<" PTlead>25;"<<MaxPtGreat25->Integral(0,31)<<std::endl;
+    std::cout<<" AFTER TAU CUTS;"<<hTauPairCuts->Integral(0,30)<<std::endl;
+    //    std::cout<<" Zeta(Mu,Tau_h) Veto;"<<ZCut->Integral(0,10)<<std::endl;  
+
+    std::cout<<"MT(mu,met) ;"<<sizeMtmumet->Integral(0,10)<<std::endl;  
+    std::cout<<" Extra Muons Veto;"<<NoExtraMuon->Integral(0,10)<<std::endl;
+    //    std::cout<<" Electrons Veto;"<<sizeZeroEle->Integral(0,10)<<std::endl;
+    std::cout<<" BJet Veto;"<<sizeJetMatch->Integral(0,10)<<std::endl;
+  
+    std::cout<<" MUON PT AREA****;"<<hMuon1Pt[7]->Integral(0,200)<<std::endl;
+
+    //std::cout<<" Dist ZVertex (Tau1,Tau2);"<< sizeTauZDist->Integral(0,10)<<std::endl;
+    //std::cout<<" Dist ZVertex (Tau1,Mu);"<< sizeMuTau1Z->Integral(0,10)<<std::endl;
+
+    //std::cout<<"TAU SUBLEAD pt MAX;"<<tagli_5->Integral(0,3)<<std::endl;
+
+
+    
+    
+} //parentesi del void
+
+void VHAnalyser_Jan13::bookHistograms() {
+    if (!bookedHistos) {
+        // Open Output File
+        std::string root_file = fileName;
+        outputFile = new TFile(root_file.c_str(), "RECREATE");
+        outputFile->cd();
+        TH1::SetDefaultSumw2();
+        
+        mupt_gen= new TH1F(" mupt_gen"," mupt_gen" ,100, 0, 200);
+        mass_MuMet= new TH1F("mass_MuMet","mass_MuMet" ,100, 0, 200);
+        mass_MuTau1= new TH1F("mass_MuTau1","mass_MuTau1", 100, 0, 200);
+        mass_TauTau_SS= new TH1F("mass_TauTau_SS","mass_TauTau_SS", 100, 0, 200);
+        mass_MuMet_PU= new TH1F("mass_MuMet_PU","mass_MuMet_PU" ,100, 0, 200);
+        mass_MuTau1_PU= new TH1F("mass_MuTau1_PU","mass_MuTau1_PU", 100, 0, 200);
+        mass_TauTau_SS_PU= new TH1F("mass_TauTau_SS_PU","mass_TauTau_SS_PU", 100, 0, 200);
+        MtMuMetVsMet_afterCharge= new TH2F("MtMuMetVsMet_afterCharge","MtMuMetVsMet_afterCharge", 200,0,200,200,0,200);
+        MtMuMetVsMet_afterZ= new TH2F("MtMuMetVsMet_afterZ","MtMuMetVsMet_afterZ", 200,0,200,200,0,200);
+        MtMuTauVSMET_afterCharge= new TH2F("MtMuTauVSMET_afterCharge","MtMuTauVSMET_afterCharge", 200,0,200,200,0,200);
+        MtMuTauVSMET_afterZ= new TH2F("MtMuTauVSMET_afterZ","MtMuTauVSMET_afterZ", 200,0,200,200,0,200);
+      
+        hNPU = new TH1F("hNPU", "Number of PileUp", 36, -0.5, 35.5);
+        hNPU_PU = new TH1F("hNPU_PU", "Number of PileUp ripesato", 36, -0.5, 35.5);
+        hnVertex = new TH1F("hnVertex", "Number of Vertex", 36, -0.5, 35.5);
+        hnVertex2 = new TH1F("hnVertex2", "Number of Vertex", 36, -0.5, 35.5);
+        hnVertex_PU = new TH1F("hnVertex_PU", "Number of Vertex reweighted", 36, -0.5, 35.5);
+        hnVertex_PU2 = new TH1F("hnVertex_PU2", "Number of Vertex reweighted", 36, -0.5, 35.5);
+        hnVertex3 = new TH1F("hnVertex3", "Number of Vertex", 36, -0.5, 35.5);
+        hnVertex_PU3 = new TH1F("hnVertex_PU3", "Number of Vertex reweighted", 36, -0.5, 35.5);
+        hnMuon = new TH1F("nMuon","number of muon", 31, -0.5, 5);
+        hnTau = new TH1F("nTau","number ef tau", 31, -0.5, 5);
+        hnElectron = new TH1F("nElectron","number of ele", 31, -0.5, 10);
+        hnMET_PU = new TH1F("nMET_PU","number of MET PU", 31, -0.5, 5);
+        hnMET = new TH1F("nMET","number of MET", 31, -0.5, 5);
+        hMET_PU = new TH1F("hMET_PU","histogram of MET PU", 50, 0, 150);
+        hMET = new TH1F("hMET","histogram of MET", 50, 0, 150);
+        hEtaMuon = new TH1F("EtaMuon","eta of muon", 50, -5, 5);
+        hrelIso = new TH1F("RelIso","relIso of muon",10,-0.3,20);
+        hPtMuon = new TH1F("PtMuon","pt of muon candidate", 200, 0, 200);
+        sizeMuonPt = new TH1F("sizeMuonPt", "Number of Muon after Pt cut", 31, -0.5, 30.5);
+        sizeMuon = new TH1F("sizeMuon", "Number of Muon after cuts", 31, -0.5, 30.5);
+        sizeMuonISO = new TH1F("sizeMuonISO", "Number of Muon after ISO cuts", 31, -0.5, 30.5);
+        sizeMuonID = new TH1F("sizeMuonID", "Number of Muon after ID cuts", 31, -0.5, 30.5);
+        sizeMuonAccept = new TH1F("sizeMuonAccept", "Number of Muon after Accept cuts", 31, -0.5, 30.5);
+        hPtEle = new TH1F("hPtEle","pt of ele candidate", 100, 0, 200);
+        nEle_baseSelection = new TH1F("nEle_baseSelection","number of electrons after baseline selection", 10, 0., 10);
+        nTau_baseSelection1 = new TH1F("nTau_baseSelection1","number of tau1 after baseline selection", 10, 0., 10);
+        sizeTauISO1 = new TH1F("sizeTauISO1","number of tau1 after ISO selection", 10, -0.5, 10.5);
+        sizeTauID1 = new TH1F("sizeTauID1","number of tau1 after ID selection", 10,-0.5, 10.5);
+        sizeTauDeltaZ1 = new TH1F("sizeTauDeltaZ1","number of tau1 after delta z selection", 10,-0.5, 10.5);
+        sizeTauAccept1 = new TH1F("sizeTauAccept1","number of tau1 after Accept selection", 10, 0., 10);
+        sizeTauPt1 = new TH1F("sizeTauPt1","number of tau1 after pt selection", 10, 0., 10);
+        sizeTauAgainstLepton1 = new TH1F("sizeTauAgainstLepton1","number of tau1 after AgainstLepton selection", 10, 0., 10);
+        nTau_baseSelection2 = new TH1F("nTau_baseSelection2","number of tau2 after baseline selection", 10, 0., 10);
+        sizeTauISO2 = new TH1F("sizeTauISO2","number of tau2 after ISO selection", 10, -0.5, 10.5);
+        sizeTauID2 = new TH1F("sizeTauID2","number of tau2 after ID selection", 10,-0.5, 10.5);
+        sizeTauDeltaZ2 = new TH1F("sizeTauDeltaZ2","number of tau2 after delta z selection", 10,-0.5, 10.5);
+        sizeTauAccept2 = new TH1F("sizeTauAccept2","number of tau2 after Accept selection", 10, 0., 10);
+        sizeTauPt2 = new TH1F("sizeTauPt2","number of tau2 after pt selection", 10, 0., 10);
+        sizeTauAgainstLepton2 = new TH1F("sizeTauAgainstLepton2","number of tau2 after AgainstLepton selection", 10, 0., 10);
+        hTau_jetEta = new TH1F ("hTau_jetEta","eta of jet tau candidate", 50, -5, 5);
+        hTau_deltaZ1 = new TH1F ("hTau_deltaZ2","delta Z of tau vertex and primary vertex ", 11, -0.1, 1);
+        hTau_deltaZ2 = new TH1F ("hTau_deltaZ1","delta Z of tau vertex and primary vertex ", 11, -0.1, 1);
+        hMuonEtaReco = new TH1F("hMuonEtaReco ","eta of muon ", 50, -5, 5);
+        hMuonPtReco = new TH1F("hMuonPtReco ","pt of muon ", 100, 0, 200);
+        hPtJet = new TH1F("PtJet","pt of jets", 100, 0, 200);
+        hJettrackCountingHighEffBTag = new TH1F("hJet_trackCountingHighEffBTag","Jet_trackCountingHighEffBTag", 65,0,13);
+        hPtJet_baseSelection = new TH1F("PtJet_baseSelection","pt of jets after baseline selection", 100, 0, 200);
+        nJet_baseSelection = new TH1F("nJet_baseSelection","number of jets after baseline selection", 10, 0., 10);
+        sizeJetMatch = new TH1F("sizeJetsMatch", "Number of event that has at least two good jets", 31, -0.5, 30.5);
+        hWH_Pt = new TH1F("hWH_Pt","pt of mu + tau1+ tau2", 100, 0, 200);
+        hTau1Pt_ottimizzazione = new TH1F("hTau1Pt_ottimizzazione","pt tau1", 100, 0, 100);
+        hTau2Pt_ottimizzazione = new TH1F("hTau2Pt_ottimizzazione","pt tau2", 100, 0, 100);
+        sizeTauZDist= new TH1F("sizeTauZDist","sizeTauZDist", 10, 0., 10);
+        VertexX = new TH1F("VertexX","VertexX", 500, 0.1, 0.5);
+        VertexY= new TH1F("VertexY","VertexY", 500, 0.1, 0.5);
+        VertexZ= new TH1F("VertexZ","VertexZ", 100, 0, 30);
+        VertexXY= new TH2F("VertexXY","VertexXY", 500, 0.1, 0.5, 500, 0.1, 0.5);
+        MuTauVSHPt= new TH2F("MuTauVSHPt","MuTauVSHPt", 200, 0, 200, 200, 0, 200);
+        sizeZeroEle = new TH1F("sizeZeroEle","sizeZeroEle", 10, 0., 10);
+        ZCut = new TH1F("ZCut","ZCut", 10, 0., 10);
+        NoExtraMuon= new TH1F("NoExtraMuon","NoExtraMuon", 10, 0., 10);
+        sizeMuTau1Z= new TH1F("sizeMuTau1Z","sizeMuTau1Z", 10, 0., 10);
+        bdiscrAleternative= new TH1F("bdiscrAlternative","simpleSecondaryVertexHighEffBTag", 10, -5, 5);
+        bdiscrAleternativeAfter= new TH1F("bdiscrAlternativeAfter","simpleSecondaryVertexHighEffBTag", 10, -5, 5);
+        sizeMuonMatchStat= new TH1F("sizeMuonMatchStat","sizeMuonMatchStat", 10, 0., 10.);
+        sizeTau1DR= new TH1F("sizeTau1DR","sizeTau1DR", 10,-0.5, 10.5);
+        sizeTau1AgMu= new TH1F("sizeTau1AgMu","sizeTau1AgMu", 10,-0.5, 10.5);
+        sizeTau2AgMu= new TH1F("sizeTau2AgMu","sizeTau2AgMu", 10,-0.5, 10.5);
+        sizeMuonChambers= new TH1F("sizeMuonChambers","sizeMuonChambers", 10,-0.5, 10.5);
+        sizeTau2DRTau1=new TH1F("sizeTau2DRTau1","sizeTau2DRTau1", 10,-0.5, 10.5);
+        sizeTau2DRMu=new TH1F("sizeTau2DRMu","sizeTau2DRMu", 10,-0.5, 10.5);
+        VertexSS=new TH1F("VertexSS","VertexSS", 10,-0.5, 10.5);
+        ZeroMuSS=new TH1F("ZeroMuSS","ZeroMuSS", 10,-0.5, 10.5);
+        zeroBJetSS=new TH1F("ZeroBJetSS","ZeroBJetSS", 10,-0.5, 10.5);
+        ZeroEleSS=new TH1F("ZeroEleSS","ZeroEleSS", 10,-0.5, 10.5);
+        AfterSS=new TH1F("AfterSS","AfterSS", 10,-0.5, 10.5);
+        mass_TauTau_AfterSS_PU = new TH1F("mass_TauTau_AfterSS_PU","mass_TauTau_AfterSS_PU", 200, 0, 100);
+        MuTau1_AfterTau1= new TH1F("MuTau1_AfterTau1"," MuTau1_AfterTau1", 200, 0, 100);
+        MuMET_AfterTau1= new TH1F("MuMET_AfterTau1"," MuMET_AfterTau1", 200, 0, 100);
+        Tau1Pt_AfterTau1= new TH1F("Tau1Pt_AfterTau1"," Tau1Pt_AfterTau1", 200, 0, 100);
+        MuPt_AfterTau1= new TH1F("MuPt_AfterTau1"," MuPt_AfterTau1", 200, 0, 100);
+        
+        //////////////////////////////////////// H per conteggi /////////////////////////////////////////////
+        H_tot = new TH1F("H_tot","H tot",3,0,3);
+        W_tot = new TH1F("W_tot","W tot",3,0,3);
+        Z_tot = new TH1F("Z_tot","Z tot",3,0,3);
+        t_tot = new TH1F("t_tot","t tot",3,0,3);
+        muonStatus1 = new TH1F("muonStatus1","muonStatus1",3,0,3);
+        WplusMuon = new TH1F("WplusMuon","WplusMuon",3,0,3);
+        muonW = new TH1F("muonW","",3,0,3);
+        muonWstatus3 = new TH1F("muonWstatus3","",3,0,3);
+        tautauEvent = new TH1F("tautauEvent","",3,0,3);
+        controlloTauTau = new TH1F("controlloTauTau","",3,0,3);
+        FHEvent= new TH1F("FHEvent","",3,0,3);
+        GTFHEvent=new TH1F("GTFHEvent","",3,0,3);
+        elejetEvent=new TH1F("elejetEvent","",3,0,3);
+        GTelejetEvent=new TH1F("GTelejetEvent","",3,0,3);
+        mujetEvent=new TH1F("mujetEvent","",3,0,3);
+        GTmujetEvent=new TH1F("GTmujetEvent","",3,0,3);
+        FLEvent=new TH1F("FLEvent","",3,0,3);
+        GTFLEvent=new TH1F("GTFLEvent","",3,0,3);
+        
+        initial_entries=new TH1F("initial_entries","",3,0,3);;
+        entries_after_vertex=new TH1F("entries_after_vertex","",3,0,3);;
+        entries_after_vertex_PU=new TH1F("entries_after_vertex_PU","",3,0,3);;
+        sizeAfterTrigger= new TH1F("sizeAfterTrigger", "sizeAfterTrigger", 3, 0, 3);
+        sizeAfterTrigger_PU = new TH1F("sizeAfterTrigger_PU", "sizeAfterTrigger_PU", 3, 0, 3);
+        
+        MuonMatchEvent=new TH1F("MuonMatchEvent","",3,0,3);
+        TauMatchEvent=new TH1F("TauMatchEvent","",3,0,3);
+        JetMatchEvent=new TH1F("JetMatchEvent","",3,0,3);
+        
+        for(Int_t i=0; i<8; i++){
+            char title[12];
+            //itoa (i,title,10);
+            sprintf(title,"tagli_%d",i);
+            tagli[i] = new TH1F(title,"tagli",3,0,3);
+            char title2[15];
+            //itoa (i,title,10);
+            sprintf(title2,"tagli_%d_PU",i);
+            tagli_PU[i] = new TH1F(title2,"tagli_PU",3,0,3);
+            
+        }
+        
+        
+        
+    
+ 
+        
+        for(Int_t i=0; i<8; i++){
+            char titleptTau1[25];
+            char titleetaTau1[25];
+            char titleptTau2[25];
+            char titleetaTau2[25];
+            char titleptMu1[25];
+            char titleetaMu1[25];
+            char titleptMu2[25];
+            char titleetaMu2[25];
+            char titleminv[25];
+            char titledB_err[25];
+            char titledB[25];
+            sprintf(titleetaTau1,"hTau1Eta_taglio%d",i);
+            sprintf(titleptTau1,"hTau1Pt_taglio%d",i);
+            sprintf(titleetaTau2,"hTau2Eta_taglio%d",i);
+            sprintf(titleptTau2,"hTau2Pt_taglio%d",i);
+            sprintf(titleetaMu1,"hMuon1Eta_taglio%d",i);
+            sprintf(titleptMu1,"hMuon1Pt_taglio%d",i);
+            sprintf(titleetaMu2,"hMuon2Eta_taglio%d",i);
+            sprintf(titleptMu2,"hMuon2Pt_taglio%d",i);
+            sprintf(titleminv,"massainv_TauTau_taglio%d",i);
+            sprintf(titledB_err,"dB_edB_taglio%d",i);
+            sprintf(titledB,"MuondB_taglio%d",i);
+            
+            char titleptTau1_PU[25];
+            char titleetaTau1_PU[25];
+            char titleptTau2_PU[25];
+            char titleetaTau2_PU[25];
+            char titleptMu_PU[25];
+            char titleetaMu_PU[25];
+            char titleminv_PU[25];
+            char titledB_err_PU[30];
+            char titledB_PU[25];
+            sprintf(titleetaTau1_PU,"hTau1Eta_taglio%d_PU",i);
+            sprintf(titleptTau1_PU,"hTau1Pt_taglio%d_PU",i);
+            sprintf(titleetaTau2_PU,"hTau2Eta_taglio%d_PU",i);
+            sprintf(titleptTau2_PU,"hTau2Pt_taglio%d_PU",i);
+            sprintf(titleetaMu_PU,"hMuonEta_taglio%d_PU",i);
+            sprintf(titleptMu_PU,"hMuonPt_taglio%d_PU",i);
+            sprintf(titleminv_PU,"massainv_TauTau_taglio%d_PU",i);
+            sprintf(titledB_err_PU,"dB_edB_taglio%d_PU",i);
+            sprintf(titledB_PU,"MuondB_taglio%d_PU",i);
+            
+            
+            hTau1Eta[i]=new TH1F(titleetaTau1 ,"eta of tau ", 12, -3, 3);
+            hTau1Pt[i]= new TH1F(titleptTau1 ,"pt of tau ", 100, 0, 200);
+            hTau2Eta[i]=new TH1F(titleetaTau2 ,"eta of tau ", 12, -3, 3);
+            hTau2Pt[i]= new TH1F(titleptTau2 ,"pt of tau ", 100, 0, 200);
+            hMuon1Pt[i]= new TH1F(titleptMu1 ,"pt of muon1 ", 100, 0, 200);
+            hMuon1Eta[i]= new TH1F(titleetaMu1 ,"eta of muon1 ", 12, -3, 3);
+            hMuon2Pt[i]= new TH1F(titleptMu2 ,"pt of muon2 ", 100, 0, 200);
+            hMuon2Eta[i]= new TH1F(titleetaMu2 ,"eta of muon2 ", 12, -3, 3);
+            massainv_TauTau[i] = new TH1F(titleminv,"visible mass tau muon", 200, 0, 400);
+            hdB_err[i]=new TH1F(titledB_err," dB/dB_err per mu",100,-3,10);
+            muondB[i] = new TH1F(titledB,"db of muon ",100,-0.1,0.1);
+            
+            hTau1Eta_PU[i]=new TH1F(titleetaTau1_PU ,"eta of tau ", 12, -3, 3);
+            hTau1Pt_PU[i]= new TH1F(titleptTau1_PU ,"pt of tau ", 100, 0, 200);
+            hTau2Eta_PU[i]=new TH1F(titleetaTau2_PU ,"eta of tau ", 12, -3, 3);
+            hTau2Pt_PU[i]= new TH1F(titleptTau2_PU ,"pt of tau ", 100, 0, 200);
+            hMuonPt_PU[i]= new TH1F(titleptMu_PU ,"pt of muon ", 100, 0, 200);
+            hMuonEta_PU[i]= new TH1F(titleetaMu_PU ,"eta of muon ", 12, -3, 3);
+            massainv_TauTau_PU[i] = new TH1F(titleminv_PU,"visible mass tau muon", 200, 0, 400);
+            hdB_err_PU[i]=new TH1F(titledB_err_PU," dB/dB_err per mu",100,-3,10);
+            muondB_PU[i] = new TH1F(titledB_PU,"db of muon ",100,-0.1,0.1);
+            
+            
+        }
+        hmassa_trasversa = new TH1F("hmassa_trasversa", "massa trasversa",12,0,120);
+        deltaPhi_muMET = new TH1F("deltaPhi_muMET","DeltaPhi tra mu e MET", 20, -1.5, 1.5);
+               
+        sizeMuonTrackGlob= new TH1F("sizeMuonTrackGlob", "sizeMuonTrackGlob", 31, -0.5, 30.5);
+        sizeMuonPixHits= new TH1F("sizeMuonPixHits", "sizeMuonPixHits", 31, -0.5, 30.5);
+        sizeMuonTrackHits= new TH1F("sizeMuonTrackHits", "sizeMuonTrackHits", 31, -0.5, 30.5);
+        sizeMuonChi2= new TH1F("sizeMuonChi2", "Number of Muon after chi2", 31, -0.5, 30.5);
+        sizeMuondB= new TH1F("sizeMuondB", "Number of Muon after dB cuts", 31, -0.5, 30.5);
+        sizeMuonDistZ= new TH1F("sizeMuonDistZ", "Number of Muon after distZ cuts", 31, -0.5, 30.5);
+        sizeMuonNMatch= new TH1F("sizeMuonNMatch", "Number of Muon after NMatch", 31, -0.5, 30.5);
+        sizeMtmumet= new TH1F("sizeMtmumet", "sizeMtmumet", 31, -0.5, 30.5);
+	hTauPairCuts= new TH1F("hTauPairCuts", "hTauPairCuts", 31, -0.5, 30.5);
+	MaxPtGreat25= new TH1F("MaxPtGreat25", "MaxPtGreat25", 31, -0.5, 30.5);
+	sizeTauSS= new TH1F("sizeTauSS", "sizeTauSS", 31, -0.5, 30.5);
+	sizeTauOS= new TH1F("sizeTauOS", "sizeTauOS", 31, -0.5, 30.5);
+
+	hMuonMult = new TH1F("hMuonMult","hMuonMult",10,0,10);
+	sizeTauOSIso = new TH1F("sizeTauOSIso","sizeTauOSIso",10,0,10);
+	sizeTauSSIso  = new TH1F("sizeTauSSIso","sizeTauSSIso",10,0,10);
+
+	hTauPtAfterTau = new TH1F("hTauPtAfterTau","hTauPtAfterTau",200,0,200);
+	hTauEtaAfterTau = new TH1F("hTauEtaAfterTau", "hTauEtaAfterTau",100,-3,3);
+	hTauOSPt_AfterIso = new TH1F("hTauOSPt_AfterIso","hTauOSPt_AfterIso",200,0,200);
+	hTauSSPt_AfterIso = new TH1F("hTauSSPt_AfterIso","hTauSSPt_AfterIso",200,0,200);
+	hMET_AfterFullLepSel = new TH1F("hMET_AfterFullLepSel","hMET_AfterFullLepSel",200,0,200);
+
+	hRecoMuonPt = new TH1F("hRecoMuonPt","hRecoMuonPt",200,0,200);
+	hRecoMuonEta = new TH1F("hRecoMuonEta","hRecoMuonEta",100,-3,3);
+	hRecoMuonPhi = new TH1F("hRecoMuonPhi","hRecoMuonPhi",100,-3,3);
+	hRecoMuonChi2 = new TH1F("hRecoMuonChi2","hRecoMuonChi2",20,0,20);
+	hMuonTrkLayer = new TH1F("hMuonTrkLayer","hMuonTrkLayer",20,0,20);
+	hMuonDB = new TH1F("hMuonDB","hMuonDB",200,-0.5,0.5);
+	hMuonDZ = new TH1F("hMuonDZ","hMuonDZ",200,-0.5,0.5);
+	hNMuonBefSel = new TH1F("hNMuonBefSel","hNMuonBefSel",10,0,10);
+	hNMuonAfterSel = new TH1F("hNMuonAfterSel","hNMuonAfterSel",10,0,10);
+	     
+
+	hMuonEtaFinal_HE = new TH1F("hMuonEtaFinal_HE","hMuonEtaFinal_HE",100,-3,3);
+	hMuonPtFinal_HE = new TH1F("hMuonPtFinal_HE","hMuonPtFinal_HE",100,0,200);
+	hMuonEtaFinal_Barrel  = new TH1F("hMuonEtaFinal_Barrel","hMuonEtaFinal_Barrel",100,-3,3);
+	hMuonPtFinal_Barrel  = new TH1F("hMuonPtFinal_Barrel","hMuonPtFinal_Barrel",100,0,200);
+	hMuonEtaFinal_Full  = new TH1F("hMuonEtaFinal_Full","hMuonEtaFinal_Full",100,-3,3);
+	hMuonPtFinal_Full  = new TH1F("hMuonPtFinal_Full","hMuonPtFinal_Full",100,0,200);
+	hMuonPtWP2012 = new TH1F("hMuonPtWP2012","hMuonPtWP2012",100,0,200);
+       ////////////////////////////
+
+
+    }
+}
+
+
+void VHAnalyser_Jan13::saveHistograms() {
+    if (outputFile) {
+        f_puweights->Close();
+        std::string root_file = fileName;
+        outputFile = new TFile(root_file.c_str(), "RECREATE");
+        outputFile->cd();
+        
+        
+        hNPU->Write();
+        hNPU_PU->Write();
+        hnVertex->Write();
+        hnVertex2->Write();
+        hnVertex_PU->Write();
+        hnVertex_PU2->Write();
+        hnElectron->Write();
+        hnTau->Write();
+        hnMuon->Write();
+        hnMET->Write();
+        hnMET_PU->Write();
+        hMET->Write();
+        hMET_PU->Write();
+        hPtMuon->Write();
+        hEtaMuon->Write();
+        hrelIso->Write();
+        sizeMuon->Write();
+        sizeMuonAccept->Write();
+        sizeMuonISO->Write();
+        sizeMuonTrackGlob->Write();
+        sizeMuonPixHits->Write();
+        sizeMuonTrackHits->Write();
+        sizeMuonChi2->Write();
+        sizeMuondB->Write();
+        sizeMuonDistZ->Write();
+        sizeMuonNMatch->Write();
+        sizeMuonChambers->Write();
+        sizeMuonID->Write();
+        sizeMuonMatchStat->Write();
+        sizeTau1DR->Write();
+        sizeTauAgainstLepton1->Write();
+        sizeTauISO1->Write();
+        sizeTau1AgMu->Write();
+        sizeTauDeltaZ1->Write();
+        sizeTauID1->Write();
+        sizeTauAccept1->Write();
+        sizeTauPt1->Write();
+        sizeTauAgainstLepton2->Write();
+        sizeTauISO2->Write();
+        sizeTauDeltaZ2->Write();
+        sizeTauID2->Write();
+        sizeTauAccept2->Write();
+        sizeTauPt2->Write();
+        sizeTau2DRTau1->Write();
+        sizeTau2DRMu->Write();
+        sizeTau2AgMu->Write();
+        hMuonPtReco->Write();
+        hMuonEtaReco->Write();
+        hPtEle->Write();
+        nEle_baseSelection->Write();
+        nTau_baseSelection1->Write();
+        nTau_baseSelection2->Write();
+        hTau_jetEta->Write();
+        hTau_deltaZ1->Write();
+        hTau_deltaZ2->Write();
+        
+        hWH_Pt->Write();
+	    
+        MuTauVSHPt->Write();
+        H_tot->Write();
+        W_tot->Write();
+        Z_tot->Write();
+        t_tot->Write();
+        muonStatus1->Write();
+        WplusMuon->Write();
+        muonW->Write();
+        muonWstatus3->Write();
+        tautauEvent->Write();
+        controlloTauTau->Write();
+        FHEvent->Write();
+        GTFHEvent->Write();
+        elejetEvent->Write();
+        GTelejetEvent->Write();
+        mujetEvent->Write();
+        GTmujetEvent->Write();
+        FLEvent->Write();
+        GTFLEvent->Write();
+        initial_entries->Write();
+        entries_after_vertex->Write();
+        entries_after_vertex_PU->Write();
+        sizeAfterTrigger->Write();
+        sizeAfterTrigger_PU->Write();
+        
+        sizeMuonPt->Write();
+        
+        sizeTauZDist->Write();
+        sizeMuTau1Z->Write();
+        sizeZeroEle->Write();
+        sizeJetMatch->Write();
+        ZCut->Write();
+        NoExtraMuon->Write();
+        
+     
+        
+      
+        
+        hTau1Pt[7]->Write();
+        hTau1Eta[7]->Write();
+        hTau2Pt[7]->Write();
+        hTau2Eta[7]->Write();
+        hMuon1Pt[7]->Write();
+        hMuon2Pt[7]->Write();
+        hMuon1Eta[7]->Write();
+        hMuon2Eta[7]->Write();
+        massainv_TauTau[7]->Write();
+   
+        
+        tagli[7]->Write();
+        tagli[6]->Write();
+        tagli[4]->Write();
+        tagli[0]->Write();
+        
+        
+
+        sizeMtmumet->Write();
+        hTauPairCuts->Write();
+	MaxPtGreat25->Write();
+	sizeTauOS->Write();
+	sizeTauSS->Write();
+
+	hMuonMult->Write();
+	sizeTauOSIso->Write();
+	sizeTauSSIso->Write();
+        //delete outputFile;
+
+	hTauPtAfterTau->Write(); 
+	hTauEtaAfterTau->Write(); 
+	hTauOSPt_AfterIso->Write();
+	hTauSSPt_AfterIso->Write();
+	hMET_AfterFullLepSel->Write();
+
+	hRecoMuonPt->Write();
+	hRecoMuonEta->Write(); 
+	hRecoMuonPhi->Write();
+	hRecoMuonChi2->Write();
+	hMuonTrkLayer->Write();
+	hMuonDB->Write(); 
+	hMuonDZ->Write(); 
+	hNMuonBefSel->Write();
+	hNMuonAfterSel->Write();
+
+	hMuonEtaFinal_HE->Write(); 
+	hMuonPtFinal_HE->Write(); 
+	hMuonEtaFinal_Barrel->Write();
+	hMuonPtFinal_Barrel->Write(); 
+	hMuonEtaFinal_Full->Write();  
+	hMuonPtFinal_Full->Write();  
+	hMuonPtWP2012->Write();
+    }
+}

@@ -6,7 +6,7 @@
 NB: you should modify template.src   according to the location of your output file.
 Be sure that the final directory of the output file exist!
 
-3. compile the code with:
+3.rune the code with:
 ./compile.sh
 
 4. step 3 create an executable called exe. To run the analysis just do: 
